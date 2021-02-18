@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8993B740-BA19-46EE-BCB1-7AE184B7E466}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>prjMultiCarbono</RootNamespace>
+    <AssemblyName>prjMultiCarbono</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\Contato.cs" />
+    <Compile Include="Entities\IEndereco.cs" />
+    <Compile Include="Entities\EnderecoCliente.cs" />
+    <Compile Include="Entities\Enums\Sexo.cs" />
+    <Compile Include="Entities\Enums\SituacaoCliente.cs" />
+    <Compile Include="Entities\Funcionario.cs" />
+    <Compile Include="Entities\ItemNota.cs" />
+    <Compile Include="Entities\ItemPedido.cs" />
+    <Compile Include="Entities\MaisCarbono.cs" />
+    <Compile Include="Entities\NotaFiscal.cs" />
+    <Compile Include="Entities\Telefone.cs" />
+    <Compile Include="Entities\Transportador.cs" />
+    <Compile Include="Entities\Veiculo.cs" />
+    <Compile Include="Forms\frmConsultarProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmConsultarProduto.Designer.cs">
+      <DependentUpon>frmConsultarProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCliente.Designer.cs">
+      <DependentUpon>frmCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmConsultaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmConsultaCliente.Designer.cs">
+      <DependentUpon>frmConsultaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmConsultaFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmConsultaFuncionario.Designer.cs">
+      <DependentUpon>frmConsultaFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmConsultaPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmConsultaPedido.Designer.cs">
+      <DependentUpon>frmConsultaPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmGerarReletorioVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmGerarReletorioVendas.Designer.cs">
+      <DependentUpon>frmGerarReletorioVendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSelecionarEnderecosEntrega.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelecionarEnderecosEntrega.Designer.cs">
+      <DependentUpon>frmSelecionarEnderecosEntrega.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFuncionario.Designer.cs">
+      <DependentUpon>frmFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAcesso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAcesso.Designer.cs">
+      <DependentUpon>frmAcesso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmNotaFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNotaFiscal.Designer.cs">
+      <DependentUpon>frmNotaFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPedido.Designer.cs">
+      <DependentUpon>frmPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSelecionarPedidosCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelecionarPedidosCliente.Designer.cs">
+      <DependentUpon>frmSelecionarPedidosCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmProduto.Designer.cs">
+      <DependentUpon>frmProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Pedido.cs" />
+    <Compile Include="Entities\Produto.cs" />
+    <Compile Include="Forms\frmGerarRelacaoCarregamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmGerarRelacaoCarregamento.Designer.cs">
+      <DependentUpon>frmGerarRelacaoCarregamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmVisualizadorRelatorios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmVisualizadorRelatorios.Designer.cs">
+      <DependentUpon>frmVisualizadorRelatorios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoCompontes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoCompontes.Designer.cs">
+      <DependentUpon>frmPadraoCompontes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoMenu.Designer.cs">
+      <DependentUpon>frmPadraoMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoConsulta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoConsulta.Designer.cs">
+      <DependentUpon>frmPadraoConsulta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoLogin.Designer.cs">
+      <DependentUpon>frmPadraoLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoCadastro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoCadastro.Designer.cs">
+      <DependentUpon>frmPadraoCadastro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoSelecao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoSelecao.Designer.cs">
+      <DependentUpon>frmPadraoSelecao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoVisualizadorImp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PadroesTelas\frmPadraoVisualizadorImp.Designer.cs">
+      <DependentUpon>frmPadraoVisualizadorImp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relatorios\rltCarregamento.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rltCarregamento.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Relatorios\rltVendas4.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rltVendas4.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Relatorios\rltVendas2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rltVendas2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Relatorios\rltVendas1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rltVendas1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Relatorios\rltVendas3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rltVendas3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Forms\frmConsultarProduto.resx">
+      <DependentUpon>frmConsultarProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCliente.resx">
+      <DependentUpon>frmCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmConsultaCliente.resx">
+      <DependentUpon>frmConsultaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmConsultaFuncionario.resx">
+      <DependentUpon>frmConsultaFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmConsultaPedido.resx">
+      <DependentUpon>frmConsultaPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmGerarReletorioVendas.resx">
+      <DependentUpon>frmGerarReletorioVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelecionarEnderecosEntrega.resx">
+      <DependentUpon>frmSelecionarEnderecosEntrega.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFuncionario.resx">
+      <DependentUpon>frmFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAcesso.resx">
+      <DependentUpon>frmAcesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNotaFiscal.resx">
+      <DependentUpon>frmNotaFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPedido.resx">
+      <DependentUpon>frmPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelecionarPedidosCliente.resx">
+      <DependentUpon>frmSelecionarPedidosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmProduto.resx">
+      <DependentUpon>frmProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmGerarRelacaoCarregamento.resx">
+      <DependentUpon>frmGerarRelacaoCarregamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmVisualizadorRelatorios.resx">
+      <DependentUpon>frmVisualizadorRelatorios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PadroesTelas\frmPadraoCompontes.resx">
+      <DependentUpon>frmPadraoCompontes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PadroesTelas\frmPadraoMenu.resx">
+      <DependentUpon>frmPadraoMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PadroesTelas\frmPadraoConsulta.resx">
+      <DependentUpon>frmPadraoConsulta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PadroesTelas\frmPadraoLogin.resx">
+      <DependentUpon>frmPadraoLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PadroesTelas\frmPadraoCadastro.resx">
+      <DependentUpon>frmPadraoCadastro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PadroesTelas\frmPadraoSelecao.resx">
+      <DependentUpon>frmPadraoSelecao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PadroesTelas\frmPadraoVisualizadorImp.resx">
+      <DependentUpon>frmPadraoVisualizadorImp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Relatorios\rltCarregamento.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rltCarregamento.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rltVendas4.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rltVendas4.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rltVendas2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rltVendas2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rltVendas1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rltVendas1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rltVendas3.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rltVendas3.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
