@@ -1,7 +1,6 @@
 CREATE TABLE `endereco_cliente` (
   `ID_ENDERCO` int NOT NULL,
   `ID_CLIENTE` int DEFAULT NULL,
-  `CNPJ_CLIENTE` text NOT NULL,
   `ENDERECO` text NOT NULL,
   `CEP` varchar(9) NOT NULL,
   `TIPO_ENDERECO` char(1) NOT NULL,
@@ -78,7 +77,6 @@ CREATE TABLE `pedido` (
   `DT_CARREGA` datetime NOT NULL,
   `OBS` varchar(80) DEFAULT NULL,
   `TIPO_FRETE` varchar(1) NOT NULL,
-  `NUM_NF` int NOT NULL,
   `ID_PEDIDO` int NOT NULL,
   PRIMARY KEY (`ID_PEDIDO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
