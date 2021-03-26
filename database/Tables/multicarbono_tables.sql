@@ -18,7 +18,6 @@ CREATE TABLE `funcionario` (
   `STATUS` char(1) DEFAULT NULL,
   `DT_CRIACAO` datetime NOT NULL,
   `NIVEL_ACESSO` text,
-  `funcionariocol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID_FUNCIONARIO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE TABLE `cliente` (
