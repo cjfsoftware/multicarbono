@@ -7,8 +7,8 @@ CREATE TABLE `endereco_cliente` (
   PRIMARY KEY (`ID_ENDERCO`),
   KEY `ID_CLIENTE_idx` (`ID_CLIENTE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-CREATE TABLE `funcionario` (
-  `ID_FUNCIONARIO` int NOT NULL,
+CREATE TABLE `usuario` (
+  `ID_USUARIO` int NOT NULL,
   `NOME` text NOT NULL,
   `DT_NASCIMENTO` datetime NOT NULL,
   `CARGO` text NOT NULL,
@@ -18,8 +18,7 @@ CREATE TABLE `funcionario` (
   `STATUS` char(1) DEFAULT NULL,
   `DT_CRIACAO` datetime NOT NULL,
   `NIVEL_ACESSO` text,
-  `funcionariocol` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ID_FUNCIONARIO`)
+  PRIMARY KEY (`ID_USUARIO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE TABLE `cliente` (
   `CNPJ` text NOT NULL,
