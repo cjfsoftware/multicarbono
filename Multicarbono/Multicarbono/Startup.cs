@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Multicarbono.Models.Login;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,11 @@ namespace Multicarbono
         {
             services.AddControllersWithViews();
 
-            services.AddTransient<IDbConnection>(
-               (sp) => new MySqlConnection(Configuration["dbConn"]));
+            services.AddTransient<MySqlConnection>(
+               (sp) => new MySqlConnection(Configuration["ConnectionStrings:dbConn"]));
+
+
+            services.AddTransient<LoginRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,8 +52,6 @@ namespace Multicarbono
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

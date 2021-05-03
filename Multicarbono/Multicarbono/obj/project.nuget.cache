@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4nD7/h2+Fop3swZ8NnkRoHz9shZKpOmRXNLl1+cPwTBacy8loeGVX+KfUN4zMk/0LN43GfMFYJb292zudIfWQw==",
+  "dgSpecHash": "uA5x7oVMPaIvgfWWcOwHbHvfDEamPz5/V4oU6w93fbD/6PR6Dgqa9YdujFPSNSewIuKinjJqpzGkr2JdMZO8SQ==",
   "success": true,
-  "projectFilePath": "C:\\Projetos\\Multicarbono\\Multicarbono\\Multicarbono.csproj",
+  "projectFilePath": "C:\\Multicarbono\\Multicarbono\\Multicarbono\\Multicarbono.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Acer\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Acer\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",

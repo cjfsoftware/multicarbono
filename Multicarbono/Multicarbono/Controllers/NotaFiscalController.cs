@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Multicarbono.Controllers.Default
+namespace Multicarbono.Controllers
 {
     public class NotaFiscalController : Controller
     {

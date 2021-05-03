@@ -18,12 +18,15 @@ namespace Multicarbono.Models.Usuario
 
         public void IncludeUsuario(Usuario usuario)
         {
-            using (var command = new MySqlCommand("INSERT INTO USUARIO VALUES (@NOME, @DT_NASCIMENTO, @CARGO, @ENDERECO, @LOGIN, " +
-                "@EMAIL, @STATUS, @DT_CRIACAO, @NIVEL_ACESSO, @SENHA)")
+            using (_dbConnection)
             {
-                CommandType = CommandType.Text
-            })
-            {
+                _dbConnection.Open();
+                
+                var command = new MySqlCommand("INSERT INTO USUARIO VALUES (@NOME, @DT_NASCIMENTO, @CARGO, @ENDERECO, @LOGIN, " +
+                 "@EMAIL, @STATUS, @DT_CRIACAO, @NIVEL_ACESSO, @SENHA)");
+
+                command.CommandType = CommandType.Text;
+
                 command.Parameters.Add("NOME", DbType.String).Value = usuario.Nome;
                 command.Parameters.Add("DT_NASCIMENTO", DbType.DateTime).Value = usuario.DtNascimento;
                 command.Parameters.Add("CARGO", DbType.String).Value = usuario.Cargo;
@@ -36,6 +39,8 @@ namespace Multicarbono.Models.Usuario
                 command.Parameters.Add("SENHA", DbType.String).Value = usuario.Senha;
 
                 int result = command.ExecuteNonQuery();
+
+                _dbConnection.Close();
             }
 
 

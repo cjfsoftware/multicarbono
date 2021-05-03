@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,12 @@ namespace Multicarbono.Controllers
 {
     public class LoginController : Controller
     {
+        private LoginRepository _login;
+
+        public LoginController(LoginRepository login) {
+            _login = login;
+        }
+        
         // GET: LoginController
         public ActionResult Index()
         {
@@ -71,7 +79,6 @@ namespace Multicarbono.Controllers
 
         // POST: LoginController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
@@ -82,6 +89,19 @@ namespace Multicarbono.Controllers
             {
                 return View();
             }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult DoLogin(LoginViewModel loginModel)
+        {
+            string login = _login.ValidarLogin(loginModel.User, loginModel.Password);
+
+            if (login == "OK")
+                return View("Base");
+            else
+                return View("ModalLoginError");
         }
     }
 }

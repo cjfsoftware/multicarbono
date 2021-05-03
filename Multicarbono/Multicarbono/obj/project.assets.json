@@ -6550,11 +6550,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projetos\\Multicarbono\\Multicarbono\\Multicarbono.csproj",
+      "projectUniqueName": "C:\\Multicarbono\\Multicarbono\\Multicarbono\\Multicarbono.csproj",
       "projectName": "Multicarbono",
-      "projectPath": "C:\\Projetos\\Multicarbono\\Multicarbono\\Multicarbono.csproj",
+      "projectPath": "C:\\Multicarbono\\Multicarbono\\Multicarbono\\Multicarbono.csproj",
       "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-      "outputPath": "C:\\Projetos\\Multicarbono\\Multicarbono\\obj\\",
+      "outputPath": "C:\\Multicarbono\\Multicarbono\\Multicarbono\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

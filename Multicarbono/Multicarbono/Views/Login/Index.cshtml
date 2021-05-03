@@ -1,26 +1,38 @@
-﻿
+﻿@model IEnumerable<Multicarbono.Models.Login.LoginViewModel>
+
 @{
     ViewData["Title"] = "Index";
-
-
-    <div style="align-content:center">
-        <h1>Login</h1>
-    </div>
-
-
-    using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @id = "LoginForm", @onsubmit = "SubmitForm()" }))
-    {
-        <div class="input-group">
-            <input type="text" name="login" id="login" />
-            <input type="text" id="senha" name="senha" />
-            <span>
-                <label type="button" name="doLogin" id="btnLogin" onClick="submit()">Login</label>
-            </span>
-
-        </div>
-    }
 }
 
+<div style="align-content:center">
+    <h1>Login</h1>
+</div>
+
+
+@using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @class = "login-form", @id = "LoginForm", @onsubmit = "login()" }))
+{
+    <div class="input-group">
+        <input type="text" name="User" id="user" />
+        <input type="text" id="Password" name="password" />
+        <span>
+            <button type="submit" id="btnLogin" @*onClick="login()"*@ >Login</button>
+        </span>
+
+
+
+    </div>
+}
+
+<script>
+    function login() {
+        //$("#LoginForm").submit();
+        document.getElementById("LoginForm").submit();
+    }
+
+    
+
+
+</script>
 
 
 
