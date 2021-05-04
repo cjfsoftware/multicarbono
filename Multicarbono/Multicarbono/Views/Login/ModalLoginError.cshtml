@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Post, new {@id = "ModalLoginError", @onsubmit = "index()" }))
+{
+<div class="modal-dialog modal-sm" role="dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <h6>
+                Usuário ou senha incorretos
+            </h6>
+            <span>
+                <button type="submit" id="btnLoginError" style="margin-left:auto">Ok</button>
+            </span>
+        </div>
+    </div>
+</div>
+}

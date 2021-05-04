@@ -9,9 +9,9 @@ namespace Multicarbono.Models.Usuario
 {
     public class UsuarioRepository
     {
-        private readonly IDbConnection _dbConnection;
+        private readonly MySqlConnection _dbConnection;
 
-        public UsuarioRepository(IDbConnection dbConnection)
+        public UsuarioRepository(MySqlConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }

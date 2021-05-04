@@ -101,7 +101,7 @@ namespace Multicarbono.Controllers
             if (login == "OK")
                 return View("Base");
             else
-                return View("ModalLoginError");
+                return PartialView("ModalLoginError");
         }
     }
 }

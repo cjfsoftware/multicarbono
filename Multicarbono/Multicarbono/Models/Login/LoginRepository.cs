@@ -29,6 +29,7 @@ namespace Multicarbono.Models.Login
                         );
                 
                 cmd.CommandType = CommandType.Text;
+                cmd.Connection = _dbConnection;
                 MySqlDataReader dr;
                 IList<Login> lista = new List<Login>();
 
@@ -37,15 +38,15 @@ namespace Multicarbono.Models.Login
 
                 dr = cmd.ExecuteReader();
 
-                if(dr.HasRows)
+                if (dr.HasRows)
                 {
                     return "OK";
                 }
                 else
                 {
-                    return "USUÁRIO ";
+                    return "999";
                 }
-                    
+
             }
         }
     }

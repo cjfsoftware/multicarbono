@@ -4,7 +4,15 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Multicarbono.Models.Cliente;
+using Multicarbono.Models.EnderecoCliente;
 using Multicarbono.Models.Login;
+using Multicarbono.Models.NotaFiscal;
+using Multicarbono.Models.Pedido;
+using Multicarbono.Models.Produto;
+using Multicarbono.Models.Telefone;
+using Multicarbono.Models.Transportador;
+using Multicarbono.Models.Usuario;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -33,6 +41,18 @@ namespace Multicarbono
 
 
             services.AddTransient<LoginRepository>();
+            services.AddTransient<UsuarioRepository>();
+            services.AddTransient<TransportadorRepository>();
+            services.AddTransient<TelefoneRepository>();
+            services.AddTransient<ClienteRepository>();
+            services.AddTransient<ProdutoRepository>();
+            services.AddTransient<NotaFiscalRepository>();
+            services.AddTransient<PedidoRepository>();
+            services.AddTransient<EnderecoClienteRepository>();
+
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

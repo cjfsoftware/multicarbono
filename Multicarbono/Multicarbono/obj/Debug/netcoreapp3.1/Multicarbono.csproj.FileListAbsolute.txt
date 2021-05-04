@@ -151,7 +151,6 @@ C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\scopedcss\bund
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Multicarbono.TagHelpers.input.cache
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Multicarbono.TagHelpers.output.cache
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Multicarbono.RazorCoreGenerate.cache
-C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Base.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Index.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
@@ -278,3 +277,5 @@ C:\Multicarbono\Multicarbono\Multicarbono\bin\Debug\netcoreapp3.1\runtimes\win\l
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Multicarbono.Views.pdb
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Multicarbono.csproj.CopyComplete
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Multicarbono.genruntimeconfig.cache
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Base.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Login\ModalLoginError.cshtml.g.cs

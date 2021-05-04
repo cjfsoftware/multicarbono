@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = null;
 }
 
 <div style="align-content:center">
@@ -9,31 +10,15 @@
 </div>
 
 
-@using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @class = "login-form", @id = "LoginForm", @onsubmit = "login()" }))
+@using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @class = "login-form", @id = "LoginForm" }))
 {
     <div class="input-group">
         <input type="text" name="User" id="user" />
         <input type="text" id="Password" name="password" />
         <span>
-            <button type="submit" id="btnLogin" @*onClick="login()"*@ >Login</button>
+            <button type="submit" id="btnLogin">Login</button>
         </span>
-
-
-
     </div>
 }
 
-<script>
-    function login() {
-        //$("#LoginForm").submit();
-        document.getElementById("LoginForm").submit();
-    }
-
-    
-
-
-</script>
-
-
-
-
+<div id="modal-login-error" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="modal-title"></div>
