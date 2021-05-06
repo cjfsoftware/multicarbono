@@ -99,6 +99,7 @@ namespace Multicarbono.Controllers
             string login = _login.ValidarLogin(loginModel.User, loginModel.Password);
 
             if (login == "OK")
+                // return RedirectToAction("Index","Cliente");
                 return View("Base");
             else
                 return PartialView("ModalLoginError");

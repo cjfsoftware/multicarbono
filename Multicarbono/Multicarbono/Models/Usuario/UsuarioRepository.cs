@@ -81,5 +81,53 @@ namespace Multicarbono.Models.Usuario
             }
         }
 
+
+        public List<Usuario> ListUsuario()
+        {
+            using (_dbConnection)
+            {
+                _dbConnection.Open();
+
+                var cmd = new MySqlCommand("SELECT * FROM USUARIO");
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = _dbConnection;
+
+                MySqlDataReader dr;
+                List<Usuario> listUsuarios = new List<Usuario>();
+
+                dr = cmd.ExecuteReader();
+
+
+                if(dr.HasRows)
+                {
+                    while(dr.Read())
+                    {
+                        Usuario usuario = new Usuario();
+
+                        usuario.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
+                        usuario.Login = Convert.ToString(dr["LOGIN"]);
+                        usuario.Nome = Convert.ToString(dr["NOME"]) ;
+                        usuario.DtNascimento = Convert.ToDateTime(dr["DT_NASCIMENTO"]);
+                        usuario.Cargo = Convert.ToString(dr["CARGO"]);
+                        usuario.Email = Convert.ToString(dr["EMAIL"]);
+                        usuario.Status = Convert.ToChar(dr["STATUS"]);
+                        usuario.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
+                        usuario.NivelAcesso = Convert.ToString(dr["NIVEL_ACESSO"]);
+                        usuario.Senha = Convert.ToString(dr["SENHA"]);
+                        usuario.Endereco = Convert.ToString(dr["ENDERECO"]);
+                                           
+                        listUsuarios.Add(usuario);
+                    }
+                }
+
+                _dbConnection.Close();
+
+                return listUsuarios;
+            }
+
+
+        }
+
     }
 }

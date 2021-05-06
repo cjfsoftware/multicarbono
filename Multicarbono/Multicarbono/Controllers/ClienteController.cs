@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.Cliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,19 @@ namespace Multicarbono.Controllers
 {
     public class ClienteController : Controller
     {
+        private ClienteRepository _clienteRepo;
+
+        public ClienteController(ClienteRepository clienteRepo)
+        {
+            _clienteRepo = clienteRepo;
+        }
+
+
+
         // GET: ClienteController
         public ActionResult Index()
         {
-            return View();
+            return PartialView("Index",_clienteRepo.ListCliente());
         }
 
         // GET: ClienteController/Details/5

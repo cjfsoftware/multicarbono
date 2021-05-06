@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.Usuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,19 @@ namespace Multicarbono.Controllers
 {
     public class UsuarioController : Controller
     {
+
+        private UsuarioRepository _usuarioRepo;
+        
+        public UsuarioController(UsuarioRepository usuarioRepo)
+        {
+            _usuarioRepo = usuarioRepo;
+        }
+
         // GET: UsuarioController
         public ActionResult Index()
         {
-            return View();
+            var model = _usuarioRepo.ListUsuario();
+            return PartialView("~/Views/Usuario/Index.cshtml", model);
         }
 
         // GET: UsuarioController/Details/5
@@ -22,8 +32,9 @@ namespace Multicarbono.Controllers
         }
 
         // GET: UsuarioController/Create
-        public ActionResult Create()
+        public ActionResult CadastroUsuario()
         {
+            //return PartialView("CadastroUsuario");
             return View();
         }
 
