@@ -1,13 +1,9 @@
 ﻿@model IEnumerable<Multicarbono.Models.Usuario.Usuario>
-@*@{
-        ViewData["Title"] = "Usuario";
-        Layout = "_Layout";
-    }*@
 
 <h1>Index</h1>
 
 <p>
-        <a asp-action="CadastroUsuario" class="btn btn-default">Create New</a>
+        <a asp-action="CadastroUsuario" class="btn btn-default">Criar usuário</a>
     </p>
 <table class="table table-striped table-hover">
     <thead>
@@ -77,11 +73,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NivelAcesso)
             </td>
-            @*<td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>*@
         </tr>
         }
     </tbody>

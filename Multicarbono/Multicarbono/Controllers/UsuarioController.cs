@@ -35,8 +35,18 @@ namespace Multicarbono.Controllers
         public ActionResult CadastroUsuario()
         {
             //return PartialView("CadastroUsuario");
-            return View();
+            //var model = _usuarioRepo.ListUsuario();
+            return PartialView();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CadastroUsuario(Usuario usuario)
+        {
+            _usuarioRepo.IncludeUsuario(usuario);
+            return RedirectToAction("Index");
+        }
+
 
         // POST: UsuarioController/Create
         [HttpPost]

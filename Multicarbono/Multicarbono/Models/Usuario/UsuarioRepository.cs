@@ -26,6 +26,7 @@ namespace Multicarbono.Models.Usuario
                  "@EMAIL, @STATUS, @DT_CRIACAO, @NIVEL_ACESSO, @SENHA)");
 
                 command.CommandType = CommandType.Text;
+                command.Connection = _dbConnection;
 
                 command.Parameters.Add("NOME", DbType.String).Value = usuario.Nome;
                 command.Parameters.Add("DT_NASCIMENTO", DbType.DateTime).Value = usuario.DtNascimento;
@@ -48,13 +49,15 @@ namespace Multicarbono.Models.Usuario
 
         public void UpdateUsuario(Usuario usuario)
         {
-            using (var command = new MySqlCommand("UPDATE USUARIO SET NOME = @NOME, DT_NASCIMENTO = @DT_NASCIMENTO, CARGO = @CARGO, ENDERECO = @ENDERECO, LOGIN = @LOGIN, " +
-                "EMAIL = @EMAIL, STATUS = @STATUS, DT_CRIACAO = @DT_CRIACAO, NIVEL_ACESSO = @NIVEL_ACESSO, SENHA = @SENHA WHERE ID_USUARIO = @ID_USUARIO")
+            using (_dbConnection)
             {
-                CommandType = CommandType.Text
+                var command = new MySqlCommand("UPDATE USUARIO SET NOME = @NOME, DT_NASCIMENTO = @DT_NASCIMENTO, CARGO = @CARGO, ENDERECO = @ENDERECO, LOGIN = @LOGIN, " +
+                "EMAIL = @EMAIL, STATUS = @STATUS, DT_CRIACAO = @DT_CRIACAO, NIVEL_ACESSO = @NIVEL_ACESSO, SENHA = @SENHA WHERE ID_USUARIO = @ID_USUARIO");
 
-            })
-            {
+
+                command.CommandType = CommandType.Text;
+                command.Connection = _dbConnection;
+
                 command.Parameters.Add("NOME", DbType.String).Value = usuario.Nome;
                 command.Parameters.Add("DT_NASCIMENTO", DbType.DateTime).Value = usuario.DtNascimento;
                 command.Parameters.Add("CARGO", DbType.String).Value = usuario.Cargo;
@@ -65,19 +68,29 @@ namespace Multicarbono.Models.Usuario
                 command.Parameters.Add("DT_CRIACAO", DbType.DateTime).Value = usuario.DtCriacao;
                 command.Parameters.Add("NIVEL_ACESSO", DbType.String).Value = usuario.NivelAcesso;
                 command.Parameters.Add("SENHA", DbType.String).Value = usuario.Senha;
-                command.Parameters.Add("ID_USUARIO", DbType.String).Value = usuario.IdUsuario;
+                command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = usuario.IdUsuario;
+
+
+                int result = command.ExecuteNonQuery();
+
+                _dbConnection.Close();
             }
         }
 
         public void DeleteUsuario(Usuario usuario)
         {
-            using (var command = new MySqlCommand("DELETE FROM USUARIO WHERE ID_USUARIO = @ID_USUARIO")
+            using (_dbConnection)
             {
-                CommandType = CommandType.Text
+                var command = new MySqlCommand("DELETE FROM USUARIO WHERE ID_USUARIO = @ID_USUARIO");
 
-            })
-            {
-                command.Parameters.Add("SENHA", DbType.String).Value = usuario.IdUsuario;
+                command.CommandType = CommandType.Text;
+                command.Connection = _dbConnection;
+         
+                command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = usuario.IdUsuario;
+
+                int result = command.ExecuteNonQuery();
+
+                _dbConnection.Close();
             }
         }
 
