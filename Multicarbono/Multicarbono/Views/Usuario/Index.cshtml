@@ -73,6 +73,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NivelAcesso)
             </td>
+            <td>
+                @*@Html.ActionLink("Editar", "Edit", new { idUsuario = item.IdUsuario }) |
+                @Html.ActionLink("Excluir", "Delete", new { idUsuario = item.IdUsuario })*@
+
+                <a asp-action="Edit" asp-route-idUsuario="@item.IdUsuario">Alterar</a>
+                <a asp-action="Delete" asp-route-idUsuario="@item.IdUsuario">Excluir</a>
+            </td>
         </tr>
         }
     </tbody>

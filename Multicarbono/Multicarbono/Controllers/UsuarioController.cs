@@ -64,39 +64,45 @@ namespace Multicarbono.Controllers
         }
 
         // GET: UsuarioController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int idUsuario)
         {
-            return View();
+
+            var model = _usuarioRepo.UsuarioById(idUsuario);
+            return PartialView("AlterarUsuario", model);
         }
 
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int idUsuario, Usuario usuario)
         {
             try
             {
+                _usuarioRepo.UpdateUsuario(usuario);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                //return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
         // GET: UsuarioController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int idUsuario)
         {
-            return View();
+            var model = _usuarioRepo.UsuarioById(idUsuario);
+            return PartialView("modalConfirmDelete", model);
         }
 
         // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Usuario usuario)
         {
             try
             {
+                _usuarioRepo.DeleteUsuario(usuario.IdUsuario);
                 return RedirectToAction(nameof(Index));
             }
             catch
