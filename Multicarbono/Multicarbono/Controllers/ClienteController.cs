@@ -22,7 +22,8 @@ namespace Multicarbono.Controllers
         // GET: ClienteController
         public ActionResult Index()
         {
-            return PartialView("Index",_clienteRepo.ListCliente());
+            var model = _clienteRepo.ListCliente();
+            return PartialView("Index", model);
         }
 
         // GET: ClienteController/Details/5
@@ -32,39 +33,35 @@ namespace Multicarbono.Controllers
         }
 
         // GET: ClienteController/Create
-        public ActionResult Create()
+        public ActionResult CadastroCliente()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: ClienteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CadastroCliente(Cliente cliente)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                _clienteRepo.IncludeCliente(cliente);
+                return RedirectToAction("Index"); 
         }
 
         // GET: ClienteController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int idCliente)
         {
-            return View();
+            var model = _clienteRepo.ClienteById(idCliente);
+            return PartialView("AlterarCliente", model);
         }
 
         // POST: ClienteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int idCliente, Cliente cliente)
         {
             try
             {
+                _clienteRepo.UpdateCliente(cliente);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -74,18 +71,20 @@ namespace Multicarbono.Controllers
         }
 
         // GET: ClienteController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int idCliente)
         {
-            return View();
+            var model = _clienteRepo.ClienteById(idCliente);
+            return PartialView("modalConfirmDelete", model);
         }
 
         // POST: ClienteController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int idCliente, Cliente cliente)
         {
             try
             {
+                _clienteRepo.DeleteCliente(cliente.IdCliente);
                 return RedirectToAction(nameof(Index));
             }
             catch

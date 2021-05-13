@@ -1,0 +1,11 @@
+﻿@model Multicarbono.Models.Cliente.Cliente
+
+<h3>Deseja excluir o cliente?</h3>
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdCliente" />
+        <input type="submit" value="Sim" class="btn btn-danger" />
+        <a asp-action="Index">Não</a>
+    </form>
+</div>

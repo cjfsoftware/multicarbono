@@ -282,3 +282,6 @@ C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Lo
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\CadastroUsuario.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\AlterarUsuario.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\modalConfirmDelete.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\AlterarCliente.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\CadastroCliente.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\modalConfirmDelete.cshtml.g.cs
