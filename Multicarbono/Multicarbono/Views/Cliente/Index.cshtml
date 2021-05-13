@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<Multicarbono.Models.Cliente.Cliente>
 
-<h1>Clientes</h1>
+@Html.Partial("_Menu")
 
-<p>
-    <a asp-action="CadastroCliente" class="btn btn-default">Criar cliente</a>
-</p>
+<h5>Clientes</h5>
+
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -31,7 +30,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Situacao)
-            </th>            
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -61,7 +60,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Situacao)
-                </td>               
+                </td>
                 <td>
                     @*@Html.ActionLink("Editar", "Edit", new { idUsuario = item.IdUsuario }) |
                         @Html.ActionLink("Excluir", "Delete", new { idUsuario = item.IdUsuario })*@
@@ -71,5 +70,9 @@
                 </td>
             </tr>
         }
-     </tbody>
+    </tbody>
 </table>
+
+<p>
+    <a asp-action="CadastroCliente" class="btn btn-info">Criar cliente</a>
+</p>

@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Multicarbono.Models.Usuario.Usuario>
 
-<h1>Index</h1>
+@Html.Partial("_Menu")
 
-<p>
-        <a asp-action="CadastroUsuario" class="btn btn-default">Criar usuário</a>
-    </p>
+<h5>Usuários</h5>
+
+
 <table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdUsuario); 
+                @Html.DisplayNameFor(model => model.IdUsuario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -41,46 +41,51 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DtNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cargo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DtCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NivelAcesso)
-            </td>
-            <td>
-                @*@Html.ActionLink("Editar", "Edit", new { idUsuario = item.IdUsuario }) |
-                @Html.ActionLink("Excluir", "Delete", new { idUsuario = item.IdUsuario })*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtCriacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NivelAcesso)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Editar", "Edit", new { idUsuario = item.IdUsuario }) |
+                        @Html.ActionLink("Excluir", "Delete", new { idUsuario = item.IdUsuario })*@
 
-                <a asp-action="Edit" asp-route-idUsuario="@item.IdUsuario">Alterar</a>
-                <a asp-action="Delete" asp-route-idUsuario="@item.IdUsuario">Excluir</a>
-            </td>
-        </tr>
+                    <a asp-action="Edit" asp-route-idUsuario="@item.IdUsuario">Alterar</a>
+                    <a asp-action="Delete" asp-route-idUsuario="@item.IdUsuario">Excluir</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+<p>
+    <a asp-action="CadastroUsuario" class="btn btn-info">Criar usuário</a>
+</p>

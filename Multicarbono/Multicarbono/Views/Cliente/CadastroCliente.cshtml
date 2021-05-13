@@ -1,8 +1,10 @@
 ﻿@model Multicarbono.Models.Cliente.Cliente
 
+@Html.Partial("_Menu")
 
 <hr />
-<div class="row">
+<h6 style="margin-left:10%">Cadastrar Cliente</h6><br /><br />
+<div class="row" style="margin-left:10%">
     <div class="col-md-4">
         <form asp-action="CadastroCliente">
             <div class="form-group">
@@ -32,9 +34,9 @@
             <div class="form-group">
                 <label asp-for="Situacao" class="control-label"></label>
                 <input asp-for="Situacao" class="form-control" />
-            </div>           
+            </div>
             <div class="form-group">
-                <input type="submit" value="Criar cliente" class="btn btn-default" />
+                <input type="submit" value="Criar cliente" class="btn btn-info" />
             </div>
         </form>
     </div>

@@ -285,3 +285,4 @@ C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Us
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\AlterarCliente.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\CadastroCliente.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\modalConfirmDelete.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Menu.cshtml.g.cs
