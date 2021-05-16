@@ -7,5 +7,12 @@ namespace Multicarbono.Models.Telefone
 {
     public class Telefone
     {
+        public int IdTelefone { get; set; }
+
+        public int IdCliente { get; set; }
+
+        public string NumTelefone { get; set; }
+
+        public string Contato { get; set; }
     }
 }

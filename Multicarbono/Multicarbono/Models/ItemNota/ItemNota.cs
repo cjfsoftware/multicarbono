@@ -7,5 +7,15 @@ namespace Multicarbono.Models.ItemNota
 {
     public class ItemNota
     {
+        public int IdItemNF { get; set; }
+
+        public int IdNF { get; set; }
+
+        public int IdItemPedido { get; set; }
+
+        public int CodProduto { get; set; }
+
+        public decimal QtdePesada { get; set; }
+
     }
 }

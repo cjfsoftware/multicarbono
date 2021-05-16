@@ -5,20 +5,22 @@
     Layout = null;
 }
 
-<div style="align-content:center">
-    <h3>Multicarbono</h3>
+<div class="text-center">
+    <h3 class="display-1">Multicarbono</h3>
 </div>
 
 
 @using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @class = "login-form", @id = "LoginForm" }))
 {
-    <div class="input-group">
-        <input type="text" name="User" id="user"  />
-        <input type="text" id="Password" name="password" />
-        <span>
-            <button type="submit" id="btnLogin">Login</button>
-        </span>
+    <div class="text-center">
+        <div class="input-group">
+            <input type="text" name="User" id="user"  />
+            <input type="text" id="Password" name="password" />
+            <span>
+                <button type="submit" id="btnLogin">Login</button>
+            </span>
+        </div>
     </div>
 }
 
-<div id="modal-login-error" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="modal-title"></div>
+
