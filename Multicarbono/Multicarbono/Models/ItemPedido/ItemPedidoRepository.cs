@@ -102,24 +102,24 @@ namespace Multicarbono.Models.ItemPedido
         }
 
 
-        public void UpdateItemNota(ItemNota itemNota)
+        public void UpdateItemPedido(ItemPedido itemPedido)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("UPDATE ITEM_NOTA SET ID_ITEM_NF = @ID_ITEM_NF, ID_NF = @ID_NF, ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO, COD_PRODUTO = @COD_PRODUTO, " +
-                "QTDE_PESADA = @QTDE_PESADA");
+                var command = new MySqlCommand("UPDATE ITEM_PEDIDO SET ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO, ID_PEDIDO = @ID_PEDIDO, ID_PRODUTO = @ID_PRODUTO, CFOP = @CFOP, " +
+                "QTDE = @QTDE");
 
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_ITEM_NF", DbType.Int32).Value = itemNota.IdItemNF;
-                command.Parameters.Add("ID_NF", DbType.Int32).Value = itemNota.IdNF;
-                command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemNota.IdItemPedido;
-                command.Parameters.Add("CODIGO_PRODUTO", DbType.Int32).Value = itemNota.CodProduto;
-                command.Parameters.Add("QTDE_PESADA", DbType.Decimal).Value = itemNota.QtdePesada;
+                command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemPedido.IdItemPedido;
+                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = itemPedido.IdPedido;
+                command.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = itemPedido.IdProduto;
+                command.Parameters.Add("CFOP", DbType.Int32).Value = itemPedido.CFOP;
+                command.Parameters.Add("QTDE", DbType.Decimal).Value = itemPedido.QTDE;
 
                 int result = command.ExecuteNonQuery();
 
@@ -127,25 +127,24 @@ namespace Multicarbono.Models.ItemPedido
             }
         }
 
-        public void IncludeItemNota(ItemNota itemNota)
+        public void IncludeItemNota(ItemPedido itemPedido)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO ITEM_NOTA (ID_ITEM_NF, ID_NF, ID_ITEM_PEDIDO, COD_PRODUTO, QTDE_PESADA) VALUES" +
-                "(@ID_ITEM_NF, @ID_NF, @ID_ITEM_PEDIDO, @COD_PRODUTO, @QTDE_PESADA)");
+                var command = new MySqlCommand("INSERT INTO ITEM_PEDIDO (ID_ITEM_PEDIDO, ID_PEDIDO, ID_PRODUTO, CFOP, QTDE) VALUES" +
+                "(@ID_ITEM_PEDIDO, @ID_PEDIDO, @ID_PRODUTO, @CFOP, @QTDE)");
 
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_ITEM_NF", DbType.Int32).Value = itemNota.IdItemNF;
-                command.Parameters.Add("ID_NF", DbType.Int32).Value = itemNota.IdNF;
-                command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemNota.IdItemPedido;
-                command.Parameters.Add("CODIGO_PRODUTO", DbType.Int32).Value = itemNota.CodProduto;
-                command.Parameters.Add("QTDE_PESADA", DbType.Decimal).Value = itemNota.QtdePesada;
-
+                command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemPedido.IdItemPedido;
+                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = itemPedido.IdPedido;
+                command.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = itemPedido.IdProduto;
+                command.Parameters.Add("CFOP", DbType.Int32).Value = itemPedido.CFOP;
+                command.Parameters.Add("QTDE", DbType.Decimal).Value = itemPedido.QTDE;
 
 
                 int result = command.ExecuteNonQuery();
@@ -154,18 +153,18 @@ namespace Multicarbono.Models.ItemPedido
             }
         }
 
-        public void DeleteCliente(int idItemNota)
+        public void DeleteCliente(int idItemPedido)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("DELETE FROM ITEM_NOTA WHERE ID_ITEM_NF = @ID_ITEM_NF");
+                var command = new MySqlCommand("DELETE FROM ITEM_NOTA WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO");
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_ITEM_NF", DbType.Int32).Value = idItemNota;
+                command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = idItemPedido;
 
                 int result = command.ExecuteNonQuery();
 

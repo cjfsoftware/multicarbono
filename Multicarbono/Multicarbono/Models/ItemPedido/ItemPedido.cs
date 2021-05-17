@@ -7,11 +7,11 @@ namespace Multicarbono.Models.ItemPedido
 {
     public class ItemPedido
     {
-        public int ID_ITEM_PEDIDO { get; set; }
+        public int IdItemPedido { get; set; }
 
-        public int ID_PEDIDO { get; set; }
+        public int IdPedido { get; set; }
 
-        public int ID_PRODUTO { get; set; }
+        public int IdProduto { get; set; }
 
         public int CFOP { get; set; }
 
