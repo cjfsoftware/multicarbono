@@ -13,7 +13,7 @@ namespace Multicarbono.Models.NotaFiscal
 
         public int NumNF { get; set; }
 
-        public string Chave { get; set; }
+        public int Chave { get; set; }
 
         public string NaturezaOper { get; set; }
 

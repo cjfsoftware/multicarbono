@@ -41,42 +41,44 @@ namespace Multicarbono.Models.NotaFiscal
                         NotaFiscal notaFiscal = new NotaFiscal();
 
                         notaFiscal.IdNF = Convert.ToInt32(dr["ID_NF"]);
-                        pedido.NumPedido = Convert.ToInt32(dr["NUM_PEDIDO"]);
-                        pedido.CNPJCliente = Convert.ToString(dr["CNPJ_CLIENTE"]);
-                        pedido.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
-                        pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
-                        pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
-                        pedido.Obs = Convert.ToString(dr["OBS"]);
-                        pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        notaFiscal.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
+                        notaFiscal.NumNF = Convert.ToInt32(dr["NUM_NF"]);
+                        notaFiscal.Chave = Convert.ToInt32(dr["CHAVE"]);
+                        notaFiscal.NaturezaOper = Convert.ToString(dr["NATUREZA_OPER"]);
+                        notaFiscal.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
+                        notaFiscal.DtSaida = Convert.ToDateTime(dr["DT_SAIDA"]);
+                        notaFiscal.VrFrete = Convert.ToDecimal(dr["VR_FRETE"]);
+                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALANGENS"]);
+                        notaFiscal.CNPJEmitente = Convert.ToString(dr["CNPJ_EMITENTE"]);
 
 
-                        listPedido.Add(pedido);
+                        listNota.Add(notaFiscal);
                     }
                 }
 
                 _dbConnection.Close();
 
-                return listPedido;
+                return listNota;
             }
         }
 
-        public Pedido PedidoById(int idPedido)
+        public NotaFiscal NotaById(int idNota)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var cmd = new MySqlCommand("SELECT * FROM PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO");
+                var cmd = new MySqlCommand("SELECT * FROM NOTA_FISCAL WHERE ID_NF = @ID_NF");
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = _dbConnection;
 
-                cmd.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
+                cmd.Parameters.Add("ID_NF", DbType.Int32).Value = idNota;
 
                 int result = cmd.ExecuteNonQuery();
 
                 MySqlDataReader dr;
-                Pedido pedidoById = new Pedido();
+                NotaFiscal notaById = new NotaFiscal();
 
                 dr = cmd.ExecuteReader();
 
@@ -85,29 +87,31 @@ namespace Multicarbono.Models.NotaFiscal
                 {
                     while (dr.Read())
                     {
-                        Pedido pedido = new Pedido();
+                        NotaFiscal notaFiscal = new NotaFiscal();
 
-                        pedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
-                        pedido.NumPedido = Convert.ToInt32(dr["NUM_PEDIDO"]);
-                        pedido.CNPJCliente = Convert.ToString(dr["CNPJ_CLIENTE"]);
-                        pedido.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
-                        pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
-                        pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
-                        pedido.Obs = Convert.ToString(dr["OBS"]);
-                        pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        notaFiscal.IdNF = Convert.ToInt32(dr["ID_NF"]);
+                        notaFiscal.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
+                        notaFiscal.NumNF = Convert.ToInt32(dr["NUM_NF"]);
+                        notaFiscal.Chave = Convert.ToInt32(dr["CHAVE"]);
+                        notaFiscal.NaturezaOper = Convert.ToString(dr["NATUREZA_OPER"]);
+                        notaFiscal.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
+                        notaFiscal.DtSaida = Convert.ToDateTime(dr["DT_SAIDA"]);
+                        notaFiscal.VrFrete = Convert.ToDecimal(dr["VR_FRETE"]);
+                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALANGENS"]);
+                        notaFiscal.CNPJEmitente = Convert.ToString(dr["CNPJ_EMITENTE"]);
 
 
-                        pedidoById = pedido;
+                       notaById = notaFiscal;
                     }
                 }
 
                 _dbConnection.Close();
 
-                return pedidoById;
+                return notaById;
             }
         }
 
-        public Pedido PedidoByCliente(int idCliente)
+        public NotaFiscal NotaByCliente(int idCliente)
         {
             using (_dbConnection)
             {
@@ -123,7 +127,7 @@ namespace Multicarbono.Models.NotaFiscal
                 int result = cmd.ExecuteNonQuery();
 
                 MySqlDataReader dr;
-                Pedido pedidoByCliente = new Pedido();
+                NotaFiscal notaById = new NotaFiscal();
 
                 dr = cmd.ExecuteReader();
 
@@ -132,49 +136,84 @@ namespace Multicarbono.Models.NotaFiscal
                 {
                     while (dr.Read())
                     {
-                        Pedido pedido = new Pedido();
+                        NotaFiscal notaFiscal = new NotaFiscal();
 
-                        pedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
-                        pedido.NumPedido = Convert.ToInt32(dr["NUM_PEDIDO"]);
-                        pedido.CNPJCliente = Convert.ToString(dr["CNPJ_CLIENTE"]);
-                        pedido.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
-                        pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
-                        pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
-                        pedido.Obs = Convert.ToString(dr["OBS"]);
-                        pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        notaFiscal.IdNF = Convert.ToInt32(dr["ID_NF"]);
+                        notaFiscal.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
+                        notaFiscal.NumNF = Convert.ToInt32(dr["NUM_NF"]);
+                        notaFiscal.Chave = Convert.ToInt32(dr["CHAVE"]);
+                        notaFiscal.NaturezaOper = Convert.ToString(dr["NATUREZA_OPER"]);
+                        notaFiscal.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
+                        notaFiscal.DtSaida = Convert.ToDateTime(dr["DT_SAIDA"]);
+                        notaFiscal.VrFrete = Convert.ToDecimal(dr["VR_FRETE"]);
+                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALANGENS"]);
+                        notaFiscal.CNPJEmitente = Convert.ToString(dr["CNPJ_EMITENTE"]);
 
 
-                        pedidoByCliente = pedido;
+                        notaById = notaFiscal;
                     }
                 }
 
                 _dbConnection.Close();
 
-                return pedidoByCliente;
+                return notaById;
             }
         }
 
-        public void UpdatePedido(Pedido pedido)
+        public void UpdatePedido(NotaFiscal notaFiscal)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("UPDATE PEDIDO SET ID_PEDIDO = @ID_PEDIDO, NUM_PEDIDO = @NUM_PEDIDO, CNPJ_CLIENTE = @CNPJ_CLIENTE, ID_USUARIO = @ID_USUARIO, " +
-                "DT_EMISSAO = @DT_EMISSAO, DT_CARREGAMENTO = @DT_CARREGAMENTO, OBS = @OBS, TIPO_FRETE = @TIPO_FRETE");
+                var command = new MySqlCommand("UPDATE NOTA_FISCAL SET ID_NF = @ID_NF, ID_PEDIDO = @ID_PEDIDO, NUM_NF = @NUMF_NF, CHAVE = @CHAVE, " +
+                "NATUREZA_OPER = @NATUREZA_OPER, DT_EMISSAO = @DT_EMISSAO, DT_SAIDA = @DT_SAIDA, VR_FRETE = @VR_FRETE, QTDE_EMBALAGENS = @QTDE_EMBALAGENS, CNPJ_EMITENTE = @CNPJ_EMITENTE");
 
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = pedido.IdPedido;
-                command.Parameters.Add("NUM_PEDIDO", DbType.Int32).Value = pedido.NumPedido;
-                command.Parameters.Add("CNPJ_CLIENTE", DbType.String).Value = pedido.CNPJCliente;
-                command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = pedido.IdUsuario;
-                command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = pedido.DtEmissao;
-                command.Parameters.Add("DT_CARREGAMENTO", DbType.DateTime).Value = pedido.DtCarregamento;
-                command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
-                command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
+                command.Parameters.Add("ID_NF", DbType.Int32).Value = notaFiscal.IdNF;
+                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = notaFiscal.IdPedido;
+                command.Parameters.Add("NUM_NF", DbType.Int32).Value = notaFiscal.NumNF;
+                command.Parameters.Add("CHAVE", DbType.Int32).Value = notaFiscal.Chave;
+                command.Parameters.Add("NATUREZA_OPER", DbType.String).Value = notaFiscal.NaturezaOper;
+                command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = notaFiscal.DtEmissao;
+                command.Parameters.Add("DT_SAIDA", DbType.DateTime).Value = notaFiscal.DtSaida;
+                command.Parameters.Add("VR_FRETE", DbType.String).Value = notaFiscal.VrFrete;
+                command.Parameters.Add("QTDE_EMBALAGENS", DbType.Int32).Value = notaFiscal.QtdeEmbalagens;
+                command.Parameters.Add("CNPJ_EMITENTE", DbType.DateTime).Value = notaFiscal.CNPJEmitente;
+
+                int result = command.ExecuteNonQuery();
+
+                _dbConnection.Close();
+            }
+        }
+
+        public void IncludePedido(NotaFiscal notaFiscal)
+        {
+            using (_dbConnection)
+            {
+                _dbConnection.Open();
+
+                var command = new MySqlCommand("INSERT INTO NOTA_FISCAL (ID_NF, ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE) VALUES" +
+                "(ID_NF, ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE)");
+
+
+                command.CommandType = CommandType.Text;
+                command.Connection = _dbConnection;
+
+                command.Parameters.Add("ID_NF", DbType.Int32).Value = notaFiscal.IdNF;
+                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = notaFiscal.IdPedido;
+                command.Parameters.Add("NUM_NF", DbType.Int32).Value = notaFiscal.NumNF;
+                command.Parameters.Add("CHAVE", DbType.Int32).Value = notaFiscal.Chave;
+                command.Parameters.Add("NATUREZA_OPER", DbType.String).Value = notaFiscal.NaturezaOper;
+                command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = notaFiscal.DtEmissao;
+                command.Parameters.Add("DT_SAIDA", DbType.DateTime).Value = notaFiscal.DtSaida;
+                command.Parameters.Add("VR_FRETE", DbType.String).Value = notaFiscal.VrFrete;
+                command.Parameters.Add("QTDE_EMBALAGENS", DbType.Int32).Value = notaFiscal.QtdeEmbalagens;
+                command.Parameters.Add("CNPJ_EMITENTE", DbType.DateTime).Value = notaFiscal.CNPJEmitente;
+
 
 
                 int result = command.ExecuteNonQuery();
@@ -183,47 +222,18 @@ namespace Multicarbono.Models.NotaFiscal
             }
         }
 
-        public void IncludePedido(Pedido pedido)
+        public void DeleteCliente(int idNotaFiscal)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGAMENTO, OBS, TIPO_FRETE) VALUES" +
-                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGAMENTO, @OBS, @TIPO_FRETE)");
-
+                var command = new MySqlCommand("DELETE FROM NOTA_FISCAL WHERE ID_NF = @ID_NF");
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = pedido.IdPedido;
-                command.Parameters.Add("NUM_PEDIDO", DbType.Int32).Value = pedido.NumPedido;
-                command.Parameters.Add("CNPJ_CLIENTE", DbType.String).Value = pedido.CNPJCliente;
-                command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = pedido.IdUsuario;
-                command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = pedido.DtEmissao;
-                command.Parameters.Add("DT_CARREGAMENTO", DbType.DateTime).Value = pedido.DtCarregamento;
-                command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
-                command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
-
-
-                int result = command.ExecuteNonQuery();
-
-                _dbConnection.Close();
-            }
-        }
-
-        public void DeleteCliente(int idPedido)
-        {
-            using (_dbConnection)
-            {
-                _dbConnection.Open();
-
-                var command = new MySqlCommand("DELETE FROM PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO");
-
-                command.CommandType = CommandType.Text;
-                command.Connection = _dbConnection;
-
-                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
+                command.Parameters.Add("ID_NF", DbType.Int32).Value = idNotaFiscal;
 
                 int result = command.ExecuteNonQuery();
 
