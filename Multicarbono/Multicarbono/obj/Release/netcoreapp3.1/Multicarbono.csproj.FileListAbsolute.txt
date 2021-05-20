@@ -146,3 +146,6 @@ C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Multicarbono
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Multicarbono.pdb
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Multicarbono.genruntimeconfig.cache
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Multicarbono.csprojAssemblyReference.cache
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\Produto\AlterarProduto.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\Produto\CadastroProduto.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\Produto\modalConfirmDelete.cshtml.g.cs

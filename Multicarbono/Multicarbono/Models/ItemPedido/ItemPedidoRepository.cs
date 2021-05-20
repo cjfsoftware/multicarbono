@@ -42,9 +42,9 @@ namespace Multicarbono.Models.ItemPedido
                     {
                         ItemPedido itemPedido = new ItemPedido();
 
-                        itemPedido.ID_ITEM_PEDIDO = Convert.ToInt32(dr["ID_ITEM_PEDIDO"]);
-                        itemPedido.ID_PEDIDO = Convert.ToInt32(dr["ID_PEDIDO"]);
-                        itemPedido.ID_PRODUTO = Convert.ToInt32(dr["ID_PRODUTO"]);
+                        itemPedido.IdItemPedido = Convert.ToInt32(dr["ID_ITEM_PEDIDO"]);
+                        itemPedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
+                        itemPedido.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
                         itemPedido.CFOP = Convert.ToInt32(dr["CFOP"]);
                         itemPedido.QTDE = Convert.ToInt32(dr["QTDE"]);
 
@@ -85,9 +85,9 @@ namespace Multicarbono.Models.ItemPedido
                     {
                         ItemPedido itemPedido = new ItemPedido();
 
-                        itemPedido.ID_ITEM_PEDIDO = Convert.ToInt32(dr["ID_ITEM_PEDIDO"]);
-                        itemPedido.ID_PEDIDO = Convert.ToInt32(dr["ID_PEDIDO"]);
-                        itemPedido.ID_PRODUTO = Convert.ToInt32(dr["ID_PRODUTO"]);
+                        itemPedido.IdItemPedido = Convert.ToInt32(dr["ID_ITEM_PEDIDO"]);
+                        itemPedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
+                        itemPedido.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
                         itemPedido.CFOP = Convert.ToInt32(dr["CFOP"]);
                         itemPedido.QTDE = Convert.ToInt32(dr["QTDE"]);
 

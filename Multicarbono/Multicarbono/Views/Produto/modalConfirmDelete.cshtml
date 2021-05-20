@@ -1,0 +1,11 @@
+﻿@model Multicarbono.Models.Produto.Produto
+
+<h3>Deseja excluir o produto?</h3>
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdProduto" />
+        <input type="submit" value="Sim" class="btn btn-danger" />
+        <a asp-action="Index">Não</a>
+    </form>
+</div>

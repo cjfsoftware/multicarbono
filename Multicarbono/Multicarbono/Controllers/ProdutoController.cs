@@ -11,74 +11,81 @@ namespace Multicarbono.Controllers
 {
     public class ProdutoController : Controller
     {
-        // GET: ProdutoController
-        public ActionResult Index()
+        private ProdutoRepository _produtoRepo;
+
+        public ProdutoController(ProdutoRepository produtoRepo)
         {
-            List<Produto> list = new List<Produto>();
-            return View();
+            _produtoRepo = produtoRepo;
         }
 
-        // GET: ProdutoController/Details/5
+        // GET: UsuarioController
+        public ActionResult Index()
+        {
+            var model = _produtoRepo.ListProduto();
+            return PartialView("~/Views/Produto/Index.cshtml", model);
+        }
+
+        // GET: UsuarioController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ProdutoController/Create
-        public ActionResult Create()
+        // GET: UsuarioController/Create
+        public ActionResult CadastroProduto()
         {
-            return View();
+            return PartialView();
         }
 
-        // POST: ProdutoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CadastroProduto(int idProduto, Produto produto)
+        {
+            _produtoRepo.IncludeProduto(produto);
+            return RedirectToAction("Index");
+        }
+
+
+        // GET: UsuarioController/Edit/5
+        public ActionResult Edit(int idProduto)
+        {
+
+            var model = _produtoRepo.ProdutoById(idProduto);
+            return PartialView("AlterarProduto", model);
+        }
+
+        // POST: UsuarioController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int idProduto, Produto produto)
         {
             try
             {
+                _produtoRepo.UpdateProduto(produto);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
-            }
-        }
-
-        // GET: ProdutoController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProdutoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
+                //return View();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
         }
 
-        // GET: ProdutoController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: UsuarioController/Delete/5
+        public ActionResult Delete(int idProduto)
         {
-            return View();
+            var model = _produtoRepo.ProdutoById(idProduto);
+            return PartialView("modalConfirmDelete", model);
         }
 
-        // POST: ProdutoController/Delete/5
+        // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int idProduto, Produto produto)
         {
             try
             {
+                _produtoRepo.DeleteProduto(idProduto);
                 return RedirectToAction(nameof(Index));
             }
             catch

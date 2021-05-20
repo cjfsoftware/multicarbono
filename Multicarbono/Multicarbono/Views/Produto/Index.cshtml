@@ -1,23 +1,87 @@
 ﻿@model IEnumerable<Multicarbono.Models.Produto.Produto>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+@Html.Partial("_Menu")
+
+<h5>Produtos</h5>
+
+<table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NCM_SH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CST)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VrUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ali_ICMS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ali_IPI)
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.IdProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NCM_SH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CST)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VrUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ali_ICMS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ali_IPI)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-idProduto="@item.IdProduto">Alterar</a>
+                <a asp-action="Delete" asp-route-idProduto="@item.IdProduto">Excluir</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
+
+<p>
+    <a asp-action="CadastroProduto" class="btn btn-info">Criar produto</a>
+</p>

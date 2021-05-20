@@ -20,9 +20,13 @@ namespace Multicarbono.Models.Produto
 
         public int CST { get; set; }
 
-        public int Unidade { get; set; }
+        public string Unidade { get; set; }
 
-        public decimal MyProperty { get; set; }
+        public decimal VrUnitario { get; set; }
+
+        public decimal Ali_ICMS { get; set; }
+
+        public decimal Ali_IPI { get; set; }
 
     }
 }

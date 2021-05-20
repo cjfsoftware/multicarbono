@@ -12,7 +12,7 @@ namespace Multicarbono.Models.NotaFiscal
         private readonly MySqlConnection _dbConnection;
 
 
-        public |NotaFiscalRepository(MySqlConnection dbConnection)
+        public NotaFiscalRepository(MySqlConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }

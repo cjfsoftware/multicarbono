@@ -99,7 +99,7 @@ namespace Multicarbono.Models.Transportador
         }
 
 
-        public void UpdateEndereco(Transportador transportador)
+        public void UpdateTransportador(Transportador transportador)
         {
             using (_dbConnection)
             {
@@ -124,13 +124,13 @@ namespace Multicarbono.Models.Transportador
             }
         }
 
-        public void IncludeCliente(Transportador transportador)
+        public void IncludeTransportador(Transportador transportador)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO TRANSPORTADOR (ID_TRANSPORTADOR, CNPJ_TRANSPORTADOR, RAZAO_SOCIAL, IE_TRANSPORTADOR, ENDERECO_TRANSP) VALUES)" +
+                var command = new MySqlCommand("INSERT INTO TRANSPORTADOR (ID_TRANSPORTADOR, CNPJ_TRANSPORTADOR, RAZAO_SOCIAL, IE_TRANSPORTADOR, ENDERECO_TRANSP) VALUES" +
                 "(@ID_TRANSPORTADOR, @CNPJ_TRANSPORTADOR, @RAZAO_SOCIAL, @IE_TRANSPORTADOR, @ENDERECO_TRANSP )");
 
 
@@ -151,18 +151,18 @@ namespace Multicarbono.Models.Transportador
             }
         }
 
-        public void DeleteCliente(int idEndereco)
+        public void DeleteTransportador(int idTransportador)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("DELETE FROM TELEFONE WHERE ID_TRANSPORTADOR = @ID_TRANSFORMADOR");
+                var command = new MySqlCommand("DELETE FROM TRANSPORTADOR WHERE ID_TRANSPORTADOR = @ID_TRANSPORTADOR");
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_TRANSPORTADOR", DbType.Int32).Value = idEndereco;
+                command.Parameters.Add("ID_TRANSPORTADOR", DbType.Int32).Value = idTransportador;
 
                 int result = command.ExecuteNonQuery();
 

@@ -17,7 +17,7 @@ namespace Multicarbono.Models.Cliente
             _dbConnection = dbConnection;
         }
 
-        public List<Cliente> listCliente()
+        public List<Cliente> ListCliente()
         {
             using (_dbConnection)
             {
@@ -59,7 +59,7 @@ namespace Multicarbono.Models.Cliente
             }
         }
 
-        public Cliente clienteById(int idCliente)
+        public Cliente ClienteById(int idCliente)
         {
             using (_dbConnection)
             {
@@ -105,7 +105,7 @@ namespace Multicarbono.Models.Cliente
             }
         }
 
-        public void updateCliente(Cliente cliente)
+        public void UpdateCliente(Cliente cliente)
         {
             using (_dbConnection)
             {
@@ -134,7 +134,7 @@ namespace Multicarbono.Models.Cliente
             }
         }
 
-        public void includeCliente(Cliente cliente)
+        public void IncludeCliente(Cliente cliente)
         {
             using (_dbConnection)
             {
@@ -163,7 +163,7 @@ namespace Multicarbono.Models.Cliente
             }
         }
 
-        public void deleteCliente(int idCliente)
+        public void DeleteCliente(int idCliente)
         {
             using (_dbConnection)
             {
