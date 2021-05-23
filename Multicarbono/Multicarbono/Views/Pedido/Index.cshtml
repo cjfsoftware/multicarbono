@@ -1,30 +1,103 @@
 ﻿@model IEnumerable<Multicarbono.Models.Pedido.Pedido>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@Html.Partial("_Menu")
 
-<h1>Index</h1>
+<h5 style="margin-left:1%">Pedido</h5>
 
+<form asp-action="PedidoByFiltro" style="margin-left:2%">
+    <div class="form-row" asp-action="PedidoByFiltro">
+        <div class="form-group col-md-3">
+            <label for="dataIni" style="font-size:10px;">Data Inicial</label>
+            <div>
+                <input type="date" name="dataIni" class="form-control" style="font-size:10px" />
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="dataFim" style="font-size:10px;">Data Final</label>
+            <div>
+                <input type="date" name="dataFim" class="form-control" style="font-size:10px" />
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="cliente" style="font-size:10px;">Cliente</label>
+            <div>
+                <input type="text" name="cliente" class="form-control" style="font-size:10px" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div><br/>
+                <button type="submit" class="btn btn-primary" style="font-size:10px">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+</form>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-striped table-hover" style="margin-left:2%">
     <thead>
         <tr>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNPJCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtEmissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtCarregamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Obs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoFrete)
+            </th>
         </tr>
     </thead>
     <tbody>
-@*@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPedido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumPedido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CNPJCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtEmissao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtCarregamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Obs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoFrete)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-idPedido="@item.IdPedido">Alterar</a>
+                    <a asp-action="Delete" asp-route-idPedido="@item.IdPedido">Excluir</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<p>
+    <a asp-action="CadastroPedido" class="btn btn-info" style="margin-left:2%">Criar pedido</a>
+</p>

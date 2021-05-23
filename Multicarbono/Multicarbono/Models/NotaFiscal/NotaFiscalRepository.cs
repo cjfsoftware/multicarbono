@@ -111,7 +111,7 @@ namespace Multicarbono.Models.NotaFiscal
             }
         }
 
-        public NotaFiscal NotaByCliente(int idCliente)
+        public NotaFiscal NotaByFiltro(int idCliente, DateTime dataInit, DateTime dataFim)
         {
             using (_dbConnection)
             {
@@ -160,7 +160,7 @@ namespace Multicarbono.Models.NotaFiscal
             }
         }
 
-        public void UpdatePedido(NotaFiscal notaFiscal)
+        public void UpdateNota(NotaFiscal notaFiscal)
         {
             using (_dbConnection)
             {
@@ -190,7 +190,7 @@ namespace Multicarbono.Models.NotaFiscal
             }
         }
 
-        public void IncludePedido(NotaFiscal notaFiscal)
+        public void IncludeNota(NotaFiscal notaFiscal)
         {
             using (_dbConnection)
             {
@@ -222,7 +222,7 @@ namespace Multicarbono.Models.NotaFiscal
             }
         }
 
-        public void DeleteCliente(int idNotaFiscal)
+        public void DeleteNota(int idNotaFiscal)
         {
             using (_dbConnection)
             {

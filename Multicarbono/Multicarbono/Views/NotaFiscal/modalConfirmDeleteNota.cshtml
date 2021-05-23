@@ -1,0 +1,11 @@
+﻿@model Multicarbono.Models.NotaFiscal.NotaFiscal
+
+<h3>Deseja excluir a nota fiscal?</h3>
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdNF" />
+        <input type="submit" value="Sim" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn_danger">Não</a>
+    </form>
+</div>

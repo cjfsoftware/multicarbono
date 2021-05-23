@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.Pedido;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,34 +11,52 @@ namespace Multicarbono.Controllers
 {
     public class PedidoController : Controller
     {
-        // GET: PedidoController
-        public ActionResult Index()
+        private PedidoRepository _pedidoRepo;
+
+        public PedidoController(PedidoRepository pedidoRepo)
         {
-        
-            
-            
-            return View();
+            _pedidoRepo = pedidoRepo;
         }
 
-        // GET: PedidoController/Details/5
+
+
+        public ActionResult Index()
+        {
+            var model = _pedidoRepo.ListPedido();
+            return PartialView("Index", model);
+        }
+
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: PedidoController/Create
-        public ActionResult Create()
+        public ActionResult CadastroPedido()
         {
-            return View();
+            return PartialView();
         }
 
-        // POST: PedidoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CadastroPedido(Pedido pedido)
+        {
+            _pedidoRepo.IncludePedido(pedido);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int idPedido)
+        {
+            var model = _pedidoRepo.PedidoById(idPedido);
+            return PartialView("AlterarPedido", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int idPedido, Pedido pedido)
         {
             try
             {
+                _pedidoRepo.UpdatePedido(pedido);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -46,40 +65,19 @@ namespace Multicarbono.Controllers
             }
         }
 
-        // GET: PedidoController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Delete(int idPedido)
         {
-            return View();
+            var model = _pedidoRepo.PedidoById(idPedido);
+            return PartialView("modalConfirmDelete", model);
         }
 
-        // POST: PedidoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Delete(int idPedido, Pedido pedido)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PedidoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PedidoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
+                _pedidoRepo.DeletePedido(pedido.IdPedido);
                 return RedirectToAction(nameof(Index));
             }
             catch

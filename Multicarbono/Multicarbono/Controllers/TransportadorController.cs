@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.Transportador;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,73 +10,74 @@ namespace Multicarbono.Controllers
 {
     public class TransportadorController : Controller
     {
-        // GET: TransportadorController
+        private TransportadorRepository _transportadorRepo;
+
+        public TransportadorController(TransportadorRepository transportadorRepo)
+        {
+            _transportadorRepo = transportadorRepo;
+        }
+
+
         public ActionResult Index()
         {
-            return View();
+            var model = _transportadorRepo.ListTransportador();
+            return PartialView("Index", model);
         }
 
-        // GET: TransportadorController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult CadastroTransportador()
         {
-            return View();
+            return PartialView();
         }
 
-        // GET: TransportadorController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TransportadorController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CadastroTransportador(int idTransportador, Transportador transportador)
+        {
+            _transportadorRepo.IncludeTransportador(transportador);
+            return RedirectToAction("Index");
+        }
+
+
+
+        public ActionResult Edit(int idTransportador)
+        {
+
+            var model = _transportadorRepo.TransportadorById(idTransportador);
+            return PartialView("AlterarTransportador", model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int idTransportador, Transportador transportador)
         {
             try
             {
+                _transportadorRepo.UpdateTransportador(transportador);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
-            }
-        }
-
-        // GET: TransportadorController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TransportadorController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
+                //return View();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
         }
 
-        // GET: TransportadorController/Delete/5
-        public ActionResult Delete(int id)
+
+        public ActionResult Delete(int idTransportador)
         {
-            return View();
+            var model = _transportadorRepo.TransportadorById(idTransportador);
+            return PartialView("modalConfirmDelete", model);
         }
 
-        // POST: TransportadorController/Delete/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int idTransportador, Transportador transportador)
         {
             try
             {
+                _transportadorRepo.DeleteTransportador(transportador.IdTransportador);
                 return RedirectToAction(nameof(Index));
             }
             catch

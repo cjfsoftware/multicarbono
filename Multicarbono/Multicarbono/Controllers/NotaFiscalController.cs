@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.NotaFiscal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,31 +10,47 @@ namespace Multicarbono.Controllers
 {
     public class NotaFiscalController : Controller
     {
-        // GET: NotaFiscalController
+        private NotaFiscalRepository _notaRepo;
+
+        public NotaFiscalController(NotaFiscalRepository notaFiscalRepo)
+        {
+            _notaRepo = notaFiscalRepo;
+        }
+
+
+
         public ActionResult Index()
         {
-            return View();
+            var model = _notaRepo.ListNotaFiscal();
+            return PartialView("Index", model);
         }
 
-        // GET: NotaFiscalController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult CadastroNotaFiscal()
         {
-            return View();
+            return PartialView();
         }
 
-        // GET: NotaFiscalController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: NotaFiscalController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CadastroNotaFiscal(NotaFiscal notaFiscal)
+        {
+            _notaRepo.IncludeNota(notaFiscal);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int idNotaFiscal)
+        {
+            var model = _notaRepo.NotaById(idNotaFiscal);
+            return PartialView("_alterarItemNotaPartial", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int idNotaFiscal, NotaFiscal notaFiscal)
         {
             try
             {
+                _notaRepo.UpdateNota(notaFiscal);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -42,40 +59,19 @@ namespace Multicarbono.Controllers
             }
         }
 
-        // GET: NotaFiscalController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Delete(int idNotaFiscal)
         {
-            return View();
+            var model = _notaRepo.NotaById(idNotaFiscal);
+            return PartialView("modalConfirmDeleteNota", model);
         }
 
-        // POST: NotaFiscalController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Delete(int idNotaFiscal, NotaFiscal notaFiscal)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: NotaFiscalController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: NotaFiscalController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
+                _notaRepo.DeleteNota(notaFiscal.IdNF);
                 return RedirectToAction(nameof(Index));
             }
             catch

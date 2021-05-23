@@ -168,7 +168,7 @@ namespace Multicarbono.Models.EnderecoCliente
             }
         }
 
-        public void IncludeCliente(EnderecoCliente endereco)
+        public void IncludeEndereco(EnderecoCliente endereco)
         {
             using (_dbConnection)
             {
@@ -194,13 +194,13 @@ namespace Multicarbono.Models.EnderecoCliente
             }
         }
 
-        public void DeleteCliente(int idEndereco)
+        public void DeleteEndereco(int idEndereco)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("DELETE FROM CLIENTE WHERE ID_ENDERECO = @ID_ENDERECO");
+                var command = new MySqlCommand("DELETE FROM ENDERECO WHERE ID_ENDERECO = @ID_ENDERECO");
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;

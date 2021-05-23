@@ -1,29 +1,116 @@
 ﻿@model IEnumerable<Multicarbono.Models.NotaFiscal.NotaFiscal>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@Html.Partial("_Menu")
 
-<h1>Index</h1>
+<h5 style="margin-left:1%">Nota Fiscal</h5>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<form asp-action="NotaByFiltro" style="margin-left:2%">
+    <div class="form-row" asp-action="NotaByFiltro">
+        <div class="form-group col-md-3">
+            <label for="dataIni" style="font-size:10px;">Data Inicial</label>
+            <div>
+                <input type="date" name="dataIni" class="form-control" style="font-size:10px" />
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="dataFim" style="font-size:10px;">Data Final</label>
+            <div>
+                <input type="date" name="dataFim" class="form-control" style="font-size:10px" />
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="cliente" style="font-size:10px;">Cliente</label>
+            <div>
+                <input type="text" name="cliente" class="form-control" style="font-size:10px" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <br />
+                <button type="submit" class="btn btn-primary" style="font-size:10px">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped table-hover" style="margin-left:2%">
     <thead>
         <tr>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumNF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chave)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NaturezaOper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtEmissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtSaida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VrFrete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdeEmbalagens)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNPJEmitente)
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.IdNF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumNF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NaturezaOper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtEmissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtSaida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VrFrete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QtdeEmbalagens)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNPJEmitente)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-idNF="@item.IdNF">Alterar</a>
+                <a asp-action="Delete" asp-route-idNF="@item.IdNF">Excluir</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
+
+<p>
+    <a asp-action="CadastroNota" class="btn btn-info" style="margin-left:2%">Emitir Nota</a>
+</p>

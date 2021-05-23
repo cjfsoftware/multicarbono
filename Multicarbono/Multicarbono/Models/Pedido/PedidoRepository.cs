@@ -107,7 +107,7 @@ namespace Multicarbono.Models.Pedido
             }
         }
 
-        public Pedido PedidoByCliente(int idCliente)
+        public Pedido PedidoByFiltro(int idCliente, DateTime dataInit, DateTime dataFim)
         {
             using (_dbConnection)
             {
@@ -161,7 +161,7 @@ namespace Multicarbono.Models.Pedido
                 _dbConnection.Open();
 
                 var command = new MySqlCommand("UPDATE PEDIDO SET ID_PEDIDO = @ID_PEDIDO, NUM_PEDIDO = @NUM_PEDIDO, CNPJ_CLIENTE = @CNPJ_CLIENTE, ID_USUARIO = @ID_USUARIO, " +
-                "DT_EMISSAO = @DT_EMISSAO, DT_CARREGAMENTO = @DT_CARREGAMENTO, OBS = @OBS, TIPO_FRETE = @TIPO_FRETE");
+                "DT_EMISSAO = @DT_EMISSAO, DT_CARREGA = @DT_CARREGA, OBS = @OBS, TIPO_FRETE = @TIPO_FRETE");
 
 
                 command.CommandType = CommandType.Text;
@@ -172,7 +172,7 @@ namespace Multicarbono.Models.Pedido
                 command.Parameters.Add("CNPJ_CLIENTE", DbType.String).Value = pedido.CNPJCliente;
                 command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = pedido.IdUsuario;
                 command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = pedido.DtEmissao;
-                command.Parameters.Add("DT_CARREGAMENTO", DbType.DateTime).Value = pedido.DtCarregamento;
+                command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;
                 command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
                 command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
 
@@ -189,8 +189,8 @@ namespace Multicarbono.Models.Pedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGAMENTO, OBS, TIPO_FRETE) VALUES" +
-                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGAMENTO, @OBS, @TIPO_FRETE)");
+                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE) VALUES" +
+                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE)");
 
 
                 command.CommandType = CommandType.Text;
@@ -201,7 +201,7 @@ namespace Multicarbono.Models.Pedido
                 command.Parameters.Add("CNPJ_CLIENTE", DbType.String).Value = pedido.CNPJCliente;
                 command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = pedido.IdUsuario;
                 command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = pedido.DtEmissao;
-                command.Parameters.Add("DT_CARREGAMENTO", DbType.DateTime).Value = pedido.DtCarregamento;
+                command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;
                 command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
                 command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
 
@@ -212,7 +212,7 @@ namespace Multicarbono.Models.Pedido
             }
         }
 
-        public void DeleteCliente(int idPedido)
+        public void DeletePedido(int idPedido)
         {
             using (_dbConnection)
             {

@@ -127,7 +127,7 @@ namespace Multicarbono.Models.ItemPedido
             }
         }
 
-        public void IncludeItemNota(ItemPedido itemPedido)
+        public void IncludeItemPedido(ItemPedido itemPedido)
         {
             using (_dbConnection)
             {
@@ -153,7 +153,7 @@ namespace Multicarbono.Models.ItemPedido
             }
         }
 
-        public void DeleteCliente(int idItemPedido)
+        public void DeleteItemPedido(int idItemPedido)
         {
             using (_dbConnection)
             {

@@ -43,7 +43,8 @@ namespace Multicarbono.Models.Transportador
                         transportador.IdTransportador = Convert.ToInt32(dr["ID_TRANSPORTADOR"]);
                         transportador.CNPJTransportador = Convert.ToString(dr["CNPJ_TRANSPORTADOR"]);
                         transportador.RazaoSocial = Convert.ToString(dr["RAZAO_SOCIAL"]);
-                        transportador.IETransportador = Convert.ToInt32(dr["CONTATO"]);
+                        transportador.IETransportador = Convert.ToInt32(dr["IE_TRANSPORTADOR"]);
+                        transportador.EnderecoTransp = Convert.ToString(dr["ENDERECO_TRANSP"]);
 
                         listTransportador.Add(transportador);
                     }
@@ -66,7 +67,7 @@ namespace Multicarbono.Models.Transportador
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = _dbConnection;
 
-                cmd.Parameters.Add("ID_TELEFONE", DbType.Int32).Value = idTransportador;
+                cmd.Parameters.Add("ID_TRANSPORTADOR", DbType.Int32).Value = idTransportador;
 
                 int result = cmd.ExecuteNonQuery();
 
@@ -105,7 +106,7 @@ namespace Multicarbono.Models.Transportador
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("UPDATE TRANSPORTAOOR SET ID_TRANSPORTADOR = @ID_TRANSPORTADOR, CNPJ_TRANSPORTADOR = @CNPJ_TRANSPORTADOR, RAZAO_SOCIAL = @RAZAO_SOCIAL, ENDERECO_TRANSP = @ENDERECO_TRANSP");
+                var command = new MySqlCommand("UPDATE TRANSPORTAOOR SET CNPJ_TRANSPORTADOR = @CNPJ_TRANSPORTADOR, RAZAO_SOCIAL = @RAZAO_SOCIAL, ENDERECO_TRANSP = @ENDERECO_TRANSP WHERE ID_TRANSPORTADOR = @ID_TRANSPORTADOR");
 
 
                 command.CommandType = CommandType.Text;
@@ -114,7 +115,7 @@ namespace Multicarbono.Models.Transportador
                 command.Parameters.Add("ID_TRANSPORTADOR", DbType.Int32).Value = transportador.IdTransportador;
                 command.Parameters.Add("CNPJ_TRANSPORTADOR", DbType.String).Value = transportador.CNPJTransportador;
                 command.Parameters.Add("RAZAO_SOCIAL", DbType.String).Value = transportador.RazaoSocial;
-                command.Parameters.Add("IE_TRANSPORTADOR", DbType.Int32).Value = transportador.RazaoSocial;
+                command.Parameters.Add("IE_TRANSPORTADOR", DbType.Int32).Value = transportador.IETransportador;
                 command.Parameters.Add("ENDERECO_TRANSP", DbType.String).Value = transportador.EnderecoTransp;
 
 
@@ -141,7 +142,7 @@ namespace Multicarbono.Models.Transportador
                 command.Parameters.Add("ID_TRANSPORTADOR", DbType.Int32).Value = transportador.IdTransportador;
                 command.Parameters.Add("CNPJ_TRANSPORTADOR", DbType.String).Value = transportador.CNPJTransportador;
                 command.Parameters.Add("RAZAO_SOCIAL", DbType.String).Value = transportador.RazaoSocial;
-                command.Parameters.Add("IE_TRANSPORTADOR", DbType.Int32).Value = transportador.RazaoSocial;
+                command.Parameters.Add("IE_TRANSPORTADOR", DbType.Int32).Value = transportador.IETransportador;
                 command.Parameters.Add("ENDERECO_TRANSP", DbType.String).Value = transportador.EnderecoTransp;
 
 

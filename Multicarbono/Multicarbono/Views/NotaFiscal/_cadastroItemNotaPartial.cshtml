@@ -1,0 +1,33 @@
+﻿@model Multicarbono.Models.ItemNota.ItemNota
+
+@Html.Partial("_Menu")
+
+<hr />
+<h6 style="margin-left:10%">Inserir pesagem de item</h6>
+<br />
+<br />
+<div class="row" style="margin-left:10%">
+    <div class="col-md-4">
+        <form asp-action="CadastroItemNota">
+            <div class="form-group">
+                <label asp-for="IdNF" class="control-label"></label>
+                <input asp-for="IdNF" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="IdItemPedido" class="control-label"></label>
+                <input asp-for="IdItemPedido" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CodProduto" class="control-label"></label>
+                <input asp-for="CodProduto" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="QtdePesada" class="control-label"></label>
+                <input asp-for="QtdePesada" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar item" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>

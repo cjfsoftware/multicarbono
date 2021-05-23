@@ -195,7 +195,7 @@ namespace Multicarbono.Models.ItemNota
             }
         }
 
-        public void DeleteCliente(int idItemNota)
+        public void DeleteItemNota(int idItemNota)
         {
             using (_dbConnection)
             {

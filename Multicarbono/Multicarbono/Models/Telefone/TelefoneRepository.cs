@@ -139,7 +139,7 @@ namespace Multicarbono.Models.Telefone
             }
         }
 
-        public void UpdateEndereco(Telefone telefone)
+        public void UpdateTelefone(Telefone telefone)
         {
             using (_dbConnection)
             {
@@ -162,7 +162,7 @@ namespace Multicarbono.Models.Telefone
             }
         }
 
-        public void IncludeCliente(Telefone telefone)
+        public void IncludeTelefone(Telefone telefone)
         {
             using (_dbConnection)
             {
@@ -187,7 +187,7 @@ namespace Multicarbono.Models.Telefone
             }
         }
 
-        public void DeleteCliente(int idEndereco)
+        public void DeleteTelefone(int idEndereco)
         {
             using (_dbConnection)
             {

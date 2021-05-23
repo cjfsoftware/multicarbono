@@ -1,0 +1,11 @@
+﻿@model Multicarbono.Models.Transportador.Transportador
+
+<h3>Deseja excluir o transportador?</h3>
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdTransportador" />
+        <input type="submit" value="Sim" class="btn btn-danger" />
+        <a asp-action="Index" value="Não"></a>
+    </form>
+</div>
