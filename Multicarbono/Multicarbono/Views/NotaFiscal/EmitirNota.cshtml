@@ -1,39 +1,96 @@
-﻿@model Multicarbono.Models.Pedido.Pedido
+﻿@model Multicarbono.Models.NotaFiscal.NotaFiscal
 
 @Html.Partial("_Menu")
 
 <hr />
-<h6 style="margin-left:10%">Cadastrar Pedido</h6><br /><br />
+<h6 style="margin-left:10%">Emissão de Nota Fiscal</h6><br /><br />
+
+<table class="table table-striped table-hover" style="margin-left:2%">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(e => e.IdProduto)*@IdProduto
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(e => e.CFOP)*@CFOP
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(e => e.QTDE)*@QTDE
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(e => e.SubtotalItemPedido)*@SubtotalItemPedido
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.itensPedido)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CFOP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QTDE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubtotalItemPedido)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-idItemPedido="@item.IdItemPedido">Alterar</a>
+                    <a asp-action="Delete" asp-route-idItemPedido="@item.IdItemPedido">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
 <div class="row" style="margin-left:10%">
     <div class="col-md-4">
-        <form asp-action="CadastroPedido">
+        <form asp-action="CadastroNotaFiscal">
             <div class="form-group">
-                <label asp-for="NumPedido" class="control-label"></label>
-                <input asp-for="NumPedido" class="form-control" />
+                <label asp-for="IdPedido" class="control-label"></label>
+                <input asp-for="IdPedido" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="CNPJCliente" class="control-label"></label>
-                <input asp-for="CNPJCliente" class="form-control" />
+                <label asp-for="NumNF" class="control-label"></label>
+                <input asp-for="NumNF" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <input asp-for="IdUsuario" class="form-control" />
+                <label asp-for="Chave" class="control-label"></label>
+                <input asp-for="Chave" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NaturezaOper" class="control-label"></label>
+                <input asp-for="NaturezaOper" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="DtEmissao" class="control-label"></label>
                 <input asp-for="DtEmissao" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="DtCarregamento" class="control-label"></label>
-                <input asp-for="DtCarregamento" class="form-control" />
+                <label asp-for="DtSaida" class="control-label"></label>
+                <input asp-for="DtSaida" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Obs" class="control-label"></label>
-                <input asp-for="Obs" class="form-control" />
+                <label asp-for="VrFrete" class="control-label"></label>
+                <input asp-for="VrFrete" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="TipoFrete" class="control-label"></label>
-                <input asp-for="TipoFrete" class="form-control" />
+                <label asp-for="QtdeEmbalagens" class="control-label"></label>
+                <input asp-for="QtdeEmbalagens" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CNPJEmitente" class="control-label"></label>
+                <input asp-for="CNPJEmitente" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorNota" class="control-label"></label>
+                <input asp-for="ValorNota" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar pedido" class="btn btn-info" />

@@ -19,9 +19,17 @@ namespace Multicarbono.Controllers
             _itemPedidoRepo = itemPedidoRepo;
         }
 
-        public ActionResult CadastroItemPedido()
+        public ActionResult Index(int idPedido)
         {
-            return PartialView("_cadastroItemPedidoPartial");
+            var model = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
+
+            return PartialView("~/Views/Pedido/_itensPedido.cshtml", model);
+        }
+
+        public ActionResult CadastroItemPedido(int idPedido)
+        {
+            ViewData["idPedido"] = idPedido;
+            return PartialView("~/Views/Pedido/_cadastroItemPedidoPartial.cshtml");
         }
 
         [HttpPost]
@@ -35,7 +43,7 @@ namespace Multicarbono.Controllers
         public ActionResult Edit(int idPedido)
         {
             var model = _itemPedidoRepo.ItemPedidoById(idPedido);
-            return PartialView("_alterarItemPedidoPartial", model);
+            return PartialView("~/Views/Pedido/_alterarItemPedidoPartial.cshtml", model);
         }
 
         [HttpPost]
@@ -56,7 +64,7 @@ namespace Multicarbono.Controllers
         public ActionResult Delete(int idItemPedido)
         {
             var model = _itemPedidoRepo.ItemPedidoById(idItemPedido);
-            return PartialView("modalConfirmDeleteItemPedido", model);
+            return PartialView("~/Views/Pedido/modalConfirmDeleteItemPedido.cshtml", model);
         }
 
         [HttpPost]

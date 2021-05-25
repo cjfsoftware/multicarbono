@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,6 +56,7 @@ namespace Multicarbono.Models.Pedido
                 }
 
                 _dbConnection.Close();
+                _dbConnection.Dispose();
 
                 return listPedido;
             }
@@ -73,7 +75,7 @@ namespace Multicarbono.Models.Pedido
 
                 cmd.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
 
-                int result = cmd.ExecuteNonQuery();
+                //int result = cmd.ExecuteNonQuery();
 
                 MySqlDataReader dr;
                 Pedido pedidoById = new Pedido();
@@ -107,23 +109,63 @@ namespace Multicarbono.Models.Pedido
             }
         }
 
-        public Pedido PedidoByFiltro(int idCliente, DateTime dataInit, DateTime dataFim)
+        public List<Pedido> PedidoByFiltro(string razaoSocial=null, DateTime? dataInit=null, DateTime? dataFim=null)
         {
+            string listIdStr = null;
+
+            if (razaoSocial != null)
+            {
+                //using (_dbConnection)
+                //{
+                //    _dbConnection.Open();
+
+                //    var command = new MySqlCommand($"SELECT ID_CLIENTE FROM CLIENTE WHERE UPPER(RAZAO_SOCIAL) LIKE '%{razaoSocial.ToUpper()}%'");
+
+                //    command.CommandType = CommandType.Text;
+                //    command.Connection = _dbConnection;
+
+                //    //command.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+
+                //    MySqlDataReader dr1;
+
+                //    dr1 = command.ExecuteReader();
+
+
+                //    if (dr1.HasRows)
+                //    {
+                //        while (dr1.Read())
+                //        {
+                //            string id;
+
+                //            id = Convert.ToString(dr1["ID_CLIENTE"]);
+                //            listId.Add(id);
+                //        }
+                //    }
+                //}
+
+                listIdStr = PesquisaCliente(razaoSocial);
+            }
+
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var cmd = new MySqlCommand("SELECT * FROM PEDIDO WHERE ID_CLIENTE = @ID_CLIENTE");
+                var cmd = new MySqlCommand("SELECT * FROM PEDIDO WHERE /*@ID_CLIENTE_FILTER_CLAUSE*/ DT_EMISSAO BETWEEN (SELECT STR_TO_DATE(@DT_EMISSAO_INI,'%d,%m,%Y')) AND (SELECT STR_TO_DATE(@DT_EMISSAO_FIM,'%d,%m,%Y'))");
 
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = _dbConnection;
 
-                cmd.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+                dataInit = dataInit == null ? DateTime.MinValue : dataInit;
+                dataFim = dataFim == null ? DateTime.MaxValue : dataFim;
+                //listIdStr = listIdStr == null ? " " : $"ID_CLIENTE in ({listIdStr}) AND ";
 
-                int result = cmd.ExecuteNonQuery();
+                //cmd.Parameters.Add("ID_CLIENTE_FILTER_CLAUSE", DbType.String).Value = listIdStr;
+                cmd.Parameters.Add("DT_EMISSAO_INI", DbType.String).Value = dataInit/*DateTime.ParseExact(dataInit.ToString(),"YYYY-MM-dd hh:mm:ss", CultureInfo.InvariantCulture)*/.ToString().Replace('/', ',').Replace(':', ',').Replace(' ', ',').Replace(",PM","").Replace(",AM","");
+                cmd.Parameters.Add("DT_EMISSAO_FIM", DbType.String).Value = dataFim.ToString().Replace('/', ',').Replace(':', ',').Replace(' ', ',').Replace(",PM", "").Replace(",AM", "");
+
 
                 MySqlDataReader dr;
-                Pedido pedidoByCliente = new Pedido();
+                List<Pedido> pedidoByFiltro = new List<Pedido>();
 
                 dr = cmd.ExecuteReader();
 
@@ -144,15 +186,54 @@ namespace Multicarbono.Models.Pedido
                         pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
 
 
-                        pedidoByCliente = pedido;
+                        pedidoByFiltro.Add(pedido);
                     }
                 }
 
-                _dbConnection.Close();
+                //_dbConnection.Close();
+                //_dbConnection.Dispose();
 
-                return pedidoByCliente;
+                return pedidoByFiltro;
             }
         }
+
+        public string PesquisaCliente(string razaoSocial)
+        {
+            using (_dbConnection)
+            {
+                _dbConnection.Open();
+
+                var command = new MySqlCommand($"SELECT ID_CLIENTE FROM CLIENTE WHERE UPPER(RAZAO_SOCIAL) LIKE '%{razaoSocial.ToUpper()}%'");
+
+                command.CommandType = CommandType.Text;
+                command.Connection = _dbConnection;
+
+                //command.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+
+                MySqlDataReader dr1;
+                List<string> listId = new List<string>();
+
+
+                dr1 = command.ExecuteReader();
+
+
+                if (dr1.HasRows)
+                {
+                    while (dr1.Read())
+                    {
+                        string id;
+
+                        id = Convert.ToString(dr1["ID_CLIENTE"]);
+                        listId.Add(id);
+                    }
+                }
+
+                string? listIdStr = string.Join(",", listId);
+
+                return listIdStr;
+            }
+        }
+
 
         public void UpdatePedido(Pedido pedido)
         {

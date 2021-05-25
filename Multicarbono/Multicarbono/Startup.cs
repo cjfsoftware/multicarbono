@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Multicarbono.Models.Cliente;
 using Multicarbono.Models.EnderecoCliente;
+using Multicarbono.Models.ItemNota;
+using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Login;
 using Multicarbono.Models.NotaFiscal;
 using Multicarbono.Models.Pedido;
@@ -49,9 +51,8 @@ namespace Multicarbono
             services.AddTransient<NotaFiscalRepository>();
             services.AddTransient<PedidoRepository>();
             services.AddTransient<EnderecoClienteRepository>();
-
-
-
+            services.AddTransient<ItemPedidoRepository>();
+            services.AddTransient<ItemNotaRepository>();
 
         }
 

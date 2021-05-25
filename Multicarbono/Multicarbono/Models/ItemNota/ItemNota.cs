@@ -17,5 +17,7 @@ namespace Multicarbono.Models.ItemNota
 
         public decimal QtdePesada { get; set; }
 
+        public decimal SubtotalItemNota { get; set; }
+
     }
 }

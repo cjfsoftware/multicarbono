@@ -3,7 +3,7 @@
 @Html.Partial("_Menu")
 
 <hr />
-<h6 style="margin-left:10%">Cadastrar Item</h6>
+<h6 style="margin-left:10%">Inserir item</h6>
 <br />
 <br />
 <div class="row" style="margin-left:10%">
@@ -11,7 +11,7 @@
         <form asp-action="CadastroItemPedido">
             <div class="form-group">
                 <label asp-for="IdPedido" class="control-label"></label>
-                <input asp-for="IdPedido" class="form-control" />
+                <input asp-for="IdPedido" placeholder="@ViewData["idPedido"]" class="form-control" disabled="true" />
             </div>
             <div class="form-group">
                 <label asp-for="IdProduto" class="control-label"></label>
@@ -26,7 +26,7 @@
                 <input asp-for="QTDE" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Criar item" class="btn btn-info" />
+                <input type="submit" value="Salvar" class="btn btn-info" />
             </div>
         </form>
     </div>

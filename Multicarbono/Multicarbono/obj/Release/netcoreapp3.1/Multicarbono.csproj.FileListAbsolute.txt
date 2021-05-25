@@ -165,3 +165,4 @@ C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\Transportador\_transportadorPartial.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\Transportador\modalConfirmDelete.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\Telefone\modalConfirmDelete.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Release\netcoreapp3.1\Razor\Views\Pedido\_itensPedido.cshtml.g.cs

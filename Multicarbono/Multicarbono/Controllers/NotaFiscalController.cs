@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.NotaFiscal;
+using Multicarbono.Models.Pedido;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,14 @@ namespace Multicarbono.Controllers
     public class NotaFiscalController : Controller
     {
         private NotaFiscalRepository _notaRepo;
+        private PedidoRepository _pedidoRepo;
+        private ItemPedidoRepository _itemPedidoRepo;
 
-        public NotaFiscalController(NotaFiscalRepository notaFiscalRepo)
+        public NotaFiscalController(NotaFiscalRepository notaFiscalRepo, PedidoRepository pedidoRepo, ItemPedidoRepository itemPedidoRepo)
         {
             _notaRepo = notaFiscalRepo;
+            _pedidoRepo = pedidoRepo;
+            _itemPedidoRepo = itemPedidoRepo;
         }
 
 
@@ -25,9 +31,18 @@ namespace Multicarbono.Controllers
             return PartialView("Index", model);
         }
 
-        public ActionResult CadastroNotaFiscal()
+        public ActionResult CadastroNotaFiscal(int idPedido)
         {
-            return PartialView();
+            var pedido = _pedidoRepo.PedidoById(idPedido);
+
+            List<ItemPedido> itensPedido = new List<ItemPedido>();
+
+            itensPedido = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
+
+            ViewBag.pedido = pedido;
+            ViewBag.itensPedido = itensPedido;
+
+            return PartialView("EmitirNota");
         }
 
         [HttpPost]

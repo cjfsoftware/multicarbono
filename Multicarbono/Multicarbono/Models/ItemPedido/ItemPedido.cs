@@ -17,5 +17,6 @@ namespace Multicarbono.Models.ItemPedido
 
         public decimal QTDE { get; set; }
 
+        public decimal SubtotalItemPedido { get; set; }
     }
 }

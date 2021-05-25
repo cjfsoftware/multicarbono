@@ -23,5 +23,9 @@ namespace Multicarbono.Models.Pedido
 
         public string TipoFrete { get; set; }
 
+        public decimal ValorPedido { get; set; }
+
+        public DateTime Expedido { get; set; }
+
     }
 }

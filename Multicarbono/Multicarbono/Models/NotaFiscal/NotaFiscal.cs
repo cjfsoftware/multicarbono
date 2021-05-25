@@ -26,5 +26,10 @@ namespace Multicarbono.Models.NotaFiscal
         public int QtdeEmbalagens { get; set; }
 
         public string CNPJEmitente { get; set; }
+
+        public string Transmitida { get; set; }
+
+        public decimal ValorNota { get; set; }
+
     }
 }

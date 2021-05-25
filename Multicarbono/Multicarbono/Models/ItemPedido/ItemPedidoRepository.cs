@@ -17,7 +17,7 @@ namespace Multicarbono.Models.ItemPedido
             _dbConnection = dbConnection;
         }
 
-        public List<ItemPedido> ItemPedidoByNota(int idPedido)
+        public List<ItemPedido> ItemPedidoByPedido(int idPedido)
         {
             using (_dbConnection)
             {
@@ -31,7 +31,7 @@ namespace Multicarbono.Models.ItemPedido
                 MySqlDataReader dr;
                 List<ItemPedido> listItemPedido = new List<ItemPedido>();
 
-                cmd.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = idPedido;
+                cmd.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
 
                 dr = cmd.ExecuteReader();
 
@@ -133,14 +133,13 @@ namespace Multicarbono.Models.ItemPedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO ITEM_PEDIDO (ID_ITEM_PEDIDO, ID_PEDIDO, ID_PRODUTO, CFOP, QTDE) VALUES" +
+                var command = new MySqlCommand("INSERT INTO ITEM_PEDIDO (ID_PEDIDO, ID_PRODUTO, CFOP, QTDE) VALUES" +
                 "(@ID_ITEM_PEDIDO, @ID_PEDIDO, @ID_PRODUTO, @CFOP, @QTDE)");
 
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemPedido.IdItemPedido;
                 command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = itemPedido.IdPedido;
                 command.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = itemPedido.IdProduto;
                 command.Parameters.Add("CFOP", DbType.Int32).Value = itemPedido.CFOP;
@@ -159,7 +158,7 @@ namespace Multicarbono.Models.ItemPedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("DELETE FROM ITEM_NOTA WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO");
+                var command = new MySqlCommand("DELETE FROM ITEM_PEDIDO WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO");
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;

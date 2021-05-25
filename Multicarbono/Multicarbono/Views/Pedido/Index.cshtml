@@ -19,9 +19,9 @@
             </div>
         </div>
         <div class="form-group col-md-3">
-            <label for="cliente" style="font-size:10px;">Cliente</label>
+            <label for="razaoSocial" style="font-size:10px;">Cliente</label>
             <div>
-                <input type="text" name="cliente" class="form-control" style="font-size:10px" />
+                <input type="text" name="razaoSocial" class="form-control" style="font-size:10px" />
             </div>
         </div>
         <div class="form-group">
@@ -59,45 +59,54 @@
             <th>
                 @Html.DisplayNameFor(model => model.TipoFrete)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorPedido)
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdPedido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumPedido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CNPJCliente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DtEmissao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DtCarregamento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Obs)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoFrete)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-idPedido="@item.IdPedido">Alterar</a>
-                    <a asp-action="Delete" asp-route-idPedido="@item.IdPedido">Excluir</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CNPJCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtEmissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtCarregamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Obs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoFrete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorPedido)
+            </td>
+            <td>
+                <a asp-controller="NotaFiscal" asp-action="CadastroNotaFiscal" asp-route-idPedido="@item.IdPedido">Emitir NF</a>
+                <a asp-action="Details" asp-route-idPedido="@item.IdPedido">Detalhes</a>
+                <a asp-action="Edit" asp-route-idPedido="@item.IdPedido">Alterar</a>
+                <a asp-action="Delete" asp-route-idPedido="@item.IdPedido">Excluir</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
 
 <p>
     <a asp-action="CadastroPedido" class="btn btn-info" style="margin-left:2%">Criar pedido</a>
+    <a asp-action="RelatorioPedido" class="btn btn-info" style="margin-left:2%">Gerar relatório</a>
 </p>
