@@ -51,6 +51,14 @@ namespace Multicarbono.Controllers
             return RedirectToAction("Index", "ItemPedido", model);
         }
 
+        [HttpPost]
+        public ActionResult DetailsNF(int idPedido)
+        {
+            var viewmodel = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
+            ViewData["idPedido"] = idPedido;
+            return PartialView("/Views/Pedido/_itensPedidoNF.cshtml", viewmodel);
+        }
+
 
         public ActionResult Edit(int idPedido)
         {

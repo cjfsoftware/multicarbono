@@ -1,54 +1,19 @@
 ﻿@model Multicarbono.Models.NotaFiscal.NotaFiscal
-
 @Html.Partial("_Menu")
 
+
+@*@using (Html.BeginForm("DetailsNF","Pedido",new {idPedido = ViewData["idPedido"]}, FormMethod.Post))
+    {
+
+            @Html.Partial("/Views/Pedido/_itensPedidoNF.cshtml", Model)
+
+
+     }*@
+
 <hr />
-<h6 style="margin-left:10%">Emissão de Nota Fiscal</h6><br /><br />
-
-<table class="table table-striped table-hover" style="margin-left:2%">
-    <thead>
-        <tr>
-            <th>
-                @*@Html.DisplayNameFor(e => e.IdProduto)*@IdProduto
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(e => e.CFOP)*@CFOP
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(e => e.QTDE)*@QTDE
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(e => e.SubtotalItemPedido)*@SubtotalItemPedido
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in ViewBag.itensPedido)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdProduto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CFOP)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QTDE)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubtotalItemPedido)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-idItemPedido="@item.IdItemPedido">Alterar</a>
-                    <a asp-action="Delete" asp-route-idItemPedido="@item.IdItemPedido">Excluir</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
-
+<h6 style="margin-left:10%">Emissão de Nota Fiscal</h6>
+<br />
+<br />
 <div class="row" style="margin-left:10%">
     <div class="col-md-4">
         <form asp-action="CadastroNotaFiscal">
@@ -93,7 +58,7 @@
                 <input asp-for="ValorNota" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Criar pedido" class="btn btn-info" />
+                <input type="submit" value="Emitir NF" class="btn btn-info" />
             </div>
         </form>
     </div>

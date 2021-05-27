@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.ItemNota;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.NotaFiscal;
 using Multicarbono.Models.Pedido;
@@ -13,14 +14,16 @@ namespace Multicarbono.Controllers
     public class NotaFiscalController : Controller
     {
         private NotaFiscalRepository _notaRepo;
+        private ItemNotaRepository _itemNotaRepo;
         private PedidoRepository _pedidoRepo;
         private ItemPedidoRepository _itemPedidoRepo;
 
-        public NotaFiscalController(NotaFiscalRepository notaFiscalRepo, PedidoRepository pedidoRepo, ItemPedidoRepository itemPedidoRepo)
+        public NotaFiscalController(NotaFiscalRepository notaFiscalRepo, PedidoRepository pedidoRepo, ItemPedidoRepository itemPedidoRepo, ItemNotaRepository itemNotaRepo)
         {
             _notaRepo = notaFiscalRepo;
             _pedidoRepo = pedidoRepo;
             _itemPedidoRepo = itemPedidoRepo;
+            _itemNotaRepo = itemNotaRepo;
         }
 
 
@@ -39,7 +42,7 @@ namespace Multicarbono.Controllers
 
             itensPedido = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
 
-            ViewBag.pedido = pedido;
+            ViewData["itensPedido"] = itensPedido;
             ViewBag.itensPedido = itensPedido;
 
             return PartialView("EmitirNota");
@@ -56,7 +59,7 @@ namespace Multicarbono.Controllers
         public ActionResult Edit(int idNotaFiscal)
         {
             var model = _notaRepo.NotaById(idNotaFiscal);
-            return PartialView("_alterarItemNotaPartial", model);
+            return PartialView("AlterarNota", model);
         }
 
         [HttpPost]
@@ -66,7 +69,7 @@ namespace Multicarbono.Controllers
             try
             {
                 _notaRepo.UpdateNota(notaFiscal);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -87,7 +90,7 @@ namespace Multicarbono.Controllers
             try
             {
                 _notaRepo.DeleteNota(notaFiscal.IdNF);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {

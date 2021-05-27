@@ -48,7 +48,7 @@ namespace Multicarbono.Models.NotaFiscal
                         notaFiscal.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         notaFiscal.DtSaida = Convert.ToDateTime(dr["DT_SAIDA"]);
                         notaFiscal.VrFrete = Convert.ToDecimal(dr["VR_FRETE"]);
-                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALANGENS"]);
+                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALAGENS"]);
                         notaFiscal.CNPJEmitente = Convert.ToString(dr["CNPJ_EMITENTE"]);
 
 
@@ -97,7 +97,7 @@ namespace Multicarbono.Models.NotaFiscal
                         notaFiscal.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         notaFiscal.DtSaida = Convert.ToDateTime(dr["DT_SAIDA"]);
                         notaFiscal.VrFrete = Convert.ToDecimal(dr["VR_FRETE"]);
-                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALANGENS"]);
+                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALAGENS"]);
                         notaFiscal.CNPJEmitente = Convert.ToString(dr["CNPJ_EMITENTE"]);
 
 
@@ -146,7 +146,7 @@ namespace Multicarbono.Models.NotaFiscal
                         notaFiscal.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         notaFiscal.DtSaida = Convert.ToDateTime(dr["DT_SAIDA"]);
                         notaFiscal.VrFrete = Convert.ToDecimal(dr["VR_FRETE"]);
-                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALANGENS"]);
+                        notaFiscal.QtdeEmbalagens = Convert.ToInt32(dr["QTDE_EMBALAGENS"]);
                         notaFiscal.CNPJEmitente = Convert.ToString(dr["CNPJ_EMITENTE"]);
 
 
@@ -166,14 +166,13 @@ namespace Multicarbono.Models.NotaFiscal
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("UPDATE NOTA_FISCAL SET ID_NF = @ID_NF, ID_PEDIDO = @ID_PEDIDO, NUM_NF = @NUMF_NF, CHAVE = @CHAVE, " +
+                var command = new MySqlCommand("UPDATE NOTA_FISCAL SET ID_PEDIDO = @ID_PEDIDO, NUM_NF = @NUM_NF, CHAVE = @CHAVE, " +
                 "NATUREZA_OPER = @NATUREZA_OPER, DT_EMISSAO = @DT_EMISSAO, DT_SAIDA = @DT_SAIDA, VR_FRETE = @VR_FRETE, QTDE_EMBALAGENS = @QTDE_EMBALAGENS, CNPJ_EMITENTE = @CNPJ_EMITENTE");
 
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_NF", DbType.Int32).Value = notaFiscal.IdNF;
                 command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = notaFiscal.IdPedido;
                 command.Parameters.Add("NUM_NF", DbType.Int32).Value = notaFiscal.NumNF;
                 command.Parameters.Add("CHAVE", DbType.Int32).Value = notaFiscal.Chave;
@@ -184,8 +183,14 @@ namespace Multicarbono.Models.NotaFiscal
                 command.Parameters.Add("QTDE_EMBALAGENS", DbType.Int32).Value = notaFiscal.QtdeEmbalagens;
                 command.Parameters.Add("CNPJ_EMITENTE", DbType.DateTime).Value = notaFiscal.CNPJEmitente;
 
-                int result = command.ExecuteNonQuery();
-
+                try
+                {
+                    int result = command.ExecuteNonQuery();
+                }
+                catch(Exception e)
+                {
+                    throw;
+                }
                 _dbConnection.Close();
             }
         }
@@ -196,8 +201,8 @@ namespace Multicarbono.Models.NotaFiscal
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO NOTA_FISCAL (ID_NF, ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE) VALUES" +
-                "(ID_NF, ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE)");
+                var command = new MySqlCommand("INSERT INTO NOTA_FISCAL (ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE) VALUES" +
+                "(@ID_PEDIDO, @NUM_NF, @CHAVE, @NATUREZA_OPER, @DT_EMISSAO, @DT_SAIDA, @VR_FRETE, @QTDE_EMBALAGENS, @CNPJ_EMITENTE)");
 
 
                 command.CommandType = CommandType.Text;
