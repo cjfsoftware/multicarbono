@@ -14,6 +14,7 @@ namespace Multicarbono.Controllers
     public class ItemNotaController : Controller
     {
         private ItemNotaRepository _itemNotaRepo;
+        private ItemPedidoRepository _itemPedidoRepo;
 
         public ItemNotaController(ItemNotaRepository itemNotaRepo)
         {

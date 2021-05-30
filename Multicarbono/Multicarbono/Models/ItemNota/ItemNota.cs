@@ -19,5 +19,6 @@ namespace Multicarbono.Models.ItemNota
 
         public decimal SubtotalItemNota { get; set; }
 
+        public decimal QtdePedido { get; set; }
     }
 }

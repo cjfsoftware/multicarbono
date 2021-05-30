@@ -49,6 +49,7 @@ namespace Multicarbono.Models.Pedido
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
                         pedido.Obs = Convert.ToString(dr["OBS"]);
                         pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
 
 
                         listPedido.Add(pedido);
@@ -97,6 +98,7 @@ namespace Multicarbono.Models.Pedido
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
                         pedido.Obs = Convert.ToString(dr["OBS"]);
                         pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
 
 
                         pedidoById = pedido;
@@ -184,6 +186,7 @@ namespace Multicarbono.Models.Pedido
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
                         pedido.Obs = Convert.ToString(dr["OBS"]);
                         pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
 
 
                         pedidoByFiltro.Add(pedido);
@@ -242,7 +245,7 @@ namespace Multicarbono.Models.Pedido
                 _dbConnection.Open();
 
                 var command = new MySqlCommand("UPDATE PEDIDO SET ID_PEDIDO = @ID_PEDIDO, NUM_PEDIDO = @NUM_PEDIDO, CNPJ_CLIENTE = @CNPJ_CLIENTE, ID_USUARIO = @ID_USUARIO, " +
-                "DT_EMISSAO = @DT_EMISSAO, DT_CARREGA = @DT_CARREGA, OBS = @OBS, TIPO_FRETE = @TIPO_FRETE");
+                "DT_EMISSAO = @DT_EMISSAO, DT_CARREGA = @DT_CARREGA, OBS = @OBS, TIPO_FRETE = @TIPO_FRETE, ID_TRANSPORT = @ID_TRANSPORT");
 
 
                 command.CommandType = CommandType.Text;
@@ -256,6 +259,7 @@ namespace Multicarbono.Models.Pedido
                 command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;
                 command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
                 command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
+                command.Parameters.Add("ID_TRANSPORT", DbType.Int32).Value = pedido.IdTransport;
 
 
                 int result = command.ExecuteNonQuery();
@@ -270,8 +274,8 @@ namespace Multicarbono.Models.Pedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE) VALUES" +
-                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE)");
+                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE, ID_TRANSPORT) VALUES" +
+                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE, @ID_TRANSPORT)");
 
 
                 command.CommandType = CommandType.Text;
@@ -285,6 +289,7 @@ namespace Multicarbono.Models.Pedido
                 command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;
                 command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
                 command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
+                command.Parameters.Add("ID_TRANSPORT", DbType.Int32).Value = pedido.IdTransport;
 
 
                 int result = command.ExecuteNonQuery();

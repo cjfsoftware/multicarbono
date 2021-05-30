@@ -22,7 +22,7 @@ namespace Multicarbono.Controllers
         public ActionResult Index(int idPedido)
         {
             var model = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
-
+            TempData["idPedido"] = idPedido;
             return PartialView("~/Views/Pedido/_itensPedido.cshtml", model);
         }
 
@@ -37,44 +37,50 @@ namespace Multicarbono.Controllers
         public ActionResult CadastroItemPedido(ItemPedido itemPedido)
         {
             _itemPedidoRepo.IncludeItemPedido(itemPedido);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { idPedido = itemPedido.IdPedido });
         }
 
-        public ActionResult Edit(int idPedido)
+        public ActionResult Edit(int idItemPedido)
         {
-            var model = _itemPedidoRepo.ItemPedidoById(idPedido);
+            var model = _itemPedidoRepo.ItemPedidoById(idItemPedido);
             return PartialView("~/Views/Pedido/_alterarItemPedidoPartial.cshtml", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int idIemPedido, ItemPedido itemPedido)
+        public ActionResult Edit(int idItemPedido, ItemPedido itemPedido)
         {
             try
             {
                 _itemPedidoRepo.UpdateItemPedido(itemPedido);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { idPedido = itemPedido.IdPedido });
+
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                throw;
+                return RedirectToAction("Index");
             }
         }
 
         public ActionResult Delete(int idItemPedido)
         {
             var model = _itemPedidoRepo.ItemPedidoById(idItemPedido);
+            TempData["ItemPedido"] = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+            TempData.Keep("ItemPedido");
             return PartialView("~/Views/Pedido/modalConfirmDeleteItemPedido.cshtml", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int idItemPedido, ItemPedido itemPedido)
+        public ActionResult Delete(int idItemPedido, ItemPedido? itemPedido)
         {
             try
             {
-                _itemPedidoRepo.DeleteItemPedido(itemPedido.IdItemPedido);
-                return RedirectToAction(nameof(Index));
+                _itemPedidoRepo.DeleteItemPedido(idItemPedido);
+                ItemPedido getModel = Newtonsoft.Json.JsonConvert.DeserializeObject<ItemPedido>(TempData["ItemPedido"].ToString()) as ItemPedido;
+                return RedirectToAction("Index", new { idPedido = getModel.IdPedido });
+
             }
             catch
             {

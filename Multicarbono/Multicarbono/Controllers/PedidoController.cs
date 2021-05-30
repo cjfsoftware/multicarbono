@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Pedido;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 
 
@@ -46,17 +48,11 @@ namespace Multicarbono.Controllers
 
         public ActionResult Details(int idPedido)
         {
-            var model = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
-            ViewData["idPedido"] = idPedido;
-            return RedirectToAction("Index", "ItemPedido", model);
-        }
+            //var model = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
 
-        [HttpPost]
-        public ActionResult DetailsNF(int idPedido)
-        {
-            var viewmodel = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
-            ViewData["idPedido"] = idPedido;
-            return PartialView("/Views/Pedido/_itensPedidoNF.cshtml", viewmodel);
+            //return RedirectToAction("Index", new RouteValueDictionary(new{controller = "ItemPedido", action = "Index", @itemPedido = model}));
+            return RedirectToAction("Index", "ItemPedido", new { idPedido = idPedido});
+
         }
 
 

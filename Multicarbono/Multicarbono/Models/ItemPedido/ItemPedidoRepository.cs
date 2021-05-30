@@ -58,6 +58,47 @@ namespace Multicarbono.Models.ItemPedido
             }
         }
 
+        public List<ItemPedido> ItemPedidoNFByPedido(int idPedido)
+        {
+            using (_dbConnection)
+            {
+                _dbConnection.Open();
+
+                var cmd = new MySqlCommand("SELECT ID_ITEM_PEDIDO, ID_PRODUTO, QTDE, SUBTOTAL_ITEM_PEDIDO FROM ITEM_PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO");
+
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = _dbConnection;
+
+                MySqlDataReader dr;
+                List<ItemPedido> listItemPedidoNF = new List<ItemPedido>();
+
+                cmd.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
+
+                dr = cmd.ExecuteReader();
+
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        ItemPedido itemPedido = new ItemPedido();
+
+                        itemPedido.IdItemPedido = Convert.ToInt32(dr["ID_ITEM_PEDIDO"]);
+                        itemPedido.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
+                        itemPedido.QTDE = Convert.ToInt32(dr["QTDE"]);
+                        itemPedido.SubtotalItemPedido = Convert.ToInt32(dr["SUBTOTAL_ITEM_PEDIDO"]);
+
+                        listItemPedidoNF.Add(itemPedido);
+                    }
+                }
+
+                _dbConnection.Close();
+
+                return listItemPedidoNF;
+            }
+        }
+
+
         public ItemPedido ItemPedidoById (int idItemPedido)
         {
             using (_dbConnection)
@@ -108,15 +149,14 @@ namespace Multicarbono.Models.ItemPedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("UPDATE ITEM_PEDIDO SET ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO, ID_PEDIDO = @ID_PEDIDO, ID_PRODUTO = @ID_PRODUTO, CFOP = @CFOP, " +
-                "QTDE = @QTDE");
+                var command = new MySqlCommand("UPDATE ITEM_PEDIDO SET ID_PRODUTO = @ID_PRODUTO, CFOP = @CFOP, " +
+                "QTDE = @QTDE WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO");
 
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
                 command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemPedido.IdItemPedido;
-                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = itemPedido.IdPedido;
                 command.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = itemPedido.IdProduto;
                 command.Parameters.Add("CFOP", DbType.Int32).Value = itemPedido.CFOP;
                 command.Parameters.Add("QTDE", DbType.Decimal).Value = itemPedido.QTDE;
@@ -134,7 +174,7 @@ namespace Multicarbono.Models.ItemPedido
                 _dbConnection.Open();
 
                 var command = new MySqlCommand("INSERT INTO ITEM_PEDIDO (ID_PEDIDO, ID_PRODUTO, CFOP, QTDE) VALUES" +
-                "(@ID_ITEM_PEDIDO, @ID_PEDIDO, @ID_PRODUTO, @CFOP, @QTDE)");
+                "(@ID_PEDIDO, @ID_PRODUTO, @CFOP, @QTDE)");
 
 
                 command.CommandType = CommandType.Text;

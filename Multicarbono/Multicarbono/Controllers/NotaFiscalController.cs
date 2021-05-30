@@ -27,7 +27,6 @@ namespace Multicarbono.Controllers
         }
 
 
-
         public ActionResult Index()
         {
             var model = _notaRepo.ListNotaFiscal();
@@ -40,10 +39,9 @@ namespace Multicarbono.Controllers
 
             List<ItemPedido> itensPedido = new List<ItemPedido>();
 
-            itensPedido = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
-
-            ViewData["itensPedido"] = itensPedido;
-            ViewBag.itensPedido = itensPedido;
+            //TempData["Pedido"] = GetItensPedidoNF(idPedido).ToArray()[0];
+            TempData["Pedido"] = Newtonsoft.Json.JsonConvert.SerializeObject(GetItensPedidoNF(idPedido));
+            TempData.Keep("Pedido");
 
             return PartialView("EmitirNota");
         }
@@ -97,5 +95,15 @@ namespace Multicarbono.Controllers
                 return View();
             }
         }
+
+     
+        public List<ItemPedido> GetItensPedidoNF(int idPedido)
+        {
+            var viewmodel = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
+            TempData["idPedido"] = idPedido;
+
+            return viewmodel;
+        }
+
     }
 }

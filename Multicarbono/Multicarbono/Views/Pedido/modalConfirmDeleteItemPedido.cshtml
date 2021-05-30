@@ -6,6 +6,7 @@
     <form asp-action="Delete" asp-controller="ItemPedido">
         <input type="hidden" asp-for="IdItemPedido" />
         <input type="submit" value="Sim" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn_danger">Não</a>
+        <input type="button" asp-action="Index" asp-route-idPedido="@Model.IdPedido" value="Não" class="btn btn_danger" />
+        <a asp-action="Index" asp-route-idPedido="@Model.IdPedido" asp-route-itemPedido="@Model" class="btn btn_danger">Não</a>
     </form>
 </div>
