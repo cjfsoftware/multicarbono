@@ -39,9 +39,10 @@ namespace Multicarbono.Controllers
 
             List<ItemPedido> itensPedido = new List<ItemPedido>();
 
-            //TempData["Pedido"] = GetItensPedidoNF(idPedido).ToArray()[0];
             TempData["Pedido"] = Newtonsoft.Json.JsonConvert.SerializeObject(GetItensPedidoNF(idPedido));
+            TempData["idPedido"] = idPedido;
             TempData.Keep("Pedido");
+            TempData.Keep("idPedido");
 
             return PartialView("EmitirNota");
         }
@@ -100,7 +101,7 @@ namespace Multicarbono.Controllers
         public List<ItemPedido> GetItensPedidoNF(int idPedido)
         {
             var viewmodel = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
-            TempData["idPedido"] = idPedido;
+            //TempData["idPedido"] = idPedido;
 
             return viewmodel;
         }

@@ -21,9 +21,9 @@ namespace Multicarbono.Controllers
             _itemNotaRepo = itemNotaRepo;
         }
 
-        public ActionResult CadastroItemNota()
+        public ActionResult CadastroItemNota(int? idPedido)
         {
-            return PartialView("_cadastroItemNotaPartial");
+            return PartialView("/Views/NotaFiscal/EmitirNota.cshtml");
         }
 
         [HttpPost]
@@ -31,7 +31,8 @@ namespace Multicarbono.Controllers
         public ActionResult CadastroItemNota(ItemNota itemNota)
         {
             _itemNotaRepo.IncludeItemNota(itemNota);
-            return RedirectToAction("Index");
+
+            return RedirectToAction("CadastroNotaFiscal","NotaFiscal", new {idPedido = TempData["idPedido"]});
         }
 
         public ActionResult Edit(int idItemNota)

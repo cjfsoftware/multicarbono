@@ -159,7 +159,7 @@ namespace Multicarbono.Models.ItemNota
                 command.Parameters.Add("ID_ITEM_NF", DbType.Int32).Value = itemNota.IdItemNF;
                 command.Parameters.Add("ID_NF", DbType.Int32).Value = itemNota.IdNF;
                 command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemNota.IdItemPedido;
-                command.Parameters.Add("CODIGO_PRODUTO", DbType.Int32).Value = itemNota.CodProduto;
+                command.Parameters.Add("COD_PRODUTO", DbType.Int32).Value = itemNota.CodProduto;
                 command.Parameters.Add("QTDE_PESADA", DbType.Decimal).Value = itemNota.QtdePesada;
 
                 int result = command.ExecuteNonQuery();
@@ -184,7 +184,7 @@ namespace Multicarbono.Models.ItemNota
                 command.Parameters.Add("ID_ITEM_NF", DbType.Int32).Value = itemNota.IdItemNF;
                 command.Parameters.Add("ID_NF", DbType.Int32).Value = itemNota.IdNF;
                 command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemNota.IdItemPedido;
-                command.Parameters.Add("CODIGO_PRODUTO", DbType.Int32).Value = itemNota.CodProduto;
+                command.Parameters.Add("COD_PRODUTO", DbType.Int32).Value = itemNota.CodProduto;
                 command.Parameters.Add("QTDE_PESADA", DbType.Decimal).Value = itemNota.QtdePesada;
 
 

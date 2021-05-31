@@ -48,11 +48,8 @@ namespace Multicarbono.Controllers
 
         public ActionResult Details(int idPedido)
         {
-            //var model = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
 
-            //return RedirectToAction("Index", new RouteValueDictionary(new{controller = "ItemPedido", action = "Index", @itemPedido = model}));
             return RedirectToAction("Index", "ItemPedido", new { idPedido = idPedido});
-
         }
 
 
@@ -80,7 +77,7 @@ namespace Multicarbono.Controllers
         public ActionResult Delete(int idPedido)
         {
             var model = _pedidoRepo.PedidoById(idPedido);
-            return PartialView("modalConfirmDelete", model);
+            return PartialView("/Views/Pedido/modalConfirmDeletePedido", model);
         }
 
         [HttpPost]
@@ -131,22 +128,6 @@ namespace Multicarbono.Controllers
         //    return filterModel;
 
 
-
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int idPedido, Pedido pedido)
-        //{
-        //    try
-        //    {
-        //        _pedidoRepo.UpdatePedido(pedido);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
 
         //}
     }
