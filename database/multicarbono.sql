@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cliente`
+-- Table structure for table `CLIENTE`
 --
 
-DROP TABLE IF EXISTS `cliente`;
+DROP TABLE IF EXISTS `CLIENTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cliente` (
+CREATE TABLE `CLIENTE` (
   `CNPJ` text NOT NULL,
   `RAZAO_SOCIAL` varchar(80) NOT NULL,
   `NOME_FANTASIA` varchar(80) NOT NULL,
@@ -36,23 +36,23 @@ CREATE TABLE `cliente` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cliente`
+-- Dumping data for table `CLIENTE`
 --
 
-LOCK TABLES `cliente` WRITE;
-/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('123','Gerdau Aços Finos Ltda','Gerdau Aços Finos','123','2021-05-13 00:31:00',1230.00,'A',1),('124','Gerdau Aços Longos Ltda','Gerdau Aços Longs','124','2021-05-13 00:31:00',1200.00,'A',2);
-/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+LOCK TABLES `CLIENTE` WRITE;
+/*!40000 ALTER TABLE `CLIENTE` DISABLE KEYS */;
+INSERT INTO `CLIENTE` VALUES ('123','Gerdau Aços Finos Ltda','Gerdau Aços Finos','123','2021-05-13 00:31:00',1230.00,'A',1),('124','Gerdau Aços Longos Ltda','Gerdau Aços Longs','124','2021-05-13 00:31:00',1200.00,'A',2);
+/*!40000 ALTER TABLE `CLIENTE` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `endereco_cliente`
+-- Table structure for table `ENDERECO_CLIENTE`
 --
 
-DROP TABLE IF EXISTS `endereco_cliente`;
+DROP TABLE IF EXISTS `ENDERECO_CLIENTE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `endereco_cliente` (
+CREATE TABLE `ENDERECO_CLIENTE` (
   `ID_ENDERECO` int NOT NULL AUTO_INCREMENT,
   `ID_CLIENTE` int DEFAULT NULL,
   `ENDERECO` text NOT NULL,
@@ -64,22 +64,22 @@ CREATE TABLE `endereco_cliente` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `endereco_cliente`
+-- Dumping data for table `ENDERECO_CLIENTE`
 --
 
-LOCK TABLES `endereco_cliente` WRITE;
-/*!40000 ALTER TABLE `endereco_cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `endereco_cliente` ENABLE KEYS */;
+LOCK TABLES `ENDERECO_CLIENTE` WRITE;
+/*!40000 ALTER TABLE `ENDERECO_CLIENTE` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ENDERECO_CLIENTE` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `item_nota`
+-- Table structure for table `ITEM_NOTA`
 --
 
-DROP TABLE IF EXISTS `item_nota`;
+DROP TABLE IF EXISTS `ITEM_NOTA`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `item_nota` (
+CREATE TABLE `ITEM_NOTA` (
   `ID_ITEM_NF` int NOT NULL AUTO_INCREMENT,
   `ID_NF` int NOT NULL,
   `ID_ITEM_PEDIDO` int NOT NULL,
@@ -91,22 +91,22 @@ CREATE TABLE `item_nota` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `item_nota`
+-- Dumping data for table `ITEM_NOTA`
 --
 
-LOCK TABLES `item_nota` WRITE;
-/*!40000 ALTER TABLE `item_nota` DISABLE KEYS */;
-/*!40000 ALTER TABLE `item_nota` ENABLE KEYS */;
+LOCK TABLES `ITEM_NOTA` WRITE;
+/*!40000 ALTER TABLE `ITEM_NOTA` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ITEM_NOTA` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `item_pedido`
+-- Table structure for table `ITEM_PEDIDO`
 --
 
-DROP TABLE IF EXISTS `item_pedido`;
+DROP TABLE IF EXISTS `ITEM_PEDIDO`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `item_pedido` (
+CREATE TABLE `ITEM_PEDIDO` (
   `ID_PEDIDO` int NOT NULL,
   `ID_PRODUTO` int NOT NULL,
   `CFOP` int NOT NULL,
@@ -118,23 +118,23 @@ CREATE TABLE `item_pedido` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `item_pedido`
+-- Dumping data for table `ITEM_PEDIDO`
 --
 
-LOCK TABLES `item_pedido` WRITE;
-/*!40000 ALTER TABLE `item_pedido` DISABLE KEYS */;
-INSERT INTO `item_pedido` VALUES (0,1,1,2,0,NULL);
-/*!40000 ALTER TABLE `item_pedido` ENABLE KEYS */;
+LOCK TABLES `ITEM_PEDIDO` WRITE;
+/*!40000 ALTER TABLE `ITEM_PEDIDO` DISABLE KEYS */;
+INSERT INTO `ITEM_PEDIDO` VALUES (0,1,1,2,0,NULL);
+/*!40000 ALTER TABLE `ITEM_PEDIDO` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `nota_fiscal`
+-- Table structure for table `NOTA_FISCAL`
 --
 
-DROP TABLE IF EXISTS `nota_fiscal`;
+DROP TABLE IF EXISTS `NOTA_FISCAL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `nota_fiscal` (
+CREATE TABLE `NOTA_FISCAL` (
   `ID_NF` int NOT NULL AUTO_INCREMENT,
   `ID_PEDIDO` int DEFAULT NULL,
   `NUM_NF` int DEFAULT NULL,
@@ -152,22 +152,22 @@ CREATE TABLE `nota_fiscal` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `nota_fiscal`
+-- Dumping data for table `NOTA_FISCAL`
 --
 
-LOCK TABLES `nota_fiscal` WRITE;
-/*!40000 ALTER TABLE `nota_fiscal` DISABLE KEYS */;
-/*!40000 ALTER TABLE `nota_fiscal` ENABLE KEYS */;
+LOCK TABLES `NOTA_FISCAL` WRITE;
+/*!40000 ALTER TABLE `NOTA_FISCAL` DISABLE KEYS */;
+/*!40000 ALTER TABLE `NOTA_FISCAL` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `pedido`
+-- Table structure for table `PEDIDO`
 --
 
-DROP TABLE IF EXISTS `pedido`;
+DROP TABLE IF EXISTS `PEDIDO`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pedido` (
+CREATE TABLE `PEDIDO` (
   `NUM_PEDIDO` int NOT NULL,
   `CNPJ_CLIENTE` text NOT NULL,
   `ID_USUARIO` int NOT NULL,
@@ -182,23 +182,23 @@ CREATE TABLE `pedido` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pedido`
+-- Dumping data for table `PEDIDO`
 --
 
-LOCK TABLES `pedido` WRITE;
-/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (123,'123',1,'2021-05-23 00:38:00','2021-05-23 00:38:00',NULL,'CIF',1,NULL);
-/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
+LOCK TABLES `PEDIDO` WRITE;
+/*!40000 ALTER TABLE `PEDIDO` DISABLE KEYS */;
+INSERT INTO `PEDIDO` VALUES (123,'123',1,'2021-05-23 00:38:00','2021-05-23 00:38:00',NULL,'CIF',1,NULL);
+/*!40000 ALTER TABLE `PEDIDO` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `produto`
+-- Table structure for table `PRODUTO`
 --
 
-DROP TABLE IF EXISTS `produto`;
+DROP TABLE IF EXISTS `PRODUTO`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `produto` (
+CREATE TABLE `PRODUTO` (
   `COD_PRODUTO` int NOT NULL,
   `DESCRICAO` varchar(80) NOT NULL,
   `ATIVO` varchar(1) DEFAULT NULL,
@@ -214,23 +214,23 @@ CREATE TABLE `produto` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `produto`
+-- Dumping data for table `PRODUTO`
 --
 
-LOCK TABLES `produto` WRITE;
-/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (2,'Grafite','A',123,123,'kg',1000.00,10.00,10.00,3),(44,'Grafite Especial','A',1,5,'kg',1010.00,10.00,10.00,5);
-/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
+LOCK TABLES `PRODUTO` WRITE;
+/*!40000 ALTER TABLE `PRODUTO` DISABLE KEYS */;
+INSERT INTO `PRODUTO` VALUES (2,'Grafite','A',123,123,'kg',1000.00,10.00,10.00,3),(44,'Grafite Especial','A',1,5,'kg',1010.00,10.00,10.00,5);
+/*!40000 ALTER TABLE `PRODUTO` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `telefone`
+-- Table structure for table `TELEFONE`
 --
 
-DROP TABLE IF EXISTS `telefone`;
+DROP TABLE IF EXISTS `TELEFONE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `telefone` (
+CREATE TABLE `TELEFONE` (
   `ID_TELEFONE` int NOT NULL AUTO_INCREMENT,
   `ID_CLIENTE` int NOT NULL,
   `NUM_TELEFONE` text NOT NULL,
@@ -240,22 +240,22 @@ CREATE TABLE `telefone` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `telefone`
+-- Dumping data for table `TELEFONE`
 --
 
-LOCK TABLES `telefone` WRITE;
-/*!40000 ALTER TABLE `telefone` DISABLE KEYS */;
-/*!40000 ALTER TABLE `telefone` ENABLE KEYS */;
+LOCK TABLES `TELEFONE` WRITE;
+/*!40000 ALTER TABLE `TELEFONE` DISABLE KEYS */;
+/*!40000 ALTER TABLE `TELEFONE` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `transportador`
+-- Table structure for table `TRANSPORTADOR`
 --
 
-DROP TABLE IF EXISTS `transportador`;
+DROP TABLE IF EXISTS `TRANSPORTADOR`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transportador` (
+CREATE TABLE `TRANSPORTADOR` (
   `ID_TRANSPORTADOR` int NOT NULL AUTO_INCREMENT,
   `CNPJ_TRANSPORTADOR` text NOT NULL,
   `RAZAO_SOCIAL` text NOT NULL,
@@ -266,23 +266,23 @@ CREATE TABLE `transportador` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transportador`
+-- Dumping data for table `TRANSPORTADOR`
 --
 
-LOCK TABLES `transportador` WRITE;
-/*!40000 ALTER TABLE `transportador` DISABLE KEYS */;
-INSERT INTO `transportador` VALUES (1,'123','Rodopress',123,'Rodovia 01, km 245');
-/*!40000 ALTER TABLE `transportador` ENABLE KEYS */;
+LOCK TABLES `TRANSPORTADOR` WRITE;
+/*!40000 ALTER TABLE `TRANSPORTADOR` DISABLE KEYS */;
+INSERT INTO `TRANSPORTADOR` VALUES (1,'123','Rodopress',123,'Rodovia 01, km 245');
+/*!40000 ALTER TABLE `TRANSPORTADOR` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `usuario`
+-- Table structure for table `USUARIO`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `USUARIO`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuario` (
+CREATE TABLE `USUARIO` (
   `ID_USUARIO` int NOT NULL AUTO_INCREMENT,
   `NOME` text,
   `DT_NASCIMENTO` datetime DEFAULT NULL,
@@ -299,13 +299,13 @@ CREATE TABLE `usuario` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario`
+-- Dumping data for table `USUARIO`
 --
 
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'analista','2021-05-11 22:19:00','analista','rua 03','analista','analista@multicarbonos.com.br','A','2021-05-11 22:19:00','2','123'),(3,'admin','2021-05-13 19:20:00','administrador','rua 1','admin','admin@multicarbonos.com.br','A','2021-05-13 19:21:00','1','123');
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+LOCK TABLES `USUARIO` WRITE;
+/*!40000 ALTER TABLE `USUARIO` DISABLE KEYS */;
+INSERT INTO `USUARIO` VALUES (1,'analista','2021-05-11 22:19:00','analista','rua 03','analista','analista@multicarbonos.com.br','A','2021-05-11 22:19:00','2','qXzqbGvUwYDKhxLYI53GfA=='),(3,'admin','2021-05-13 19:20:00','administrador','rua 1','admin','admin@multicarbonos.com.br','A','2021-05-13 19:21:00','1','qXzqbGvUwYDKhxLYI53GfA==');
+/*!40000 ALTER TABLE `USUARIO` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

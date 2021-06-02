@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,10 +13,12 @@ namespace Multicarbono.Models.Usuario
 
         public string Nome { get; set; }
 
+        [Display(Name = "Data de Nascimento")]
         public DateTime DtNascimento { get; set; }
 
         public string Cargo { get; set; }
 
+        [Display(Name = "Endereço")]
         public string Endereco { get; set; }
 
         public string Login { get; set; }
@@ -24,13 +27,12 @@ namespace Multicarbono.Models.Usuario
 
         public char Status { get; set; }
 
+        [Display(Name = "Data de Criação")]
         public DateTime DtCriacao { get; set; }
 
+        [Display(Name = "Nível de Acesso")]
         public string NivelAcesso { get; set; }
 
         public string Senha { get; set; }
-
-
-
     }
 }

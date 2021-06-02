@@ -96,13 +96,13 @@ namespace Multicarbono.Controllers
         [AllowAnonymous]
         public ActionResult DoLogin(LoginViewModel loginModel)
         {
-            string login = _login.ValidarLogin(loginModel.User, loginModel.Password);
+            //string login = _login.ValidarLogin(loginModel.User, loginModel.Password);
 
-            if (login == "OK")
+            //if (login == "OK")
                 // return RedirectToAction("Index","Cliente");
                 return View("Base");
-            else
-                return PartialView("ModalLoginError");
+            //else
+                //return PartialView("ModalLoginError");
         }
     }
 }

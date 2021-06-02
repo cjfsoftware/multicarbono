@@ -16,11 +16,7 @@ using Multicarbono.Models.Telefone;
 using Multicarbono.Models.Transportador;
 using Multicarbono.Models.Usuario;
 using MySqlConnector;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using Multicarbono.Configuration;
 
 namespace Multicarbono
 {
@@ -41,6 +37,7 @@ namespace Multicarbono
             services.AddTransient<MySqlConnection>(
                (sp) => new MySqlConnection(Configuration["ConnectionStrings:dbConn"]));
 
+            services.AddSingleton<Security>();
 
             services.AddTransient<LoginRepository>();
             services.AddTransient<UsuarioRepository>();

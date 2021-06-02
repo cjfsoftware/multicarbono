@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using Multicarbono.Configuration;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,14 +11,18 @@ namespace Multicarbono.Models.Usuario
     public class UsuarioRepository
     {
         private readonly MySqlConnection _dbConnection;
+        private readonly Security _security;
 
-        public UsuarioRepository(MySqlConnection dbConnection)
+        public UsuarioRepository(MySqlConnection dbConnection, Security security)
         {
             _dbConnection = dbConnection;
+            _security = security;
         }
 
         public void IncludeUsuario(Usuario usuario)
         {
+            var encryptedPassword = _security.Encrypt(usuario.Senha);
+
             using (_dbConnection)
             {
                 _dbConnection.Open();
@@ -38,7 +43,7 @@ namespace Multicarbono.Models.Usuario
                 command.Parameters.Add("STATUS", DbType.String).Value = usuario.Status;
                 command.Parameters.Add("DT_CRIACAO", DbType.DateTime).Value = usuario.DtCriacao;
                 command.Parameters.Add("NIVEL_ACESSO", DbType.String).Value = usuario.NivelAcesso;
-                command.Parameters.Add("SENHA", DbType.String).Value = usuario.Senha;
+                command.Parameters.Add("SENHA", DbType.String).Value = encryptedPassword;
 
                 int result = command.ExecuteNonQuery();
 
@@ -50,6 +55,8 @@ namespace Multicarbono.Models.Usuario
 
         public void UpdateUsuario(Usuario usuario)
         {
+            var encryptedPassword = _security.Encrypt(usuario.Senha);
+
             using (_dbConnection)
             {
                 _dbConnection.Open();
@@ -70,7 +77,7 @@ namespace Multicarbono.Models.Usuario
                 command.Parameters.Add("STATUS", DbType.String).Value = usuario.Status;
                 command.Parameters.Add("DT_CRIACAO", DbType.DateTime).Value = usuario.DtCriacao;
                 command.Parameters.Add("NIVEL_ACESSO", DbType.String).Value = usuario.NivelAcesso;
-                command.Parameters.Add("SENHA", DbType.String).Value = usuario.Senha;
+                command.Parameters.Add("SENHA", DbType.String).Value = encryptedPassword;
                 command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = usuario.IdUsuario;
 
 
