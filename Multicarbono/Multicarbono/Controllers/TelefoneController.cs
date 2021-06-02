@@ -77,12 +77,13 @@ namespace Multicarbono.Controllers
         {
             try
             {
-                _telefoneRepo.DeleteTelefone(telefone.IdTelefone);
+                _telefoneRepo.DeleteTelefone(idTelefone);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                throw;
+                return RedirectToAction(nameof(Index));
             }
         }
     }

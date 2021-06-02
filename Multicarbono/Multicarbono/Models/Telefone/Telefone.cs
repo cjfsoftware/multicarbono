@@ -14,5 +14,7 @@ namespace Multicarbono.Models.Telefone
         public string NumTelefone { get; set; }
 
         public string Contato { get; set; }
+
+        public string Email { get; set; }
     }
 }

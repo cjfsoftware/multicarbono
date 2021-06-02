@@ -1,0 +1,11 @@
+﻿@model Multicarbono.Models.EnderecoCliente.EnderecoCliente
+
+<h3>Deseja excluir o endereço?</h3>
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdEndereco" />
+        <input type="submit" value="Sim" class="btn btn-danger" />
+        <a asp-action="Index">Não</a>
+    </form>
+</div>

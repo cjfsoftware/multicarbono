@@ -308,3 +308,9 @@ C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Tr
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Transportador\CadastroTransportador.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Transportador\modalConfirmDelete.cshtml.g.cs
 C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Transportador\_transportadorPartial.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\DetalhesCliente.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\EnderecoCliente\AlterarEndereco.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\EnderecoCliente\CadastroEndereco.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\EnderecoCliente\Index.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\EnderecoCliente\modalConfirmDelete.cshtml.g.cs
+C:\Multicarbono\Multicarbono\Multicarbono\obj\Debug\netcoreapp3.1\Razor\Views\EnderecoCliente\_enderecoPartial.cshtml.g.cs

@@ -187,7 +187,7 @@ namespace Multicarbono.Models.Telefone
             }
         }
 
-        public void DeleteTelefone(int idEndereco)
+        public void DeleteTelefone(int idTelefone)
         {
             using (_dbConnection)
             {
@@ -198,7 +198,7 @@ namespace Multicarbono.Models.Telefone
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_ENDERECO", DbType.Int32).Value = idEndereco;
+                command.Parameters.Add("ID_TELEFONE", DbType.Int32).Value = idTelefone;
 
                 int result = command.ExecuteNonQuery();
 
