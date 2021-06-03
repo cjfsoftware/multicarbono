@@ -28,5 +28,7 @@ namespace Multicarbono.Models.Pedido
         public DateTime Expedido { get; set; }
 
         public int IdTransport { get; set; }
+
+        public char NFEmitida { get; set; }
     }
 }

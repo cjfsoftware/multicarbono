@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Multicarbono.Models.ItemNota;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.NotaFiscal;
@@ -44,7 +45,14 @@ namespace Multicarbono.Controllers
             TempData.Keep("Pedido");
             TempData.Keep("idPedido");
 
-            return PartialView("EmitirNota");
+            if (pedido.NFEmitida == 'Y')
+            {
+                Response.WriteAsync("<script language='javascript'>alert('NF ja emitida para este pedido')</script>");
+                return RedirectToAction("Index", "Pedido");
+            }
+            else
+            
+                return PartialView("EmitirNota");
         }
 
         [HttpPost]
