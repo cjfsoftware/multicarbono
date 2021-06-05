@@ -48,7 +48,7 @@ namespace Multicarbono.Models.Pedido
                         pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
                         pedido.Obs = Convert.ToString(dr["OBS"]);
-                        pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        pedido.TipoFrete = (Enum.TipoFrete)System.Enum.Parse(typeof(Enum.TipoFrete), Convert.ToString(dr["TIPO_FRETE"]), true);
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
 
 
@@ -97,7 +97,7 @@ namespace Multicarbono.Models.Pedido
                         pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
                         pedido.Obs = Convert.ToString(dr["OBS"]);
-                        pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        pedido.TipoFrete = (Enum.TipoFrete)System.Enum.Parse(typeof(Enum.TipoFrete), Convert.ToString(dr["TIPO_FRETE"]), true);
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
                         pedido.NFEmitida = Convert.ToChar(dr["NF_EMITIDA"]);
 
@@ -186,7 +186,7 @@ namespace Multicarbono.Models.Pedido
                         pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
                         pedido.Obs = Convert.ToString(dr["OBS"]);
-                        pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
+                        pedido.TipoFrete = (Enum.TipoFrete)dr["TIPO_FRETE"];
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
 
 

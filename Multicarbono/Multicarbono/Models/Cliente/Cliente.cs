@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Multicarbono.Models.Enum;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Multicarbono.Models.Cliente
 {
@@ -27,7 +25,7 @@ namespace Multicarbono.Models.Cliente
         public string IE { get; set; }
 
         [Display(Name = "Situação Cadastral")]
-        public char Situacao { get; set; }
+        public SituacaoCliente Situacao { get; set; }
 
         [Display(Name = "Saldo Disponível")]
         public decimal Saldo { get; set; }

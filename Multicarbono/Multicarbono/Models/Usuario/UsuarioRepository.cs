@@ -138,7 +138,7 @@ namespace Multicarbono.Models.Usuario
                         usuario.Email = Convert.ToString(dr["EMAIL"]);
                         usuario.Status = Convert.ToChar(dr["STATUS"]);
                         usuario.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
-                        usuario.NivelAcesso = Convert.ToString(dr["NIVEL_ACESSO"]);
+                        usuario.NivelAcesso = (Enum.NivelAcesso)System.Enum.Parse(typeof(Enum.NivelAcesso), Convert.ToString(dr["NIVEL_ACESSO"]), true);
                         usuario.Senha = Convert.ToString(dr["SENHA"]);
                         usuario.Endereco = Convert.ToString(dr["ENDERECO"]);
 
@@ -187,7 +187,7 @@ namespace Multicarbono.Models.Usuario
                         user.Email = Convert.ToString(dr["EMAIL"]);
                         user.Status = Convert.ToChar(dr["STATUS"]);
                         user.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
-                        user.NivelAcesso = Convert.ToString(dr["NIVEL_ACESSO"]);
+                        user.NivelAcesso = (Enum.NivelAcesso)System.Enum.Parse(typeof(Enum.NivelAcesso), Convert.ToString(dr["NIVEL_ACESSO"]), true);
                         user.Senha = Convert.ToString(dr["SENHA"]);
                         user.Endereco = Convert.ToString(dr["ENDERECO"]);
 

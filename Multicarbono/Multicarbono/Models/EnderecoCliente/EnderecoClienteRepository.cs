@@ -44,7 +44,7 @@ namespace Multicarbono.Models.EnderecoCliente
                         endereco.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
                         endereco.Endereco = Convert.ToString(dr["ENDERECO"]);
                         endereco.CEP = Convert.ToString(dr["CEP"]);
-                        endereco.TipoEndereco = Convert.ToChar(dr["TIPO_ENDERECO"]);
+                        endereco.TipoEndereco = (Enum.TipoEnderecoCliente)Convert.ToChar(dr["TIPO_ENDERECO"]);
 
 
                         listEndereco.Add(endereco);
@@ -88,7 +88,7 @@ namespace Multicarbono.Models.EnderecoCliente
                         endereco.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
                         endereco.Endereco = Convert.ToString(dr["ENDERECO"]);
                         endereco.CEP = Convert.ToString(dr["CEP"]);
-                        endereco.TipoEndereco = Convert.ToChar(dr["TIPO_ENDERECO"]);
+                        endereco.TipoEndereco = (Enum.TipoEnderecoCliente)System.Enum.Parse(typeof(Enum.TipoEnderecoCliente), Convert.ToString(dr["TIPO_ENDERECO"]), true);
 
                         enderecoById = endereco;
                     }
@@ -131,7 +131,7 @@ namespace Multicarbono.Models.EnderecoCliente
                         endereco.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
                         endereco.Endereco = Convert.ToString(dr["ENDERECO"]);
                         endereco.CEP = Convert.ToString(dr["CEP"]);
-                        endereco.TipoEndereco = Convert.ToChar(dr["TIPO_ENDERECO"]);
+                        endereco.TipoEndereco = (Enum.TipoEnderecoCliente)System.Enum.Parse(typeof(Enum.TipoEnderecoCliente), Convert.ToString(dr["TIPO_ENDERECO"]), true);
 
                         listEndereco.Add(endereco);
                     }

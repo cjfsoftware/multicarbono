@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multicarbono.Models.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Multicarbono.Models.Usuario
         public DateTime DtCriacao { get; set; }
 
         [Display(Name = "Nível de Acesso")]
-        public string NivelAcesso { get; set; }
+        public NivelAcesso NivelAcesso { get; set; }
 
         public string Senha { get; set; }
     }

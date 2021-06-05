@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multicarbono.Models.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Multicarbono.Models.Produto
         public int CST { get; set; }
 
         [Display(Name = "Unidade")]
-        public string Unidade { get; set; }
+        public TipoUnidadeProduto Unidade { get; set; }
 
         [Display(Name = "Valor Unitário")]
         public decimal VrUnitario { get; set; }

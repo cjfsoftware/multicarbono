@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multicarbono.Models.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Multicarbono.Models.Pedido
         public string Obs { get; set; }
 
         [Display(Name = "Tipo de Frete")]
-        public string TipoFrete { get; set; }
+        public TipoFrete TipoFrete { get; set; }
 
         [Display(Name = "Valor do Pedido")]
         public decimal ValorPedido { get; set; }

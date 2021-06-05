@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multicarbono.Models.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Multicarbono.Models.EnderecoCliente
         public string CEP { get; set; }
 
         [Display(Name = "Tipo de Endereço")]
-        public char TipoEndereco { get; set; }
+        public TipoEnderecoCliente TipoEndereco { get; set; }
 
     }
 }
