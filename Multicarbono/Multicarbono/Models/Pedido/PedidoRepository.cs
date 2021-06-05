@@ -99,6 +99,7 @@ namespace Multicarbono.Models.Pedido
                         pedido.Obs = Convert.ToString(dr["OBS"]);
                         pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
+                        pedido.NFEmitida = Convert.ToChar(dr["NF_EMITIDA"]);
 
 
                         pedidoById = pedido;
@@ -290,6 +291,7 @@ namespace Multicarbono.Models.Pedido
                 command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
                 command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
                 command.Parameters.Add("ID_TRANSPORT", DbType.Int32).Value = pedido.IdTransport;
+                command.Parameters.Add("NF_EMITIDA", DbType.String).Value = 'N';
 
 
                 int result = command.ExecuteNonQuery();

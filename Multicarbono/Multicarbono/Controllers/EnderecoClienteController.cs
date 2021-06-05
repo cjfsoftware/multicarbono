@@ -27,7 +27,7 @@ namespace Multicarbono.Controllers
 
         public ActionResult CadastroEndereco()
         {
-            return PartialView();
+            return PartialView("CadastroEndereco");
         }
 
         [HttpPost]
@@ -40,10 +40,10 @@ namespace Multicarbono.Controllers
 
 
 
-        public ActionResult Edit(int idEndereco)
+        public ActionResult Edit(int idEnderecoCliente)
         {
 
-            var model = _enderecoClienteRepo.EnderecoById(idEndereco);
+            var model = _enderecoClienteRepo.EnderecoById(idEnderecoCliente);
             return PartialView("AlterarEndereco", model);
         }
 

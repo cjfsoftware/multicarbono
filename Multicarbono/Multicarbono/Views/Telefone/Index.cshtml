@@ -38,8 +38,8 @@
                     @Html.DisplayFor(modelItem => item.Contato)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-idTransportador="@item.IdTelefone">Alterar</a>
-                    <a asp-action="Delete" asp-route-idTransportador="@item.IdTelefone">Excluir</a>
+                    <a asp-action="Edit" asp-route-idTelefone="@item.IdTelefone">Alterar</a>
+                    <a asp-action="Delete" asp-route-idTelefone="@item.IdTelefone">Excluir</a>
                 </td>
             </tr>
         }
@@ -47,5 +47,5 @@
 </table>
 
 <p>
-    <a asp-action="CadastroTelefone" class="btn btn-info">Criar telefone</a>
+    <a asp-action="CadastroTelefone" class="btn btn-info" style="margin-left:2%">Criar telefone</a>
 </p>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Pedido;
+using Multicarbono.Models.Produto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace Multicarbono.Controllers
     public class ItemPedidoController : Controller
     {
         private ItemPedidoRepository _itemPedidoRepo;
+        private ProdutoRepository _produtoRepo;
 
-        public ItemPedidoController(ItemPedidoRepository itemPedidoRepo)
+        public ItemPedidoController(ItemPedidoRepository itemPedidoRepo, ProdutoRepository produtoRepo)
         {
             _itemPedidoRepo = itemPedidoRepo;
+            _produtoRepo = produtoRepo;
         }
 
         public ActionResult Index(int idPedido)
@@ -37,7 +40,8 @@ namespace Multicarbono.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CadastroItemPedido(ItemPedido itemPedido)
         {
-            _itemPedidoRepo.IncludeItemPedido(itemPedido);
+            decimal valProduto = _produtoRepo.ProdutoById(itemPedido.IdProduto).VrUnitario;
+            _itemPedidoRepo.IncludeItemPedido(itemPedido, valProduto);
             return RedirectToAction("Index", new { idPedido = itemPedido.IdPedido });
         }
 
@@ -53,7 +57,8 @@ namespace Multicarbono.Controllers
         {
             try
             {
-                _itemPedidoRepo.UpdateItemPedido(itemPedido);
+                decimal valProduto = _produtoRepo.ProdutoById(itemPedido.IdProduto).VrUnitario;
+                _itemPedidoRepo.UpdateItemPedido(itemPedido, valProduto);
                 return RedirectToAction("Index", new { idPedido = itemPedido.IdPedido });
 
             }

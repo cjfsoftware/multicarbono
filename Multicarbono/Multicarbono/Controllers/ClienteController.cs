@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multicarbono.Models.Cliente;
+using Multicarbono.Models.EnderecoCliente;
+using Multicarbono.Models.Telefone;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,14 @@ namespace Multicarbono.Controllers
     public class ClienteController : Controller
     {
         private ClienteRepository _clienteRepo;
+        private EnderecoClienteRepository _enderecoRepo;
+        private TelefoneRepository _telefoneRepo;
 
-        public ClienteController(ClienteRepository clienteRepo)
+        public ClienteController(ClienteRepository clienteRepo, EnderecoClienteRepository enderecoRepo, TelefoneRepository telefoneRepo)
         {
             _clienteRepo = clienteRepo;
+            _enderecoRepo = enderecoRepo;
+            _telefoneRepo = telefoneRepo;
         }
 
 
@@ -27,9 +33,14 @@ namespace Multicarbono.Controllers
         }
 
         // GET: ClienteController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int idCliente)
         {
-            return View();
+            TempData["Telefone"] = Newtonsoft.Json.JsonConvert.SerializeObject(_telefoneRepo.TelefoneByCliente(idCliente));
+            TempData.Keep("ItemPedido");
+            TempData["Endereco"] = Newtonsoft.Json.JsonConvert.SerializeObject(_enderecoRepo.EnderecoByCliente(idCliente));
+            TempData.Keep("Endereco");
+            var model = _clienteRepo.ClienteById(idCliente);
+            return View("DetalhesCliente", model);
         }
 
         // GET: ClienteController/Create

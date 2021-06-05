@@ -202,7 +202,7 @@ namespace Multicarbono.Models.NotaFiscal
                 _dbConnection.Open();
 
                 var command = new MySqlCommand("INSERT INTO NOTA_FISCAL (ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE) VALUES" +
-                "(@ID_PEDIDO, @NUM_NF, @CHAVE, @NATUREZA_OPER, @DT_EMISSAO, @DT_SAIDA, @VR_FRETE, @QTDE_EMBALAGENS, @CNPJ_EMITENTE)");
+                "(@ID_PEDIDO, @NUM_NF, @CHAVE, @NATUREZA_OPER, @DT_EMISSAO, @DT_SAIDA, @VR_FRETE, @QTDE_EMBALAGENS, @CNPJ_EMITENTE); UPDATE PEDIDO SET NF_EMITIDA = 'Y' WHERE ID_PEDIDO = @ID_PEDIDO");
 
 
                 command.CommandType = CommandType.Text;
