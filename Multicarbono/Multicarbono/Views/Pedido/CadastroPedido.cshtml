@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="TipoFrete" class="control-label"></label>
-                <input asp-for="TipoFrete" class="form-control" />
+                <select asp-for="TipoFrete" asp-items="Html.GetEnumSelectList<Multicarbono.Models.Enum.TipoFrete>()" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdTransport" class="control-label"></label>
