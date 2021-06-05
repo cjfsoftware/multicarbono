@@ -1,0 +1,70 @@
+﻿@model Multicarbono.Models.Cliente.Cliente
+
+
+<h5 style="margin-left:1%">Detalhes do cliente</h5>
+
+<table class="table table-striped table-hover" style="margin-left:2%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNPJ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RazaoSocial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeFantasia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Saldo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Situacao)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model)*@
+        @*{*@
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.IdCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CNPJ)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.RazaoSocial)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.NomeFantasia)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.IE)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.DtCadastro)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Saldo)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Situacao)
+                </td>
+            </tr>
+        @*}*@
+    </tbody>
+</table>
+
+@Html.Partial("/Views/Telefone/_telefonePartial.cshtml")
+
+@Html.Partial("/Views/EnderecoCliente/_enderecoPartial.cshtml")

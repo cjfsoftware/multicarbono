@@ -77,7 +77,7 @@ namespace Multicarbono.Controllers
         public ActionResult Delete(int idPedido)
         {
             var model = _pedidoRepo.PedidoById(idPedido);
-            return PartialView("/Views/Pedido/modalConfirmDeletePedido", model);
+            return PartialView("/Views/Pedido/modalConfirmDeletePedido.cshtml", model);
         }
 
         [HttpPost]

@@ -149,7 +149,7 @@ namespace Multicarbono.Models.EnderecoCliente
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("UPDATE CLIENTE SET ID_ENDERECO = @ID_ENDERECO, ID_CLIENTE = @ID_CLIENTE, ENDERECO = @ENDERECO, CEP = @CEP, " +
+                var command = new MySqlCommand("UPDATE ENDERECO_CLIENTE SET ID_ENDERECO = @ID_ENDERECO, ID_CLIENTE = @ID_CLIENTE, ENDERECO = @ENDERECO, CEP = @CEP, " +
                 "TIPO_ENDERECO = @TIPO_ENDERECO");
 
 
@@ -174,14 +174,13 @@ namespace Multicarbono.Models.EnderecoCliente
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO CLIENTE (ID_ENDERECO, ID_CLIENTE, ENDERECO, CEP, TIPO_ENDERECO) VALUES" +
-                "(@ID_ENDERECO, @ID_CLIENTE, @ENDERECO, @CEP, @TIPO_ENDERECO)");
+                var command = new MySqlCommand("INSERT INTO ENDERECO_CLIENTE (ID_CLIENTE, ENDERECO, CEP, TIPO_ENDERECO) VALUES" +
+                "(@ID_CLIENTE, @ENDERECO, @CEP, @TIPO_ENDERECO)");
 
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_ENDERECO", DbType.Int32).Value = endereco.IdEndereco;
                 command.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = endereco.IdCliente;
                 command.Parameters.Add("ENDERECO", DbType.String).Value = endereco.Endereco;
                 command.Parameters.Add("CEP", DbType.String).Value = endereco.CEP;
@@ -200,7 +199,7 @@ namespace Multicarbono.Models.EnderecoCliente
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("DELETE FROM ENDERECO WHERE ID_ENDERECO = @ID_ENDERECO");
+                var command = new MySqlCommand("DELETE FROM ENDERECO_CLIENTE WHERE ID_ENDERECO = @ID_ENDERECO");
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;

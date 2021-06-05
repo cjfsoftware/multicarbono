@@ -17,5 +17,7 @@ namespace Multicarbono.Models.Telefone
 
         [Display(Name = "Contato")]
         public string Contato { get; set; }
+
+        public string Email { get; set; }
     }
 }

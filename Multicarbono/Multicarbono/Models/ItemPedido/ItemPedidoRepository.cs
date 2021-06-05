@@ -47,6 +47,8 @@ namespace Multicarbono.Models.ItemPedido
                         itemPedido.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
                         itemPedido.CFOP = Convert.ToInt32(dr["CFOP"]);
                         itemPedido.QTDE = Convert.ToInt32(dr["QTDE"]);
+                        itemPedido.SubtotalItemPedido = Convert.ToInt32(dr["SUBTOTAL_ITEM_PEDIDO"]);
+
 
                         listItemPedido.Add(itemPedido);
                     }
@@ -131,6 +133,7 @@ namespace Multicarbono.Models.ItemPedido
                         itemPedido.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
                         itemPedido.CFOP = Convert.ToInt32(dr["CFOP"]);
                         itemPedido.QTDE = Convert.ToInt32(dr["QTDE"]);
+                        itemPedido.SubtotalItemPedido = Convert.ToInt32(dr["SUBTOTAL_ITEM_PEDIDO"]);
 
                         itemPedidoById = itemPedido;
                     }
@@ -143,14 +146,15 @@ namespace Multicarbono.Models.ItemPedido
         }
 
 
-        public void UpdateItemPedido(ItemPedido itemPedido)
+        public void UpdateItemPedido(ItemPedido itemPedido, decimal valProduto)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
                 var command = new MySqlCommand("UPDATE ITEM_PEDIDO SET ID_PRODUTO = @ID_PRODUTO, CFOP = @CFOP, " +
-                "QTDE = @QTDE WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO");
+                "QTDE = @QTDE, SUBTOTAL_ITEM_PEDIDO = @SUBTOTAL_ITEM_PEDIDO WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO;COMMIT; UPDATE PEDIDO SET VALOR_PEDIDO = (SELECT SUM(SUBTOTAL_ITEM_PEDIDO) FROM " +
+                "(SELECT * FROM ITEM_PEDIDO WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO) SUB) WHERE ID_PEDIDO IN (SELECT ID_PEDIDO FROM ITEM_PEDIDO WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO)");
 
 
                 command.CommandType = CommandType.Text;
@@ -160,6 +164,8 @@ namespace Multicarbono.Models.ItemPedido
                 command.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = itemPedido.IdProduto;
                 command.Parameters.Add("CFOP", DbType.Int32).Value = itemPedido.CFOP;
                 command.Parameters.Add("QTDE", DbType.Decimal).Value = itemPedido.QTDE;
+                command.Parameters.Add("SUBTOTAL_ITEM_PEDIDO", DbType.Decimal).Value = itemPedido.QTDE * valProduto;
+
 
                 int result = command.ExecuteNonQuery();
 
@@ -167,14 +173,15 @@ namespace Multicarbono.Models.ItemPedido
             }
         }
 
-        public void IncludeItemPedido(ItemPedido itemPedido)
+        public void IncludeItemPedido(ItemPedido itemPedido, decimal valProduto)
         {
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO ITEM_PEDIDO (ID_PEDIDO, ID_PRODUTO, CFOP, QTDE) VALUES" +
-                "(@ID_PEDIDO, @ID_PRODUTO, @CFOP, @QTDE)");
+                var command = new MySqlCommand("INSERT INTO ITEM_PEDIDO (ID_PEDIDO, ID_PRODUTO, CFOP, QTDE, SUBTOTAL_ITEM_PEDIDO) VALUES" +
+                "(@ID_PEDIDO, @ID_PRODUTO, @CFOP, @QTDE, @SUBTOTAL_ITEM_PEDIDO); COMMIT; UPDATE PEDIDO P SET VALOR_PEDIDO = (SELECT SUM(SUBTOTAL_ITEM_PEDIDO) FROM " +
+                "(SELECT * FROM ITEM_PEDIDO WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO) SUB) WHERE ID_PEDIDO IN (SELECT ID_PEDIDO FROM ITEM_PEDIDO WHERE ID_ITEM_PEDIDO = @ID_ITEM_PEDIDO)");
 
 
                 command.CommandType = CommandType.Text;
@@ -184,6 +191,8 @@ namespace Multicarbono.Models.ItemPedido
                 command.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = itemPedido.IdProduto;
                 command.Parameters.Add("CFOP", DbType.Int32).Value = itemPedido.CFOP;
                 command.Parameters.Add("QTDE", DbType.Decimal).Value = itemPedido.QTDE;
+                command.Parameters.Add("SUBTOTAL_ITEM_PEDIDO", DbType.Decimal).Value = itemPedido.QTDE * valProduto;
+                command.Parameters.Add("ID_ITEM_PEDIDO", DbType.Int32).Value = itemPedido.IdItemPedido;
 
 
                 int result = command.ExecuteNonQuery();

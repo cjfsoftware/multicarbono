@@ -39,5 +39,7 @@ namespace Multicarbono.Models.Pedido
 
         [Display(Name = "Id do Transportador")]
         public int IdTransport { get; set; }
+
+        public char NFEmitida { get; set; }
     }
 }
