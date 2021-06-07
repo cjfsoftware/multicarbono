@@ -2,6 +2,8 @@
 
 @{
     List<Multicarbono.Models.ItemPedido.ItemPedido> itemPedido = Newtonsoft.Json.JsonConvert.DeserializeObject< List<Multicarbono.Models.ItemPedido.ItemPedido>>(TempData["Pedido"].ToString());
+    List<Multicarbono.Models.ItemNota.ItemNota> itemNF = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Multicarbono.Models.ItemNota.ItemNota>>(TempData["ItensNota"].ToString());
+
 }
 
 <h6 style="margin-left:2%">Emissão de Nota Fiscal</h6>
@@ -56,13 +58,13 @@
                         <input asp-for="QtdePedido" class="form-control" value="@item.value.QTDE" />
                     </td>
                     <td>
-                        <input asp-for="QtdePesada" class="form-control" value="@Model?.QtdePesada"/>
+                        <input asp-for="QtdePesada" class="form-control" value="@itemNF[item.index].QtdePesada"/>
                     </td>
                     <td>
                         <input asp-for="SubtotalItemNota" class="form-control" value="@item.value.SubtotalItemPedido" />
                     </td>
                     <td>
-                        <input type="submit" value="Gravar peso" class="btn btn-info" style="margin-left:2%" onsubmit="readonly:true" />
+                        <input type="submit" value="Gravar peso" class="btn btn-info" style="margin-left:2%" onsubmit="readonly:readonly" />
                     </td>
                 </form>
             </tr>

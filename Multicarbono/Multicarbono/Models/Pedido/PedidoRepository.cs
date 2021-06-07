@@ -50,6 +50,9 @@ namespace Multicarbono.Models.Pedido
                         pedido.Obs = Convert.ToString(dr["OBS"]);
                         pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
+                        pedido.ValorPedido = Convert.ToDecimal(dr["VALOR_PEDIDO"]);
+                        pedido.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
+                        pedido.ValorPagar = Convert.ToDecimal(dr["VALOR_PAGAR"]);
 
 
                         listPedido.Add(pedido);
@@ -100,6 +103,8 @@ namespace Multicarbono.Models.Pedido
                         pedido.TipoFrete = Convert.ToString(dr["TIPO_FRETE"]);
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
                         pedido.NFEmitida = Convert.ToChar(dr["NF_EMITIDA"]);
+                        pedido.ValorPedido = Convert.ToDecimal(dr["VALOR_PEDIDO"]);
+                        pedido.ValorPagar = Convert.ToDecimal(dr["VALOR_PAGAR"]);
 
 
                         pedidoById = pedido;
@@ -109,6 +114,76 @@ namespace Multicarbono.Models.Pedido
                 _dbConnection.Close();
 
                 return pedidoById;
+            }
+        }
+
+        public decimal getSaldo(int idPedido, int idCliente, decimal valorPedido)
+        {
+            //using (_dbConnection)
+            //{
+                _dbConnection.Open();
+
+                var getSaldo = new MySqlCommand("SELECT SALDO FROM CLIENTE WHERE ID_CLIENTE = @ID_CLIENTE");
+
+                getSaldo.CommandType = CommandType.Text;
+                getSaldo.Connection = _dbConnection;
+
+                getSaldo.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+
+                MySqlDataReader dr;
+                decimal saldo = 0;
+
+                dr = getSaldo.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    saldo = Convert.ToDecimal(dr["SALDO"]);
+                }
+
+            _dbConnection.Close();
+
+
+            return saldo;
+
+            //}
+        }
+
+        public void ValorPagar(int idPedido, int idCliente, decimal valorPedido, decimal saldo)
+        {
+            using (_dbConnection)
+            {
+                _dbConnection.Open();
+                
+                if(saldo >= valorPedido)
+                {
+                    decimal novoSaldo = saldo - valorPedido;
+                    var updateSaldo = new MySqlCommand("UPDATE CLIENTE SET SALDO = @SALDO WHERE ID_CLIENTE = @ID_CLIENTE; COMMIT; UPDATE PEDIDO SET VALOR_PAGAR = 0 WHERE ID_PEDIDO = @ID_PEDIDO") ;
+
+                    updateSaldo.Parameters.Add("SALDO", DbType.Int32).Value = novoSaldo;
+                    updateSaldo.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+                    updateSaldo.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
+
+                    updateSaldo.CommandType = CommandType.Text;
+                    updateSaldo.Connection = _dbConnection;
+
+                    int result = updateSaldo.ExecuteNonQuery();
+                }
+                else
+                {
+                    decimal novoValPedido = valorPedido - saldo;
+                    var updateValPedido = new MySqlCommand("UPDATE CLIENTE SET SALDO = 0 WHERE ID_CLIENTE = @ID_CLIENTE; COMMIT; UPDATE PEDIDO SET VALOR_PAGAR = @VALOR_PAGAR WHERE ID_PEDIDO = @ID_PEDIDO");
+
+                    updateValPedido.Parameters.Add("VALOR_PAGAR", DbType.Int32).Value = novoValPedido;
+                    updateValPedido.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+                    updateValPedido.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
+
+                    updateValPedido.CommandType = CommandType.Text;
+                    updateValPedido.Connection = _dbConnection;
+
+                    int result = updateValPedido.ExecuteNonQuery();
+                }
+
+                _dbConnection.Close();
             }
         }
 
@@ -275,8 +350,8 @@ namespace Multicarbono.Models.Pedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE, ID_TRANSPORT) VALUES" +
-                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE, @ID_TRANSPORT)");
+                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE, ID_TRANSPORT, VALOR_PEDIDO, VALOR_PAGAR) VALUES" +
+                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE, @ID_TRANSPORT, 0, 0)");
 
 
                 command.CommandType = CommandType.Text;

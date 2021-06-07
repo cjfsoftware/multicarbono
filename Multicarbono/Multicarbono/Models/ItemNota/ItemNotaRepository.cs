@@ -57,6 +57,46 @@ namespace Multicarbono.Models.ItemNota
             }
         }
 
+        public List<ItemNota> ItemNotaByPedido(int? idPedido)
+        {
+            _dbConnection.Open();
+
+            var cmd = new MySqlCommand("SELECT * FROM ITEM_NOTA WHERE ID_ITEM_PEDIDO IN (SELECT ID_ITEM_PEDIDO FROM ITEM_PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO)");
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = _dbConnection;
+
+            cmd.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = idPedido;
+
+            int result = cmd.ExecuteNonQuery();
+
+            MySqlDataReader dr;
+            List<ItemNota> itemNotaByPedido = new List<ItemNota>();
+
+            dr = cmd.ExecuteReader();
+
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    ItemNota itemNota = new ItemNota();
+
+                    itemNota.IdItemNF = Convert.ToInt32(dr["ID_ITEM_NF"]);
+                    itemNota.IdNF = Convert.ToInt32(dr["ID_NF"]);
+                    itemNota.IdItemPedido = Convert.ToInt32(dr["ID_ITEM_PEDIDO"]);
+                    itemNota.CodProduto = Convert.ToInt32(dr["COD_PRODUTO"]);
+                    itemNota.QtdePesada = Convert.ToDecimal(dr["QTDE_PESADA"]);
+
+                    itemNotaByPedido.Add(itemNota);
+                }
+            }
+
+            _dbConnection.Close();
+
+            return itemNotaByPedido;
+        }
+
         public ItemNota ItemNotaById(int idItemNota)
         {
             using (_dbConnection)

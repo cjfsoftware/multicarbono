@@ -25,10 +25,14 @@ namespace Multicarbono.Models.Pedido
 
         public decimal ValorPedido { get; set; }
 
+        public decimal ValorPagar { get; set; }
+
         public DateTime Expedido { get; set; }
 
         public int IdTransport { get; set; }
 
         public char NFEmitida { get; set; }
+
+        public int IdCliente { get; set; }
     }
 }

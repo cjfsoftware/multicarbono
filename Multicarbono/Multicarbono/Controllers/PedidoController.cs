@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Multicarbono.Models.Cliente;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Pedido;
 using MySqlConnector;
@@ -49,7 +50,7 @@ namespace Multicarbono.Controllers
         public ActionResult Details(int idPedido)
         {
 
-            return RedirectToAction("Index", "ItemPedido", new { idPedido = idPedido});
+            return RedirectToAction("Index", "ItemPedido", new { idPedido = idPedido });
         }
 
 
@@ -95,14 +96,20 @@ namespace Multicarbono.Controllers
             }
         }
 
-        public async Task<ActionResult> PedidoByFiltro(string razaoSocial=null, DateTime? dataIni=null, DateTime? dataFim = null)
+        public async Task<ActionResult> PedidoByFiltro(string razaoSocial = null, DateTime? dataIni = null, DateTime? dataFim = null)
         {
             var model = _pedidoRepo.PedidoByFiltro(razaoSocial, dataIni, dataFim);
             return PartialView("Index", model);
         }
 
 
-
+        public ActionResult ValorPagar(int idPedido, int idCliente, decimal valorPedido)
+        {
+            decimal saldo = _pedidoRepo.getSaldo(idPedido, idCliente, valorPedido);
+            _pedidoRepo.ValorPagar(idPedido, idCliente, valorPedido, saldo);
+            
+            return RedirectToAction(nameof(Index));
+        }
 
 
         //public ActionResult MakeFilter(DateTime dataInit, DateTime dataFim, string razaoSocial)

@@ -63,6 +63,9 @@
                 @Html.DisplayNameFor(model => model.ValorPedido)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ValorPagar)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IdTransport)
             </th>
         </tr>
@@ -99,13 +102,18 @@
                 @Html.DisplayFor(modelItem => item.ValorPedido)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ValorPagar)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdTransport)
             </td>
             <td>
+                <a asp-controller="Pedido" asp-action="ValorPagar" asp-route-idPedido="@item.IdPedido" asp-route-idCliente="@item.IdCliente" asp-route-valorPedido="@item.ValorPedido">Checkout</a>
                 <a asp-controller="NotaFiscal" asp-action="CadastroNotaFiscal" asp-route-idPedido="@item.IdPedido">Emitir NF</a>
                 <a asp-action="Details" asp-route-idPedido="@item.IdPedido">Detalhes</a>
                 <a asp-action="Edit" asp-route-idPedido="@item.IdPedido">Alterar</a>
                 <a asp-action="Delete" asp-route-idPedido="@item.IdPedido">Excluir</a>
+
             </td>
         </tr>
         }

@@ -167,7 +167,8 @@ namespace Multicarbono.Models.NotaFiscal
                 _dbConnection.Open();
 
                 var command = new MySqlCommand("UPDATE NOTA_FISCAL SET ID_PEDIDO = @ID_PEDIDO, NUM_NF = @NUM_NF, CHAVE = @CHAVE, " +
-                "NATUREZA_OPER = @NATUREZA_OPER, DT_EMISSAO = @DT_EMISSAO, DT_SAIDA = @DT_SAIDA, VR_FRETE = @VR_FRETE, QTDE_EMBALAGENS = @QTDE_EMBALAGENS, CNPJ_EMITENTE = @CNPJ_EMITENTE");
+                "NATUREZA_OPER = @NATUREZA_OPER, DT_EMISSAO = @DT_EMISSAO, DT_SAIDA = @DT_SAIDA, VR_FRETE = @VR_FRETE, QTDE_EMBALAGENS = @QTDE_EMBALAGENS," +
+                " CNPJ_EMITENTE = @CNPJ_EMITENTE, VALOR_NOTA = (SELECT VALOR_PAGAR FROM PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO)");
 
 
                 command.CommandType = CommandType.Text;
@@ -179,9 +180,10 @@ namespace Multicarbono.Models.NotaFiscal
                 command.Parameters.Add("NATUREZA_OPER", DbType.String).Value = notaFiscal.NaturezaOper;
                 command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = notaFiscal.DtEmissao;
                 command.Parameters.Add("DT_SAIDA", DbType.DateTime).Value = notaFiscal.DtSaida;
-                command.Parameters.Add("VR_FRETE", DbType.String).Value = notaFiscal.VrFrete;
+                command.Parameters.Add("VR_FRETE", DbType.Decimal).Value = notaFiscal.VrFrete;
                 command.Parameters.Add("QTDE_EMBALAGENS", DbType.Int32).Value = notaFiscal.QtdeEmbalagens;
                 command.Parameters.Add("CNPJ_EMITENTE", DbType.DateTime).Value = notaFiscal.CNPJEmitente;
+
 
                 try
                 {
@@ -201,8 +203,9 @@ namespace Multicarbono.Models.NotaFiscal
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO NOTA_FISCAL (ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE) VALUES" +
-                "(@ID_PEDIDO, @NUM_NF, @CHAVE, @NATUREZA_OPER, @DT_EMISSAO, @DT_SAIDA, @VR_FRETE, @QTDE_EMBALAGENS, @CNPJ_EMITENTE); UPDATE PEDIDO SET NF_EMITIDA = 'Y' WHERE ID_PEDIDO = @ID_PEDIDO");
+                var command = new MySqlCommand("INSERT INTO NOTA_FISCAL (ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE, VALOR_NOTA) VALUES" +
+                "(@ID_PEDIDO, @NUM_NF, @CHAVE, @NATUREZA_OPER, @DT_EMISSAO, @DT_SAIDA, @VR_FRETE, @QTDE_EMBALAGENS, @CNPJ_EMITENTE, (SELECT VALOR_PAGAR FROM PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO);" +
+                "UPDATE PEDIDO SET NF_EMITIDA = 'Y' WHERE ID_PEDIDO = @ID_PEDIDO; COMMIT");
 
 
                 command.CommandType = CommandType.Text;

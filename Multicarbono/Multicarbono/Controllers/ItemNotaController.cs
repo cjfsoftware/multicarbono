@@ -23,7 +23,8 @@ namespace Multicarbono.Controllers
 
         public ActionResult CadastroItemNota(int? idPedido)
         {
-            return PartialView("/Views/NotaFiscal/EmitirNota.cshtml");
+            var model = _itemNotaRepo.ItemNotaByPedido(idPedido);
+            return PartialView("/Views/NotaFiscal/EmitirNota.cshtml", model);
         }
 
         [HttpPost]
