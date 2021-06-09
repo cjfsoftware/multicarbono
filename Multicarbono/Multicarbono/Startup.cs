@@ -17,6 +17,8 @@ using Multicarbono.Models.Transportador;
 using Multicarbono.Models.Usuario;
 using MySqlConnector;
 using Multicarbono.Configuration;
+using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Multicarbono
 {
@@ -51,6 +53,12 @@ namespace Multicarbono
             services.AddTransient<ItemPedidoRepository>();
             services.AddTransient<ItemNotaRepository>();
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +78,8 @@ namespace Multicarbono
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

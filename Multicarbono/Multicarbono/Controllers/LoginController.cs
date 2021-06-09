@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multicarbono.Models.Login;
+using Multicarbono.Models.Usuario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace Multicarbono.Controllers
     public class LoginController : Controller
     {
         private LoginRepository _login;
+        private UsuarioRepository _usuarioRepository;
 
-        public LoginController(LoginRepository login) {
+        public LoginController(LoginRepository login, UsuarioRepository usuarioRepository) {
             _login = login;
-        }
+            _usuarioRepository = usuarioRepository;
+    }
         
         // GET: LoginController
         public ActionResult Index()
@@ -96,13 +99,18 @@ namespace Multicarbono.Controllers
         [AllowAnonymous]
         public ActionResult DoLogin(LoginViewModel loginModel)
         {
-            //string login = _login.ValidarLogin(loginModel.User, loginModel.Password);
+            string login = _login.ValidarLogin(loginModel.User, loginModel.Password);
+            Usuario usuario = _usuarioRepository.UsuarioByLogin(loginModel.User);
 
-            //if (login == "OK")
-                // return RedirectToAction("Index","Cliente");
+            if (login == "OK")
+            {
+                HttpContext.Session.SetString("user_id", usuario.IdUsuario.ToString());
+                HttpContext.Session.SetString("access_grant_type", usuario.NivelAcesso.ToString());
+
                 return View("Base");
-            //else
-                //return PartialView("ModalLoginError");
+            }
+            else
+                return PartialView("ModalLoginError");
         }
     }
 }

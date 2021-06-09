@@ -45,7 +45,7 @@ namespace Multicarbono.Controllers
             TempData.Keep("Pedido");
             TempData.Keep("idPedido");
 
-            if (pedido.NFEmitida == 'Y')
+            if (pedido.NFEmitida == true)
             {
                 Response.WriteAsync("<script language='javascript'>alert('NF ja emitida para este pedido')</script>");
                 return RedirectToAction("Index", "Pedido");

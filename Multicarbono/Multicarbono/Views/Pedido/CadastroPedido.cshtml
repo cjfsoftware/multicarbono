@@ -1,43 +1,42 @@
-﻿@model Multicarbono.Models.Pedido.Pedido
+﻿@model Multicarbono.ViewModels.CadastroPedidoViewModel
 
 @Html.Partial("_Menu")
 
 <hr />
-<h6 style="margin-left:10%">Cadastrar Pedido</h6><br /><br />
+<h6 style="margin-left:10%">Cadastrar Pedido</h6>
+<br />
+<br />
 <div class="row" style="margin-left:10%">
     <div class="col-md-4">
         <form asp-action="CadastroPedido">
             <div class="form-group">
-                <label asp-for="NumPedido" class="control-label"></label>
-                <input asp-for="NumPedido" class="form-control" />
+                <input asp-for="Pedido.NumPedido" class="form-control" value="@Model.NumPedido" hidden />
             </div>
             <div class="form-group">
-                <label asp-for="CNPJCliente" class="control-label"></label>
-                <input asp-for="CNPJCliente" class="form-control" />
+                <label asp-for="Pedido.CNPJCliente" class="control-label"></label>
+                <select asp-for="Pedido.CNPJCliente" asp-items="@Model.Clientes" class="form-control"></select>
             </div>
             <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <input asp-for="IdUsuario" class="form-control" />
+                <input asp-for="Pedido.IdUsuario" class="form-control"  value="@Model.Usuario.IdUsuario" hidden/>
             </div>
             <div class="form-group">
-                <label asp-for="DtEmissao" class="control-label"></label>
-                <input asp-for="DtEmissao" class="form-control" />
+                <input asp-for="Pedido.DtEmissao" class="form-control" type="datetime" value="@Model.DtEmissao" hidden/>
             </div>
             <div class="form-group">
-                <label asp-for="DtCarregamento" class="control-label"></label>
-                <input asp-for="DtCarregamento" class="form-control" />
+                <label asp-for="Pedido.DtCarregamento" class="control-label"></label>
+                <input asp-for="Pedido.DtCarregamento" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Obs" class="control-label"></label>
-                <input asp-for="Obs" class="form-control" />
+                <label asp-for="Pedido.Obs" class="control-label"></label>
+                <input asp-for="Pedido.Obs" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="TipoFrete" class="control-label"></label>
-                <select asp-for="TipoFrete" asp-items="Html.GetEnumSelectList<Multicarbono.Models.Enum.TipoFrete>()" class="form-control"></select>
+                <label asp-for="Pedido.TipoFrete" class="control-label"></label>
+                <select asp-for="Pedido.TipoFrete" asp-items="Html.GetEnumSelectList<Multicarbono.Models.Enum.TipoFrete>()" class="form-control"></select>
             </div>
             <div class="form-group">
-                <label asp-for="IdTransport" class="control-label"></label>
-                <input asp-for="IdTransport" class="form-control" />
+                <label asp-for="Pedido.IdTransport" class="control-label"></label>
+                <select asp-for="Pedido.IdTransport" asp-items="@Model.Transportadores" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar pedido" class="btn btn-info" />

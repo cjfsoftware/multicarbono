@@ -1,4 +1,5 @@
 ﻿using Multicarbono.Configuration;
+using Multicarbono.Exceptions;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Multicarbono.Models.Usuario
             using (_dbConnection)
             {
                 _dbConnection.Open();
-                
+
                 var command = new MySqlCommand("INSERT INTO USUARIO (NOME, DT_NASCIMENTO, CARGO, ENDERECO, LOGIN, EMAIL, STATUS, DT_CRIACAO, NIVEL_ACESSO, SENHA ) " +
                     "VALUES (@NOME, @DT_NASCIMENTO, @CARGO, @ENDERECO, @LOGIN, @EMAIL, @STATUS, @DT_CRIACAO, @NIVEL_ACESSO, @SENHA)");
 
@@ -40,7 +41,7 @@ namespace Multicarbono.Models.Usuario
                 command.Parameters.Add("ENDERECO", DbType.String).Value = usuario.Endereco;
                 command.Parameters.Add("LOGIN", DbType.String).Value = usuario.Login;
                 command.Parameters.Add("EMAIL", DbType.String).Value = usuario.Email;
-                command.Parameters.Add("STATUS", DbType.String).Value = usuario.Status;
+                command.Parameters.Add("STATUS", DbType.Boolean).Value = usuario.Ativo;
                 command.Parameters.Add("DT_CRIACAO", DbType.DateTime).Value = usuario.DtCriacao;
                 command.Parameters.Add("NIVEL_ACESSO", DbType.String).Value = usuario.NivelAcesso;
                 command.Parameters.Add("SENHA", DbType.String).Value = encryptedPassword;
@@ -49,8 +50,6 @@ namespace Multicarbono.Models.Usuario
 
                 _dbConnection.Close();
             }
-
-
         }
 
         public void UpdateUsuario(Usuario usuario)
@@ -74,12 +73,11 @@ namespace Multicarbono.Models.Usuario
                 command.Parameters.Add("ENDERECO", DbType.String).Value = usuario.Endereco;
                 command.Parameters.Add("LOGIN", DbType.String).Value = usuario.Login;
                 command.Parameters.Add("EMAIL", DbType.String).Value = usuario.Email;
-                command.Parameters.Add("STATUS", DbType.String).Value = usuario.Status;
+                command.Parameters.Add("STATUS", DbType.Boolean).Value = usuario.Ativo;
                 command.Parameters.Add("DT_CRIACAO", DbType.DateTime).Value = usuario.DtCriacao;
                 command.Parameters.Add("NIVEL_ACESSO", DbType.String).Value = usuario.NivelAcesso;
                 command.Parameters.Add("SENHA", DbType.String).Value = encryptedPassword;
                 command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = usuario.IdUsuario;
-
 
                 int result = command.ExecuteNonQuery();
 
@@ -97,7 +95,7 @@ namespace Multicarbono.Models.Usuario
 
                 command.CommandType = CommandType.Text;
                 command.Connection = _dbConnection;
-         
+
                 command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = idUsuario;
 
                 int result = command.ExecuteNonQuery();
@@ -136,7 +134,7 @@ namespace Multicarbono.Models.Usuario
                         usuario.DtNascimento = Convert.ToDateTime(dr["DT_NASCIMENTO"]);
                         usuario.Cargo = Convert.ToString(dr["CARGO"]);
                         usuario.Email = Convert.ToString(dr["EMAIL"]);
-                        usuario.Status = Convert.ToChar(dr["STATUS"]);
+                        usuario.Ativo = Convert.ToBoolean(dr["STATUS"]);
                         usuario.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
                         usuario.NivelAcesso = (Enum.NivelAcesso)System.Enum.Parse(typeof(Enum.NivelAcesso), Convert.ToString(dr["NIVEL_ACESSO"]), true);
                         usuario.Senha = Convert.ToString(dr["SENHA"]);
@@ -185,7 +183,7 @@ namespace Multicarbono.Models.Usuario
                         user.DtNascimento = Convert.ToDateTime(dr["DT_NASCIMENTO"]);
                         user.Cargo = Convert.ToString(dr["CARGO"]);
                         user.Email = Convert.ToString(dr["EMAIL"]);
-                        user.Status = Convert.ToChar(dr["STATUS"]);
+                        user.Ativo = Convert.ToBoolean(dr["STATUS"]);
                         user.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
                         user.NivelAcesso = (Enum.NivelAcesso)System.Enum.Parse(typeof(Enum.NivelAcesso), Convert.ToString(dr["NIVEL_ACESSO"]), true);
                         user.Senha = Convert.ToString(dr["SENHA"]);
@@ -200,6 +198,50 @@ namespace Multicarbono.Models.Usuario
                 return usuarioById;
             }
         }
-        
+
+        public Usuario UsuarioByLogin(string login)
+        {
+            _dbConnection.Open();
+
+            var cmd = new MySqlCommand("SELECT * FROM USUARIO WHERE LOWER(LOGIN) = @LOGIN")
+            {
+                CommandType = CommandType.Text,
+                Connection = _dbConnection,
+            };
+
+            cmd.Parameters.Add("LOGIN", DbType.String).Value = login;
+
+            int result = cmd.ExecuteNonQuery();
+
+            MySqlDataReader dr;
+            Usuario usuarioByLogin = new Usuario();
+
+            dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    usuarioByLogin.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
+                    usuarioByLogin.Login = Convert.ToString(dr["LOGIN"]);
+                    usuarioByLogin.Nome = Convert.ToString(dr["NOME"]);
+                    usuarioByLogin.DtNascimento = Convert.ToDateTime(dr["DT_NASCIMENTO"]);
+                    usuarioByLogin.Cargo = Convert.ToString(dr["CARGO"]);
+                    usuarioByLogin.Email = Convert.ToString(dr["EMAIL"]);
+                    usuarioByLogin.Ativo = Convert.ToBoolean(dr["STATUS"]);
+                    usuarioByLogin.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
+                    usuarioByLogin.NivelAcesso = (Enum.NivelAcesso)System.Enum.Parse(typeof(Enum.NivelAcesso), Convert.ToString(dr["NIVEL_ACESSO"]), true);
+                    usuarioByLogin.Senha = Convert.ToString(dr["SENHA"]);
+                    usuarioByLogin.Endereco = Convert.ToString(dr["ENDERECO"]);
+                }
+
+                return usuarioByLogin;
+            }
+
+            else
+            {
+                throw new ResourceNotFoundException();
+            }
+        }
     }
 }

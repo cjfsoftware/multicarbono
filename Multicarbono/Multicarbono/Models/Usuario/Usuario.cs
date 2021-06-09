@@ -26,7 +26,7 @@ namespace Multicarbono.Models.Usuario
 
         public string Email { get; set; }
 
-        public char Status { get; set; }
+        public bool Ativo { get; set; }
 
         [Display(Name = "Data de Criação")]
         public DateTime DtCriacao { get; set; }

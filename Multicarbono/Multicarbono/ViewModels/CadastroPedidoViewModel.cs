@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Multicarbono.Models.Cliente;
+using Multicarbono.Configuration;
 using Multicarbono.Models.Pedido;
-using Multicarbono.Models.Transportador;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 
 namespace Multicarbono.ViewModels
 {
     public class CadastroPedidoViewModel
     {
-        public Pedido pedido { get; set; }
-        public List<SelectListItem> clientes { get; set; }
-        public List<SelectListItem> transportadores { get; set; }
-}
+        public int NumPedido { get; set; }
+        public Pedido Pedido { get; set; }
+        public SessionUser Usuario { get; set; }
+        public List<SelectListItem> Clientes { get; set; }
+        public List<SelectListItem> Transportadores { get; set; }
+        public DateTime DtEmissao { get; set; } = DateTime.Now;
+    }
 }
