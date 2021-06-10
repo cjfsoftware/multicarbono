@@ -102,14 +102,9 @@ namespace Multicarbono.Models.Pedido
                         pedido.Obs = Convert.ToString(dr["OBS"]);
                         pedido.TipoFrete = (Enum.TipoFrete)System.Enum.Parse(typeof(Enum.TipoFrete), Convert.ToString(dr["TIPO_FRETE"]), true);
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
-<<<<<<< HEAD
-                        pedido.NFEmitida = Convert.ToChar(dr["NF_EMITIDA"]);
                         pedido.ValorPedido = Convert.ToDecimal(dr["VALOR_PEDIDO"]);
                         pedido.ValorPagar = Convert.ToDecimal(dr["VALOR_PAGAR"]);
-=======
                         pedido.NFEmitida = Convert.ToBoolean(dr["NF_EMITIDA"]);
->>>>>>> 2df264e8ae059445fa8359da6e40630ddf9004cf
-
 
                         pedidoById = pedido;
                     }

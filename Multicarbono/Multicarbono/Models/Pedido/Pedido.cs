@@ -36,24 +36,18 @@ namespace Multicarbono.Models.Pedido
         [Display(Name = "Valor do Pedido")]
         public decimal ValorPedido { get; set; }
 
-<<<<<<< HEAD
+        [Display(Name = "Valor a Pagar")]
         public decimal ValorPagar { get; set; }
 
-=======
         [Display(Name = "Data de Expedição")]
->>>>>>> 2df264e8ae059445fa8359da6e40630ddf9004cf
         public DateTime Expedido { get; set; }
 
         [Display(Name = "Id do Transportador")]
         public int IdTransport { get; set; }
 
-<<<<<<< HEAD
-        public char NFEmitida { get; set; }
-
         public int IdCliente { get; set; }
-=======
+
         [Display(Name = "Nota Fiscal Emitida")]
         public bool NFEmitida { get; set; }
->>>>>>> 2df264e8ae059445fa8359da6e40630ddf9004cf
     }
 }

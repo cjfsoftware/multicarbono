@@ -45,14 +45,10 @@ namespace Multicarbono.Controllers
             TempData.Keep("Pedido");
             TempData.Keep("idPedido");
 
-<<<<<<< HEAD
             TempData["ItensNota"] = Newtonsoft.Json.JsonConvert.SerializeObject(_itemNotaRepo.ItemNotaByPedido(idPedido));
             TempData.Keep("ItensNota");
 
-            if (pedido.NFEmitida == 'Y')
-=======
             if (pedido.NFEmitida == true)
->>>>>>> 2df264e8ae059445fa8359da6e40630ddf9004cf
             {
                 Response.WriteAsync("<script language='javascript'>alert('NF ja emitida para este pedido')</script>");
                 return RedirectToAction("Index", "Pedido");
