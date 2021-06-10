@@ -5,22 +5,26 @@
     Layout = null;
 }
 
-<div class="text-center">
-    <h3 class="display-1">Multicarbono</h3>
-</div>
 
+<body style="background-image:url('@Url.Content("/Content/carbono.jpg")'); background-size:cover">
 
-@using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @class = "login-form", @id = "LoginForm" }))
-{
-    <div class="text-center">
-        <div class="input-group">
-            <input type="text" name="User" id="user"  />
-            <input type="text" id="Password" name="password" />
-            <span>
-                <button type="submit" id="btnLogin">Login</button>
-            </span>
+    @using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @class = "login-form", @id = "LoginForm" }))
+    {
+        <div class="container" style="background-color:darkgray; background-size:contain; margin:2px 2px 2px 2px">
+            <div class="text-center" style="text-align:center; margin-top:15%">
+                <h1 class="display-1">Multicarbono</h1>
+            </div>
+
+            <div class="text-center" style="text-align:center; margin-top:2%">
+                <div class="input-group">
+                    <input type="text" name="User" id="user" style="margin:2px 0px 2px 0px" placeholder="Usuário" /><br />
+                    <input type="text" id="Password" name="password" style="margin:2px 0px 2px 0px" class="input-group-lg" placeholder="Senha" /><br />
+                    <span>
+                        <button type="submit" id="btnLogin" class="btn-danger">Login</button>
+                    </span>
+                </div>
+            </div>
         </div>
-    </div>
-}
-
+    }
+</body>
 
