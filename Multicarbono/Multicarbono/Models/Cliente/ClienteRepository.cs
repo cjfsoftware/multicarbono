@@ -47,7 +47,7 @@ namespace Multicarbono.Models.Cliente
                         cliente.IE = Convert.ToString(dr["IE"]);
                         cliente.DtCadastro = Convert.ToDateTime(dr["DT_CADASTRO"]);
                         cliente.Saldo = Convert.ToDecimal(dr["SALDO"]);
-                        cliente.Situacao = Convert.ToChar(dr["SITUACAO"]);
+                        cliente.Situacao = (Enum.SituacaoCliente)System.Enum.Parse(typeof(Enum.SituacaoCliente), Convert.ToString(dr["SITUACAO"]), true);
                         
                         listClientes.Add(cliente);
                     }
@@ -93,7 +93,7 @@ namespace Multicarbono.Models.Cliente
                         cliente.IE = Convert.ToString(dr["IE"]);
                         cliente.DtCadastro = Convert.ToDateTime(dr["DT_CADASTRO"]);
                         cliente.Saldo = Convert.ToDecimal(dr["SALDO"]);
-                        cliente.Situacao = Convert.ToChar(dr["SITUACAO"]);
+                        cliente.Situacao = (Enum.SituacaoCliente)System.Enum.Parse(typeof(Enum.SituacaoCliente), Convert.ToString(dr["SITUACAO"]), true);
 
                         clienteById = cliente;
                     }

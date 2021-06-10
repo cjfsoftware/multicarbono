@@ -16,11 +16,9 @@ using Multicarbono.Models.Telefone;
 using Multicarbono.Models.Transportador;
 using Multicarbono.Models.Usuario;
 using MySqlConnector;
+using Multicarbono.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Multicarbono
 {
@@ -41,6 +39,7 @@ namespace Multicarbono
             services.AddTransient<MySqlConnection>(
                (sp) => new MySqlConnection(Configuration["ConnectionStrings:dbConn"]));
 
+            services.AddSingleton<Security>();
 
             services.AddTransient<LoginRepository>();
             services.AddTransient<UsuarioRepository>();
@@ -53,6 +52,12 @@ namespace Multicarbono
             services.AddTransient<EnderecoClienteRepository>();
             services.AddTransient<ItemPedidoRepository>();
             services.AddTransient<ItemNotaRepository>();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
 
         }
 
@@ -73,6 +78,8 @@ namespace Multicarbono
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

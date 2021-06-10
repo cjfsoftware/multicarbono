@@ -1,10 +1,7 @@
-﻿using MySqlConnector;
-using System;
+﻿using Multicarbono.Configuration;
+using MySqlConnector;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Multicarbono.Models.Login
 {
@@ -12,20 +9,24 @@ namespace Multicarbono.Models.Login
     {
 
         private readonly MySqlConnection _dbConnection;
+        private readonly Security _security;
 
-        public LoginRepository(MySqlConnection dbConnection)
+        public LoginRepository(MySqlConnection dbConnection, Security security)
         {
-            this._dbConnection = dbConnection;
+            _dbConnection = dbConnection;
+            _security = security;
         }
 
         public string ValidarLogin(string userName, string password)
-        {           
+        {
+            var encryptedPassword = _security.Encrypt(password);
+
             using (_dbConnection)
             {
                 _dbConnection.Open();
 
                 MySqlCommand cmd = new MySqlCommand(
-                    "SELECT SENHA FROM usuario WHERE LOGIN = @LOGIN AND SENHA = @SENHA" 
+                    "SELECT SENHA FROM USUARIO WHERE LOGIN = @LOGIN AND SENHA = @SENHA" 
                         );
                 
                 cmd.CommandType = CommandType.Text;
@@ -34,7 +35,7 @@ namespace Multicarbono.Models.Login
                 IList<Login> lista = new List<Login>();
 
                 cmd.Parameters.Add("LOGIN", DbType.String).Value = userName;
-                cmd.Parameters.Add("SENHA", DbType.String).Value = password;
+                cmd.Parameters.Add("SENHA", DbType.String).Value = encryptedPassword;
 
                 dr = cmd.ExecuteReader();
 

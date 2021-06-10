@@ -36,8 +36,8 @@
                 <input asp-for="Email" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <label asp-for="Ativo" class="control-label"></label>
+                <input asp-for="Ativo" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="DtCriacao" class="control-label"></label>
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="NivelAcesso" class="control-label"></label>
-                <input asp-for="NivelAcesso" class="form-control" />
+                <select asp-for="NivelAcesso" asp-items="Html.GetEnumSelectList<Multicarbono.Models.Enum.NivelAcesso>()" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Senha" class="control-label"></label>

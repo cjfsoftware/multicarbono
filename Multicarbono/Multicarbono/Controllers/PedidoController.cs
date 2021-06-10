@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Multicarbono.Models.Cliente;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Pedido;
+using Multicarbono.Models.Transportador;
+using Multicarbono.ViewModels;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -17,12 +20,16 @@ namespace Multicarbono.Controllers
     public class PedidoController : Controller
     {
         private PedidoRepository _pedidoRepo;
+        private ClienteRepository _clienteRepo;
         private ItemPedidoRepository _itemPedidoRepo;
+        private TransportadorRepository _transportadorRepo;
 
-        public PedidoController(PedidoRepository pedidoRepo, ItemPedidoRepository itemPedidoRepo)
+        public PedidoController(PedidoRepository pedidoRepo, ItemPedidoRepository itemPedidoRepo, ClienteRepository clienteRepo, TransportadorRepository transportadorRepo)
         {
             _pedidoRepo = pedidoRepo;
             _itemPedidoRepo = itemPedidoRepo;
+            _clienteRepo = clienteRepo;
+            _transportadorRepo = transportadorRepo;
         }
 
 
@@ -36,7 +43,35 @@ namespace Multicarbono.Controllers
 
         public ActionResult CadastroPedido()
         {
-            return PartialView();
+            CadastroPedidoViewModel vmPedido = new CadastroPedidoViewModel();
+            vmPedido.Clientes = new List<SelectListItem>();
+            foreach (Cliente c in _clienteRepo.ListCliente())
+            {
+                vmPedido.Clientes.Add(new SelectListItem
+                {
+                    Value = c.CNPJ.ToString(),
+                    Text = c.RazaoSocial
+                });
+            }
+
+            vmPedido.Transportadores = new List<SelectListItem>();
+            foreach (Transportador t in _transportadorRepo.ListTransportador())
+            {
+                vmPedido.Transportadores.Add(new SelectListItem
+                {
+                    Value = t.IdTransportador.ToString(),
+                    Text = t.RazaoSocial
+                });
+            }
+
+            vmPedido.Usuario = new Configuration.SessionUser();
+
+            vmPedido.Usuario.IdUsuario = int.Parse(HttpContext.Session.GetString("user_id"));
+            vmPedido.Usuario.NivelAcesso = (Models.Enum.NivelAcesso)System.Enum.Parse(typeof(Models.Enum.NivelAcesso), HttpContext.Session.GetString("access_grant_type"), true);
+
+            vmPedido.NumPedido = _pedidoRepo.GetNextNumPedido();
+
+            return PartialView("CadastroPedido", vmPedido);
         }
 
         [HttpPost]
@@ -56,23 +91,44 @@ namespace Multicarbono.Controllers
 
         public ActionResult Edit(int idPedido)
         {
+            CadastroPedidoViewModel vmPedido = new CadastroPedidoViewModel();
+            
+            vmPedido.Clientes = new List<SelectListItem>();
+            foreach (Cliente c in _clienteRepo.ListCliente())
+            {
+                vmPedido.Clientes.Add(new SelectListItem
+                {
+                    Value = c.CNPJ.ToString(),
+                    Text = c.RazaoSocial
+                });
+            }
+
+            vmPedido.Transportadores = new List<SelectListItem>();
+            foreach (Transportador t in _transportadorRepo.ListTransportador())
+            {
+                vmPedido.Transportadores.Add(new SelectListItem
+                {
+                    Value = t.IdTransportador.ToString(),
+                    Text = t.RazaoSocial
+                });
+            }
+
+
             var model = _pedidoRepo.PedidoById(idPedido);
-            return PartialView("AlterarPedido", model);
+
+            vmPedido.Pedido = model;
+
+            return PartialView("AlterarPedido", vmPedido);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int idPedido, Pedido pedido)
         {
-            try
-            {
-                _pedidoRepo.UpdatePedido(pedido);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+    
+               _pedidoRepo.UpdatePedido(pedido);
+               return RedirectToAction(nameof(Index));
+
         }
 
         public ActionResult Delete(int idPedido)

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Multicarbono.Models.Produto
 {
@@ -46,7 +44,7 @@ namespace Multicarbono.Models.Produto
                         produto.Ativo = Convert.ToChar(dr["ATIVO"]);
                         produto.NCM_SH = Convert.ToInt32(dr["NCM_SH"]);
                         produto.CST = Convert.ToInt32(dr["CST"]);
-                        produto.Unidade = Convert.ToString(dr["UNIDADE"]);
+                        produto.Unidade = (Enum.TipoUnidadeProduto)System.Enum.Parse(typeof(Enum.TipoUnidadeProduto), Convert.ToString(dr["UNIDADE"]), true);
                         produto.VrUnitario = Convert.ToDecimal(dr["VR_UNITARIO"]);
                         produto.Ali_ICMS = Convert.ToDecimal(dr["ALI_ICMS"]);
                         produto.Ali_IPI = Convert.ToDecimal(dr["ALI_IPI"]);                   
@@ -94,7 +92,7 @@ namespace Multicarbono.Models.Produto
                         produto.Ativo = Convert.ToChar(dr["ATIVO"]);
                         produto.NCM_SH = Convert.ToInt32(dr["NCM_SH"]);
                         produto.CST = Convert.ToInt32(dr["CST"]);
-                        produto.Unidade = Convert.ToString(dr["UNIDADE"]);
+                        produto.Unidade = (Enum.TipoUnidadeProduto)System.Enum.Parse(typeof(Enum.TipoUnidadeProduto), Convert.ToString(dr["UNIDADE"]), true);
                         produto.VrUnitario = Convert.ToDecimal(dr["VR_UNITARIO"]);
                         produto.Ali_ICMS = Convert.ToDecimal(dr["ALI_ICMS"]);
                         produto.Ali_IPI = Convert.ToDecimal(dr["ALI_IPI"]);
