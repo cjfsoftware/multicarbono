@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Multicarbono.Models.Pedido.Pedido>
+﻿@model IEnumerable<Multicarbono.ViewModels.PedidoIndexViewModel>
 
 @Html.Partial("_Menu")
 
@@ -36,34 +36,34 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NumPedido)
+                @Html.DisplayNameFor(model => model.Pedido.NumPedido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CNPJCliente)
+                Cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdUsuario)
+                Usuário
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DtEmissao)
+                @Html.DisplayNameFor(model => model.Pedido.DtEmissao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DtCarregamento)
+                @Html.DisplayNameFor(model => model.Pedido.DtCarregamento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Obs)
+                @Html.DisplayNameFor(model => model.Pedido.Obs)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipoFrete)
+                @Html.DisplayNameFor(model => model.Pedido.TipoFrete)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ValorPedido)
+                @Html.DisplayNameFor(model => model.Pedido.ValorPedido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ValorPagar)
+                @Html.DisplayNameFor(model => model.Pedido.ValorPagar)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdTransport)
+                Transportador
             </th>
         </tr>
     </thead>
@@ -72,41 +72,41 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NumPedido)
+                @Html.DisplayFor(modelItem => item.Pedido.NumPedido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CNPJCliente)
+                @Html.DisplayFor(modelItem => item.Cliente.RazaoSocial)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdUsuario)
+                @Html.DisplayFor(modelItem => item.Usuario.Login)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DtEmissao)
+                @Html.DisplayFor(modelItem => item.Pedido.DtEmissao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DtCarregamento)
+                @Html.DisplayFor(modelItem => item.Pedido.DtCarregamento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Obs)
+                @Html.DisplayFor(modelItem => item.Pedido.Obs)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoFrete)
+                @Html.DisplayFor(modelItem => item.Pedido.TipoFrete)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValorPedido)
+                @Html.DisplayFor(modelItem => item.Pedido.ValorPedido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValorPagar)
+                @Html.DisplayFor(modelItem => item.Pedido.ValorPagar)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdTransport)
+                @Html.DisplayFor(modelItem => item.Transportador.RazaoSocial)
             </td>
             <td>
-                <a asp-controller="Pedido" asp-action="ValorPagar" asp-route-idPedido="@item.IdPedido" asp-route-idCliente="@item.IdCliente" asp-route-valorPedido="@item.ValorPedido">Checkout</a>
-                <a asp-controller="NotaFiscal" asp-action="CadastroNotaFiscal" asp-route-idPedido="@item.IdPedido">Emitir NF</a>
-                <a asp-action="Details" asp-route-idPedido="@item.IdPedido">Detalhes</a>
-                <a asp-action="Edit" asp-route-idPedido="@item.IdPedido">Alterar</a>
-                <a asp-action="Delete" asp-route-idPedido="@item.IdPedido">Excluir</a>
+                <a asp-controller="Pedido" asp-action="ValorPagar" asp-route-idPedido="@item.Pedido.IdPedido" asp-route-idCliente="@item.Pedido.IdCliente" asp-route-valorPedido="@item.Pedido.ValorPedido">Checkout</a>
+                <a asp-controller="NotaFiscal" asp-action="CadastroNotaFiscal" asp-route-idPedido="@item.Pedido.IdPedido">Emitir NF</a>
+                <a asp-action="Details" asp-route-idPedido="@item.Pedido.IdPedido">Detalhes</a>
+                <a asp-action="Edit" asp-route-idPedido="@item.Pedido.IdPedido">Alterar</a>
+                <a asp-action="Delete" asp-route-idPedido="@item.Pedido.IdPedido">Excluir</a>
 
             </td>
         </tr>

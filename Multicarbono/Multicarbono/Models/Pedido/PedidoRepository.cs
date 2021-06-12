@@ -43,7 +43,7 @@ namespace Multicarbono.Models.Pedido
 
                         pedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
                         pedido.NumPedido = Convert.ToInt32(dr["NUM_PEDIDO"]);
-                        pedido.CNPJCliente = Convert.ToString(dr["CNPJ_CLIENTE"]);
+                        pedido.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
                         pedido.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
                         pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
@@ -94,7 +94,7 @@ namespace Multicarbono.Models.Pedido
 
                         pedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
                         pedido.NumPedido = Convert.ToInt32(dr["NUM_PEDIDO"]);
-                        pedido.CNPJCliente = Convert.ToString(dr["CNPJ_CLIENTE"]);
+                        pedido.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
                         pedido.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
                         pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
@@ -254,7 +254,7 @@ namespace Multicarbono.Models.Pedido
 
                         pedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
                         pedido.NumPedido = Convert.ToInt32(dr["NUM_PEDIDO"]);
-                        pedido.CNPJCliente = Convert.ToString(dr["CNPJ_CLIENTE"]);
+                        pedido.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
                         pedido.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
                         pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
                         pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
@@ -318,7 +318,7 @@ namespace Multicarbono.Models.Pedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("UPDATE PEDIDO SET CNPJ_CLIENTE = @CNPJ_CLIENTE, " +
+                var command = new MySqlCommand("UPDATE PEDIDO SET ID_CLIENTE = @ID_CLIENTE, " +
                 "DT_CARREGA = @DT_CARREGA, OBS = @OBS, TIPO_FRETE = @TIPO_FRETE, ID_TRANSPORT = @ID_TRANSPORT " +
                 "WHERE ID_PEDIDO = @ID_PEDIDO");
 
@@ -327,7 +327,7 @@ namespace Multicarbono.Models.Pedido
                 command.Connection = _dbConnection;
 
                 command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = pedido.IdPedido;
-                command.Parameters.Add("CNPJ_CLIENTE", DbType.String).Value = pedido.CNPJCliente;
+                command.Parameters.Add("ID_CLIENTE", DbType.String).Value = pedido.IdCliente;
                 command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;
                 command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
                 command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
@@ -346,8 +346,8 @@ namespace Multicarbono.Models.Pedido
             {
                 _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, CNPJ_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE, ID_TRANSPORT, VALOR_PEDIDO, VALOR_PAGAR) VALUES" +
-                "(@ID_PEDIDO, @NUM_PEDIDO, @CNPJ_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE, @ID_TRANSPORT, 0, 0)");
+                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, ID_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE, ID_TRANSPORT, VALOR_PEDIDO, VALOR_PAGAR) VALUES" +
+                "(@ID_PEDIDO, @NUM_PEDIDO, @ID_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE, @ID_TRANSPORT, 0, 0)");
 
 
                 command.CommandType = CommandType.Text;
@@ -355,7 +355,7 @@ namespace Multicarbono.Models.Pedido
 
                 command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = pedido.IdPedido;
                 command.Parameters.Add("NUM_PEDIDO", DbType.Int32).Value = pedido.NumPedido;
-                command.Parameters.Add("CNPJ_CLIENTE", DbType.String).Value = pedido.CNPJCliente;
+                command.Parameters.Add("ID_CLIENTE", DbType.String).Value = pedido.IdCliente;
                 command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = pedido.IdUsuario;
                 command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = pedido.DtEmissao;
                 command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;

@@ -15,7 +15,7 @@ namespace Multicarbono.Models.Pedido
         public int NumPedido { get; set; }
 
         [Display(Name = "Cliente")]
-        public string CNPJCliente { get; set; }
+        public int IdCliente { get; set; }
 
         [Display(Name = "Usuario")]
         public int IdUsuario { get; set; }
@@ -44,8 +44,6 @@ namespace Multicarbono.Models.Pedido
 
         [Display(Name = "Id do Transportador")]
         public int IdTransport { get; set; }
-
-        public int IdCliente { get; set; }
 
         [Display(Name = "Nota Fiscal Emitida")]
         public bool NFEmitida { get; set; }

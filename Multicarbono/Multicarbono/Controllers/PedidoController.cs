@@ -6,6 +6,7 @@ using Multicarbono.Models.Cliente;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Pedido;
 using Multicarbono.Models.Transportador;
+using Multicarbono.Models.Usuario;
 using Multicarbono.ViewModels;
 using MySqlConnector;
 using System;
@@ -23,20 +24,43 @@ namespace Multicarbono.Controllers
         private ClienteRepository _clienteRepo;
         private ItemPedidoRepository _itemPedidoRepo;
         private TransportadorRepository _transportadorRepo;
+        private UsuarioRepository _usuarioRepo;
 
-        public PedidoController(PedidoRepository pedidoRepo, ItemPedidoRepository itemPedidoRepo, ClienteRepository clienteRepo, TransportadorRepository transportadorRepo)
+        public PedidoController(
+            PedidoRepository pedidoRepo,
+            ItemPedidoRepository itemPedidoRepo,
+            ClienteRepository clienteRepo,
+            TransportadorRepository transportadorRepo,
+            UsuarioRepository usuarioRepo
+        )
         {
             _pedidoRepo = pedidoRepo;
             _itemPedidoRepo = itemPedidoRepo;
             _clienteRepo = clienteRepo;
             _transportadorRepo = transportadorRepo;
+            _usuarioRepo = usuarioRepo;
         }
 
 
-        public ActionResult Index(List<Pedido> model)
+        public ActionResult Index(List<PedidoIndexViewModel> model)
         {
+            var pedidos = _pedidoRepo.ListPedido();
+            var viewModels = new List<PedidoIndexViewModel>();
+
+            pedidos.ForEach(p =>
+            {
+                var viewModel = new PedidoIndexViewModel();
+
+                viewModel.Pedido = p;
+                viewModel.Cliente = _clienteRepo.ClienteById(p.IdCliente);
+                viewModel.Transportador = _transportadorRepo.TransportadorById(p.IdTransport);
+                viewModel.Usuario = _usuarioRepo.UsuarioById(p.IdUsuario);
+
+                viewModels.Add(viewModel);
+            });
             if (model.Count == 0)
-                model = _pedidoRepo.ListPedido();
+                model = viewModels;
+
             return PartialView("Index", model);
         }
 
@@ -49,7 +73,7 @@ namespace Multicarbono.Controllers
             {
                 vmPedido.Clientes.Add(new SelectListItem
                 {
-                    Value = c.CNPJ.ToString(),
+                    Value = c.IdCliente.ToString(),
                     Text = c.RazaoSocial
                 });
             }
