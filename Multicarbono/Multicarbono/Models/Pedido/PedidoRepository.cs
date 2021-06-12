@@ -51,7 +51,6 @@ namespace Multicarbono.Models.Pedido
                         pedido.TipoFrete = (Enum.TipoFrete)System.Enum.Parse(typeof(Enum.TipoFrete), Convert.ToString(dr["TIPO_FRETE"]), true);
                         pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
                         pedido.ValorPedido = Convert.ToDecimal(dr["VALOR_PEDIDO"]);
-                        pedido.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
                         pedido.ValorPagar = Convert.ToDecimal(dr["VALOR_PAGAR"]);
 
 
