@@ -42,24 +42,48 @@ namespace Multicarbono.Controllers
         }
 
 
-        public ActionResult Index(List<PedidoIndexViewModel> model)
+        public ActionResult Index(PedidoIndexViewModel model)
         {
-            var pedidos = _pedidoRepo.ListPedido();
-            var viewModels = new List<PedidoIndexViewModel>();
 
-            pedidos.ForEach(p =>
+            if (model.Pedidos == null && false == model.ByFilter)
             {
-                var viewModel = new PedidoIndexViewModel();
+                var pedidos = _pedidoRepo.ListPedido();
+                var viewModels = new List<PedidoViewModel>();
 
-                viewModel.Pedido = p;
-                viewModel.Cliente = _clienteRepo.ClienteById(p.IdCliente);
-                viewModel.Transportador = _transportadorRepo.TransportadorById(p.IdTransport);
-                viewModel.Usuario = _usuarioRepo.UsuarioById(p.IdUsuario);
+                pedidos.ForEach(p =>
+                {
+                    var viewModel = new PedidoViewModel
+                    {
+                        Pedido = p,
+                        Cliente = _clienteRepo.ClienteById(p.IdCliente),
+                        Transportador = _transportadorRepo.TransportadorById(p.IdTransport),
+                        Usuario = _usuarioRepo.UsuarioById(p.IdUsuario)
+                    };
 
-                viewModels.Add(viewModel);
+                    viewModels.Add(viewModel);
+                });
+
+                model.Pedidos = viewModels;
+            }
+
+            if (model.Pedidos == null) model.Pedidos = new List<PedidoViewModel>();
+
+            model.AllClientes = new List<SelectListItem>();
+
+            model.AllClientes.Add(new SelectListItem
+            {
+                Value = null,
+                Text = "Todos"
             });
-            if (model.Count == 0)
-                model = viewModels;
+
+            foreach (Cliente c in _clienteRepo.ListCliente())
+            {
+                model.AllClientes.Add(new SelectListItem
+                {
+                    Value = c.IdCliente.ToString(),
+                    Text = c.RazaoSocial
+                });
+            }
 
             return PartialView("Index", model);
         }
@@ -97,6 +121,8 @@ namespace Multicarbono.Controllers
 
             return PartialView("CadastroPedido", vmPedido);
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -137,7 +163,6 @@ namespace Multicarbono.Controllers
                 });
             }
 
-
             var model = _pedidoRepo.PedidoById(idPedido);
 
             vmPedido.Pedido = model;
@@ -176,10 +201,45 @@ namespace Multicarbono.Controllers
             }
         }
 
-        public async Task<ActionResult> PedidoByFiltro(string razaoSocial = null, DateTime? dataIni = null, DateTime? dataFim = null)
+        [HttpPost]
+        public ActionResult PedidoByFiltro(PedidoIndexViewModel viewModel)
         {
-            var model = _pedidoRepo.PedidoByFiltro(razaoSocial, dataIni, dataFim);
-            return PartialView("Index", model);
+            var pedidos = _pedidoRepo.GetPedidosByCriteria(viewModel.InicioEmissaoCriteria, viewModel.FimEmissaoCriteria, viewModel.IdCliente, viewModel.InicioCarregamentoCriteria, viewModel.FimCarregamentoCriteria);
+
+            viewModel.Pedidos = new List<PedidoViewModel>();
+
+            pedidos.ForEach(p =>
+            {
+                viewModel.Pedidos.Add(new PedidoViewModel
+                {
+                    Pedido = p,
+                    Cliente = _clienteRepo.ClienteById(p.IdCliente),
+                    Transportador = _transportadorRepo.TransportadorById(p.IdTransport),
+                    Usuario = _usuarioRepo.UsuarioById(p.IdUsuario)
+                }) ;
+                ;
+            });
+
+            viewModel.ByFilter = true;
+
+            viewModel.AllClientes = new List<SelectListItem>();
+
+            viewModel.AllClientes.Add(new SelectListItem
+            {
+                Value = null,
+                Text = "Todos"
+            });
+
+            foreach (Cliente c in _clienteRepo.ListCliente())
+            {
+                viewModel.AllClientes.Add(new SelectListItem
+                {
+                    Value = c.IdCliente.ToString(),
+                    Text = c.RazaoSocial
+                });
+            }
+
+            return PartialView("Index",viewModel);
         }
 
 

@@ -61,48 +61,45 @@ namespace Multicarbono.Models.Cliente
 
         public Cliente ClienteById(int idCliente)
         {
-            using (_dbConnection)
+            _dbConnection.Open();
+
+            var cmd = new MySqlCommand("SELECT * FROM CLIENTE WHERE ID_CLIENTE = @ID_CLIENTE ");
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = _dbConnection;
+
+            cmd.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+
+            int result = cmd.ExecuteNonQuery();
+
+            MySqlDataReader dr;
+            Cliente clienteById = new Cliente();
+
+            dr = cmd.ExecuteReader();
+
+
+            if (dr.HasRows)
             {
-                _dbConnection.Open();
-
-                var cmd = new MySqlCommand("SELECT * FROM CLIENTE WHERE ID_CLIENTE = @ID_CLIENTE ");
-
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = _dbConnection;
-
-                cmd.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
-
-                int result = cmd.ExecuteNonQuery();
-
-                MySqlDataReader dr;
-                Cliente clienteById = new Cliente();
-
-                dr = cmd.ExecuteReader();
-
-
-                if (dr.HasRows)
+                while (dr.Read())
                 {
-                    while (dr.Read())
-                    {
-                        Cliente cliente = new Cliente();
+                    Cliente cliente = new Cliente();
 
-                        cliente.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
-                        cliente.CNPJ = Convert.ToString(dr["CNPJ"]);
-                        cliente.RazaoSocial = Convert.ToString(dr["RAZAO_SOCIAL"]);
-                        cliente.NomeFantasia = Convert.ToString(dr["NOME_FANTASIA"]);
-                        cliente.IE = Convert.ToString(dr["IE"]);
-                        cliente.DtCadastro = Convert.ToDateTime(dr["DT_CADASTRO"]);
-                        cliente.Saldo = Convert.ToDecimal(dr["SALDO"]);
-                        cliente.Situacao = (Enum.SituacaoCliente)System.Enum.Parse(typeof(Enum.SituacaoCliente), Convert.ToString(dr["SITUACAO"]), true);
+                    cliente.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
+                    cliente.CNPJ = Convert.ToString(dr["CNPJ"]);
+                    cliente.RazaoSocial = Convert.ToString(dr["RAZAO_SOCIAL"]);
+                    cliente.NomeFantasia = Convert.ToString(dr["NOME_FANTASIA"]);
+                    cliente.IE = Convert.ToString(dr["IE"]);
+                    cliente.DtCadastro = Convert.ToDateTime(dr["DT_CADASTRO"]);
+                    cliente.Saldo = Convert.ToDecimal(dr["SALDO"]);
+                    cliente.Situacao = (Enum.SituacaoCliente)System.Enum.Parse(typeof(Enum.SituacaoCliente), Convert.ToString(dr["SITUACAO"]), true);
 
-                        clienteById = cliente;
-                    }
+                    clienteById = cliente;
                 }
-
-                _dbConnection.Close();
-
-                return clienteById;
             }
+
+            _dbConnection.Close();
+
+            return clienteById;
         }
 
         public void UpdateCliente(Cliente cliente)

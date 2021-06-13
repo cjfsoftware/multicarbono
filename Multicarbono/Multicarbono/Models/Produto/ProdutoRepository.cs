@@ -41,7 +41,7 @@ namespace Multicarbono.Models.Produto
                         produto.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
                         produto.CodProduto = Convert.ToInt32(dr["COD_PRODUTO"]);
                         produto.Descricao = Convert.ToString(dr["DESCRICAO"]);
-                        produto.Ativo = Convert.ToChar(dr["ATIVO"]);
+                        produto.Ativo = Convert.ToBoolean(dr["ATIVO"]);
                         produto.NCM_SH = Convert.ToInt32(dr["NCM_SH"]);
                         produto.CST = Convert.ToInt32(dr["CST"]);
                         produto.Unidade = (Enum.TipoUnidadeProduto)System.Enum.Parse(typeof(Enum.TipoUnidadeProduto), Convert.ToString(dr["UNIDADE"]), true);
@@ -89,7 +89,7 @@ namespace Multicarbono.Models.Produto
                         produto.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
                         produto.CodProduto = Convert.ToInt32(dr["COD_PRODUTO"]);
                         produto.Descricao = Convert.ToString(dr["DESCRICAO"]);
-                        produto.Ativo = Convert.ToChar(dr["ATIVO"]);
+                        produto.Ativo = Convert.ToBoolean(dr["ATIVO"]);
                         produto.NCM_SH = Convert.ToInt32(dr["NCM_SH"]);
                         produto.CST = Convert.ToInt32(dr["CST"]);
                         produto.Unidade = (Enum.TipoUnidadeProduto)System.Enum.Parse(typeof(Enum.TipoUnidadeProduto), Convert.ToString(dr["UNIDADE"]), true);
@@ -124,7 +124,7 @@ namespace Multicarbono.Models.Produto
                 command.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = produto.IdProduto;
                 command.Parameters.Add("COD_PRODUTO", DbType.Int32).Value = produto.CodProduto;
                 command.Parameters.Add("DESCRICAO", DbType.String).Value = produto.Descricao;
-                command.Parameters.Add("ATIVO", DbType.String).Value = produto.Ativo;
+                command.Parameters.Add("ATIVO", DbType.Boolean).Value = produto.Ativo;
                 command.Parameters.Add("NCM_SH", DbType.Int32).Value = produto.NCM_SH;
                 command.Parameters.Add("CST", DbType.Int32).Value = produto.CST;
                 command.Parameters.Add("UNIDADE", DbType.String).Value = produto.Unidade;

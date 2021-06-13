@@ -58,45 +58,43 @@ namespace Multicarbono.Models.Transportador
 
         public Transportador TransportadorById(int idTransportador)
         {
-            using (_dbConnection)
+            _dbConnection.Open();
+
+            var cmd = new MySqlCommand("SELECT * FROM TRANSPORTADOR WHERE ID_TRANSPORTADOR = @ID_TRANSPORTADOR");
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = _dbConnection;
+
+            cmd.Parameters.Add("ID_TRANSPORTADOR", DbType.Int32).Value = idTransportador;
+
+            int result = cmd.ExecuteNonQuery();
+
+            MySqlDataReader dr;
+            Transportador transportadorById = new Transportador();
+
+            dr = cmd.ExecuteReader();
+
+
+            if (dr.HasRows)
             {
-                _dbConnection.Open();
-
-                var cmd = new MySqlCommand("SELECT * FROM TRANSPORTADOR WHERE ID_TRANSPORTADOR = @ID_TRANSPORTADOR");
-
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = _dbConnection;
-
-                cmd.Parameters.Add("ID_TRANSPORTADOR", DbType.Int32).Value = idTransportador;
-
-                int result = cmd.ExecuteNonQuery();
-
-                MySqlDataReader dr;
-                Transportador transportadorById = new Transportador();
-
-                dr = cmd.ExecuteReader();
-
-
-                if (dr.HasRows)
+                while (dr.Read())
                 {
-                    while (dr.Read())
-                    {
-                        Transportador transportador = new Transportador();
+                    Transportador transportador = new Transportador();
 
-                        transportador.IdTransportador = Convert.ToInt32(dr["ID_TRANSPORTADOR"]);
-                        transportador.CNPJTransportador = Convert.ToString(dr["CNPJ_TRANSPORTADOR"]);
-                        transportador.RazaoSocial = Convert.ToString(dr["RAZAO_SOCIAL"]);
-                        transportador.IETransportador = Convert.ToInt32(dr["IE_TRANSPORTADOR"]);
-                        transportador.EnderecoTransp = Convert.ToString(dr["ENDERECO_TRANSP"]);
+                    transportador.IdTransportador = Convert.ToInt32(dr["ID_TRANSPORTADOR"]);
+                    transportador.CNPJTransportador = Convert.ToString(dr["CNPJ_TRANSPORTADOR"]);
+                    transportador.RazaoSocial = Convert.ToString(dr["RAZAO_SOCIAL"]);
+                    transportador.IETransportador = Convert.ToInt32(dr["IE_TRANSPORTADOR"]);
+                    transportador.EnderecoTransp = Convert.ToString(dr["ENDERECO_TRANSP"]);
 
-                        transportadorById = transportador;
-                    }
+                    transportadorById = transportador;
                 }
-
-                _dbConnection.Close();
-
-                return transportadorById;
             }
+
+            _dbConnection.Close();
+
+            return transportadorById;
+            
         }
 
 
