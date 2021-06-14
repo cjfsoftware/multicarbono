@@ -1,0 +1,17 @@
+﻿
+
+@using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, new {@id = "ModalAccessError", @onsubmit = "index()" }))
+{
+<div class="modal-dialog modal-sm" role="dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <h3>
+                Você não tem permissão para alterar este usuário
+            </h3>
+            <span>
+                <button type="submit" id="btnLoginError" style="margin-left:auto">Ok</button>
+            </span>
+        </div>
+    </div>
+</div>
+}

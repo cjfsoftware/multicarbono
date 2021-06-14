@@ -9,11 +9,11 @@
         <form asp-action="CadastroCliente">
             <div class="form-group">
                 <label asp-for="CNPJ" class="control-label"></label>
-                <input asp-for="CNPJ" class="form-control" />
+                <input asp-for="CNPJ" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label asp-for="RazaoSocial" class="control-label"></label>
-                <input asp-for="RazaoSocial" class="form-control" />
+                <input asp-for="RazaoSocial" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label asp-for="NomeFantasia" class="control-label"></label>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DtCadastro" class="control-label"></label>
-                <input asp-for="DtCadastro" class="form-control" />
+                <input asp-for="DtCadastro" class="form-control" readonly/>
             </div>
             <div class="form-group">
                 <label asp-for="Saldo" class="control-label"></label>

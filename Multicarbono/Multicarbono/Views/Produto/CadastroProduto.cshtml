@@ -9,11 +9,11 @@
         <form asp-action="CadastroProduto">
             <div class="form-group">
                 <label asp-for="CodProduto" class="control-label"></label>
-                <input asp-for="CodProduto" class="form-control" />
+                <input asp-for="CodProduto" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <input asp-for="Descricao" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label asp-for="Ativo" class="control-label"></label>
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="VrUnitario" class="control-label"></label>
-                <input asp-for="VrUnitario" class="form-control" />
+                <input asp-for="VrUnitario" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label asp-for="Ali_ICMS" class="control-label"></label>
