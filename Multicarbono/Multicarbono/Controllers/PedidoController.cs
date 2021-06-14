@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using Multicarbono.Models.Cliente;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Pedido;
+using Multicarbono.Models.Produto;
 using Multicarbono.Models.Transportador;
 using Multicarbono.Models.Usuario;
 using Multicarbono.ViewModels;
@@ -25,13 +26,15 @@ namespace Multicarbono.Controllers
         private ItemPedidoRepository _itemPedidoRepo;
         private TransportadorRepository _transportadorRepo;
         private UsuarioRepository _usuarioRepo;
+        private ProdutoRepository _produtoRepo;
 
         public PedidoController(
             PedidoRepository pedidoRepo,
             ItemPedidoRepository itemPedidoRepo,
             ClienteRepository clienteRepo,
             TransportadorRepository transportadorRepo,
-            UsuarioRepository usuarioRepo
+            UsuarioRepository usuarioRepo,
+            ProdutoRepository produtoRepo
         )
         {
             _pedidoRepo = pedidoRepo;
@@ -39,6 +42,7 @@ namespace Multicarbono.Controllers
             _clienteRepo = clienteRepo;
             _transportadorRepo = transportadorRepo;
             _usuarioRepo = usuarioRepo;
+            _produtoRepo = produtoRepo;
         }
 
 
@@ -92,6 +96,8 @@ namespace Multicarbono.Controllers
         public ActionResult CadastroPedido()
         {
             CadastroPedidoViewModel vmPedido = new CadastroPedidoViewModel();
+            ItemPedidoViewModel vmItemPedido = new ItemPedidoViewModel();
+
             vmPedido.Clientes = new List<SelectListItem>();
             foreach (Cliente c in _clienteRepo.ListCliente())
             {
@@ -111,6 +117,20 @@ namespace Multicarbono.Controllers
                     Text = t.RazaoSocial
                 });
             }
+
+            var listProduto = new List<Produto>();
+            listProduto = _produtoRepo.ListProduto();
+            //foreach (Produto p in _produtoRepo.ListProduto())
+            //{
+            //    listProduto.Add(new SelectListItem
+            //    {
+            //        Value = p.IdProduto.ToString(),
+            //        Text = p.Descricao
+            //    });
+            //}
+
+            TempData["produtoItemPedido"] = Newtonsoft.Json.JsonConvert.SerializeObject(listProduto);
+            TempData.Keep("produtoItemPedido");
 
             vmPedido.Usuario = new Configuration.SessionUser();
 

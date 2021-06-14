@@ -1,5 +1,6 @@
 ﻿@model Multicarbono.Models.Cliente.Cliente
 
+@Html.Partial("_Menu")
 
 <h5 style="margin-left:1%">Detalhes do cliente</h5>
 
@@ -35,32 +36,36 @@
     <tbody>
         @*@foreach (var item in Model)*@
         @*{*@
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.IdCliente)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.CNPJ)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.RazaoSocial)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.NomeFantasia)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.IE)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.DtCadastro)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Saldo)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Situacao)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.IdCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CNPJ)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.RazaoSocial)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NomeFantasia)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.IE)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DtCadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Saldo)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Situacao)
+            </td>
+            <td>
+                <a asp-action="CadastroEndereco" asp-controller="EnderecoCliente" asp-route-idCliente="@Model.IdCliente">Inserir Endereco</a>
+                <a asp-action="CadastroTelefone" asp-controller="Telefone" asp-route-idCliente="@Model.IdCliente">Inserir Telefone</a>
+            </td>
+        </tr>
         @*}*@
     </tbody>
 </table>

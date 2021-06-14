@@ -8,52 +8,52 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <a class="navbar-nav ml-auto" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Content/logo.png" style="max-height:40px; max-width:100px" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    @*<header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                    <a class="navbar-nav ml-auto" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Content/logo.png" style="max-height:40px; max-width:100px" /></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="navbar-collapse flex-sm-row-reverse">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-xl-4">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
-                        </li>
-                        <li class="nav-item px-xl-4">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="NotaFiscal" asp-action="Index">Nota Fiscal</a>
-                        </li>
-                        <li class="nav-item px-xl-4">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Index">Produto</a>
-                        </li>
-                        <li class="nav-item px-xl-4">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
-                        </li>
-                        <li class="nav-item px-xl-4">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Transportador" asp-action="Index">Transportador</a>
-                        </li>
-                        <li class="nav-item px-xl-4">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuário</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                <div class="navbar-nav mr-auto>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Sair</a>
-                    </li>
-                </div>
-        </nav>       
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-            <body style="background-image:url('@Url.Content(" /Content/home.png")'); background-size:cover">
-            </body>
-        </main>
-    </div>
+                    <div class="navbar-collapse flex-sm-row-reverse">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item px-xl-4">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
+                            </li>
+                            <li class="nav-item px-xl-4">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="NotaFiscal" asp-action="Index">Nota Fiscal</a>
+                            </li>
+                            <li class="nav-item px-xl-4">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Index">Produto</a>
+                            </li>
+                            <li class="nav-item px-xl-4">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                            </li>
+                            <li class="nav-item px-xl-4">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Transportador" asp-action="Index">Transportador</a>
+                            </li>
+                            <li class="nav-item px-xl-4">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuário</a>
+                            </li>
 
+                        </ul>
+                    </div>
+                    <div class="navbar-nav mr-auto>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Sair</a>
+                        </li>
+                    </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+
+                <body style="background-image:url('@Url.Content(" /Content/home.png")'); background-size:cover">
+                </body>
+            </main>
+        </div>*@
+    @RenderBody()
     <footer class="border-top footer text-muted">
         <div class="container">
             @*&copy; 2021 - Multicarbono - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@

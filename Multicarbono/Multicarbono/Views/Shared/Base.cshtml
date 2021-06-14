@@ -3,8 +3,9 @@
 *@
 @{
     ViewData["Title"] = "Menu";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h6 class="display-4">Sistema de Vendas - Multicarbono</h6>
-</div>
+@Html.Partial("_Menu")
+<body style="background-image:url('@Url.Content(" /Content/home.png")'); background-size:cover"></body>
+

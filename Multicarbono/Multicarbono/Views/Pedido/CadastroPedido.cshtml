@@ -17,10 +17,10 @@
                 <select asp-for="Pedido.IdCliente" asp-items="@Model.Clientes" class="form-control"></select>
             </div>
             <div class="form-group">
-                <input asp-for="Pedido.IdUsuario" class="form-control"  value="@Model.Usuario.IdUsuario" hidden/>
+                <input asp-for="Pedido.IdUsuario" class="form-control" value="@Model.Usuario.IdUsuario" hidden />
             </div>
             <div class="form-group">
-                <input asp-for="Pedido.DtEmissao" class="form-control" type="datetime" value="@Model.DtEmissao" hidden/>
+                <input asp-for="Pedido.DtEmissao" class="form-control" type="datetime" value="@Model.DtEmissao" hidden />
             </div>
             <div class="form-group">
                 <label asp-for="Pedido.DtCarregamento" class="control-label"></label>
@@ -45,3 +45,4 @@
     </div>
 </div>
 
+@Html.Partial("/Views/Pedido/_cadastroItemPedidoPartialPedido.cshtml", Model.ItemPedido)
