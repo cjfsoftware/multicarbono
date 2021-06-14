@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.Enum;
 using Multicarbono.Models.Usuario;
 using System;
 using System.Collections.Generic;
@@ -52,8 +53,16 @@ namespace Multicarbono.Controllers
         public ActionResult Edit(int idUsuario)
         {
 
-            var model = _usuarioRepo.UsuarioById(idUsuario);
-            return PartialView("AlterarUsuario", model);
+            var currentUserId = HttpContext.Session.GetString("user_id");
+            var currentUserGrantType = HttpContext.Session.GetString("access_grant_type");
+
+            if (int.Parse(currentUserId.ToString()) == idUsuario || NivelAcesso.ADMINISTRADOR.ToString() == currentUserGrantType.ToString())
+            {
+                var model = _usuarioRepo.UsuarioById(idUsuario);
+                return PartialView("AlterarUsuario", model);
+            }
+            else
+                return PartialView("ModalAccessError");
         }
 
         // POST: UsuarioController/Edit/5

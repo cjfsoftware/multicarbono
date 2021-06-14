@@ -1,32 +1,45 @@
-﻿@model IEnumerable<Multicarbono.ViewModels.PedidoIndexViewModel>
+﻿@model Multicarbono.ViewModels.PedidoIndexViewModel
 
 @Html.Partial("_Menu")
 
 <h5 style="margin-left:1%">Pedido</h5>
 
-<form asp-action="PedidoByFiltro" style="margin-left:2%">
-    <div class="form-row" asp-action="PedidoByFiltro">
-        <div class="form-group col-md-3">
-            <label for="dataIni" style="font-size:10px;">Data Inicial</label>
+<form method="post" asp-action="PedidoByFiltro" style="margin-left:2%">
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="dataIni" style="font-size:10px;">Inicio Emissao</label>
             <div>
-                <input type="date" name="dataIni" class="form-control" style="font-size:10px" />
+                <input asp-for="InicioEmissaoCriteria" class="form-control" style="font-size:10px" />
             </div>
         </div>
-        <div class="form-group col-md-3">
-            <label for="dataFim" style="font-size:10px;">Data Final</label>
+        <div class="form-group col-md-2">
+            <label for="dataFim" style="font-size:10px;">Fim Emissao</label>
             <div>
-                <input type="date" name="dataFim" class="form-control" style="font-size:10px" />
+                <input asp-for="FimEmissaoCriteria" class="form-control" style="font-size:10px" />
             </div>
         </div>
         <div class="form-group col-md-3">
             <label for="razaoSocial" style="font-size:10px;">Cliente</label>
             <div>
-                <input type="text" name="razaoSocial" class="form-control" style="font-size:10px" />
+                <select asp-for="IdCliente" asp-items="@Model.AllClientes" class="form-control" style="font-size:10px"></select>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="dataFim" style="font-size:10px;">Inicio Carregamento</label>
+            <div>
+                <input asp-for="InicioCarregamentoCriteria" class="form-control" style="font-size:10px" />
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="dataFim" style="font-size:10px;">Fim Carregamento</label>
+            <div>
+                <input asp-for="FimCarregamentoCriteria" class="form-control" style="font-size:10px" />
             </div>
         </div>
         <div class="form-group">
-            <div><br/>
-                <button type="submit" class="btn btn-primary" style="font-size:10px">Pesquisar</button>
+            <div>
+                <br />
+                <input type="submit" value="Pesquisar" class="btn btn-primary" style="font-size:10px" />
             </div>
         </div>
     </div>
@@ -36,7 +49,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido.NumPedido)
+                Número do pedido
             </th>
             <th>
                 Cliente
@@ -45,22 +58,22 @@
                 Usuário
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido.DtEmissao)
+                Data de Emissão
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido.DtCarregamento)
+                Data de Carregamento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido.Obs)
+                Observação
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido.TipoFrete)
+                Tipo de Frete
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido.ValorPedido)
+                Valor do Pedido
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido.ValorPagar)
+                Valor à Pagar
             </th>
             <th>
                 Transportador
@@ -68,7 +81,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Pedidos)
         {
         <tr>
             <td>

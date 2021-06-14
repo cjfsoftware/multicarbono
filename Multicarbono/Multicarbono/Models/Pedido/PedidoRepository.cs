@@ -411,5 +411,65 @@ namespace Multicarbono.Models.Pedido
 
             return nextNumPedido;
         }
+
+        public List<Pedido> GetPedidosByCriteria(DateTime? inicioEmissao, DateTime? fimEmissao, int? idCliente, DateTime? inicioCarrega, DateTime? fimCarrega)
+        {
+          
+            _dbConnection.Open();
+
+            var command = new MySqlCommand("SELECT * FROM PEDIDO " +
+                "WHERE (@ID_CLIENTE IS NULL OR ID_CLIENTE = @ID_CLIENTE) " +
+                "AND ((@INICIO_EMISSAO IS NULL AND @FIM_EMISSAO IS NULL) " +
+                  "OR (@INICIO_EMISSAO IS NULL AND @FIM_EMISSAO > DT_EMISSAO) " +
+                  "OR (@INICIO_EMISSAO < DT_EMISSAO AND @FIM_EMISSAO IS NULL) " +
+                  "OR (DT_EMISSAO BETWEEN @INICIO_EMISSAO AND @FIM_EMISSAO)) " +
+                "AND ((@INICIO_CARREGA IS NULL AND @FIM_CARREGA IS NULL) " +
+                  "OR (@INICIO_CARREGA IS NULL AND @FIM_CARREGA > DT_CARREGA) " +
+                  "OR (@INICIO_CARREGA < DT_CARREGA AND @FIM_CARREGA IS NULL) " +
+                  "OR (DT_CARREGA BETWEEN @INICIO_CARREGA AND @FIM_CARREGA))");
+
+            command.CommandType = CommandType.Text;
+            command.Connection = _dbConnection;
+
+            command.Parameters.Add("ID_CLIENTE", DbType.Int32).Value = idCliente;
+            command.Parameters.Add("INICIO_EMISSAO", DbType.DateTime).Value = inicioEmissao;
+            command.Parameters.Add("FIM_EMISSAO", DbType.DateTime).Value = fimEmissao;
+            command.Parameters.Add("INICIO_CARREGA", DbType.DateTime).Value = inicioCarrega;
+            command.Parameters.Add("FIM_CARREGA", DbType.DateTime).Value = fimCarrega;
+
+            MySqlDataReader dr;
+
+            dr = command.ExecuteReader();
+
+            List<Pedido> pedidosByCriteria = new List<Pedido>();
+
+            if (dr.HasRows)
+            {
+
+                while (dr.Read())
+                {
+                    Pedido pedido = new Pedido();
+
+                    pedido.IdPedido = Convert.ToInt32(dr["ID_PEDIDO"]);
+                    pedido.NumPedido = Convert.ToInt32(dr["NUM_PEDIDO"]);
+                    pedido.IdCliente = Convert.ToInt32(dr["ID_CLIENTE"]);
+                    pedido.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
+                    pedido.DtEmissao = Convert.ToDateTime(dr["DT_EMISSAO"]);
+                    pedido.DtCarregamento = Convert.ToDateTime(dr["DT_CARREGA"]);
+                    pedido.Obs = Convert.ToString(dr["OBS"]);
+                    pedido.TipoFrete = (Enum.TipoFrete)System.Enum.Parse(typeof(Enum.TipoFrete), Convert.ToString(dr["TIPO_FRETE"]), true);
+                    pedido.IdTransport = Convert.ToInt32(dr["ID_TRANSPORT"]);
+                    pedido.ValorPedido = Convert.ToDecimal(dr["VALOR_PEDIDO"]);
+                    pedido.ValorPagar = Convert.ToDecimal(dr["VALOR_PAGAR"]);
+                    pedido.NFEmitida = Convert.ToBoolean(dr["NF_EMITIDA"]);
+
+                    pedidosByCriteria.Add(pedido);
+                }
+            }
+
+            _dbConnection.Close();
+
+            return pedidosByCriteria;
+        }
     }
 }

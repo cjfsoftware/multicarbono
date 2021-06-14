@@ -18,7 +18,7 @@ namespace Multicarbono.Models.Produto
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
-        public char Ativo { get; set; }
+        public bool Ativo { get; set; }
 
         [Display(Name = "NCM SH")]
         public int NCM_SH { get; set; }

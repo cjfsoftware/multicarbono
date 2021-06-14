@@ -1,7 +1,5 @@
-﻿using Multicarbono.Models.Cliente;
-using Multicarbono.Models.Pedido;
-using Multicarbono.Models.Transportador;
-using Multicarbono.Models.Usuario;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Multicarbono.Models.Cliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +9,15 @@ namespace Multicarbono.ViewModels
 {
     public class PedidoIndexViewModel
     {
-        public Pedido Pedido { get; set; }
-        public Cliente Cliente { get; set; }
-        public Transportador Transportador { get; set; }
-        public Usuario Usuario { get; set; }
+        public List<PedidoViewModel> Pedidos { get; set; }
+        public List<SelectListItem> AllClientes { get; set; }
+
+        public int? IdCliente { get; set; } = null;
+        public DateTime? InicioEmissaoCriteria { get; set; } = null;
+        public DateTime? FimEmissaoCriteria { get; set; } = null;
+        public DateTime? InicioCarregamentoCriteria { get; set; } = null;
+        public DateTime? FimCarregamentoCriteria { get; set; } = null;
+
+        public bool ByFilter { get; set; }
     }
 }

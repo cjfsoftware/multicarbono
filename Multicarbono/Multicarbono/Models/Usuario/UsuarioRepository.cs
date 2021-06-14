@@ -152,51 +152,49 @@ namespace Multicarbono.Models.Usuario
 
         public Usuario UsuarioById(int idUsuario)
         {
-            using (_dbConnection)
+            _dbConnection.Open();
+
+            var cmd = new MySqlCommand("SELECT * FROM USUARIO WHERE ID_USUARIO = @ID_USUARIO ");
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = _dbConnection;
+
+            cmd.Parameters.Add("ID_USUARIO", DbType.Int32).Value = idUsuario;
+
+            int result = cmd.ExecuteNonQuery();
+
+            MySqlDataReader dr;
+            Usuario usuarioById = new Usuario();
+
+            dr = cmd.ExecuteReader();
+
+
+            if (dr.HasRows)
             {
-                _dbConnection.Open();
-
-                var cmd = new MySqlCommand("SELECT * FROM USUARIO WHERE ID_USUARIO = @ID_USUARIO ");
-
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = _dbConnection;
-
-                cmd.Parameters.Add("ID_USUARIO", DbType.Int32).Value = idUsuario;
-
-                int result = cmd.ExecuteNonQuery();
-
-                MySqlDataReader dr;
-                Usuario usuarioById = new Usuario();
-
-                dr = cmd.ExecuteReader();
-
-
-                if (dr.HasRows)
+                while (dr.Read())
                 {
-                    while (dr.Read())
-                    {
-                        Usuario user = new Usuario();
+                    Usuario user = new Usuario();
 
-                        user.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
-                        user.Login = Convert.ToString(dr["LOGIN"]);
-                        user.Nome = Convert.ToString(dr["NOME"]);
-                        user.DtNascimento = Convert.ToDateTime(dr["DT_NASCIMENTO"]);
-                        user.Cargo = Convert.ToString(dr["CARGO"]);
-                        user.Email = Convert.ToString(dr["EMAIL"]);
-                        user.Ativo = Convert.ToBoolean(dr["STATUS"]);
-                        user.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
-                        user.NivelAcesso = (Enum.NivelAcesso)System.Enum.Parse(typeof(Enum.NivelAcesso), Convert.ToString(dr["NIVEL_ACESSO"]), true);
-                        user.Senha = Convert.ToString(dr["SENHA"]);
-                        user.Endereco = Convert.ToString(dr["ENDERECO"]);
+                    user.IdUsuario = Convert.ToInt32(dr["ID_USUARIO"]);
+                    user.Login = Convert.ToString(dr["LOGIN"]);
+                    user.Nome = Convert.ToString(dr["NOME"]);
+                    user.DtNascimento = Convert.ToDateTime(dr["DT_NASCIMENTO"]);
+                    user.Cargo = Convert.ToString(dr["CARGO"]);
+                    user.Email = Convert.ToString(dr["EMAIL"]);
+                    user.Ativo = Convert.ToBoolean(dr["STATUS"]);
+                    user.DtCriacao = Convert.ToDateTime(dr["DT_CRIACAO"]);
+                    user.NivelAcesso = (Enum.NivelAcesso)System.Enum.Parse(typeof(Enum.NivelAcesso), Convert.ToString(dr["NIVEL_ACESSO"]), true);
+                    user.Senha = Convert.ToString(dr["SENHA"]);
+                    user.Endereco = Convert.ToString(dr["ENDERECO"]);
 
-                        usuarioById = user;
-                    }
+                    usuarioById = user;
                 }
-
-                _dbConnection.Close();
-
-                return usuarioById;
             }
+
+            _dbConnection.Close();
+
+            return usuarioById;
+            
         }
 
         public Usuario UsuarioByLogin(string login)

@@ -8,6 +8,7 @@ namespace Multicarbono.Models.Enum
     public enum NivelAcesso
     {
         GERENCIA,
-        ANALISTA
+        ANALISTA,
+        ADMINISTRADOR
     }
 }

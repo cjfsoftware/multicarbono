@@ -34,6 +34,7 @@ namespace Multicarbono.Models.Usuario
         [Display(Name = "Nível de Acesso")]
         public NivelAcesso NivelAcesso { get; set; }
 
+        [DataType(DataType.Password)]
         public string Senha { get; set; }
     }
 }
