@@ -118,16 +118,16 @@ namespace Multicarbono.Controllers
                 });
             }
 
-            var listProduto = new List<Produto>();
-            listProduto = _produtoRepo.ListProduto();
-            //foreach (Produto p in _produtoRepo.ListProduto())
-            //{
-            //    listProduto.Add(new SelectListItem
-            //    {
-            //        Value = p.IdProduto.ToString(),
-            //        Text = p.Descricao
-            //    });
-            //}
+            var listProduto = new List<SelectListItem>();
+            //listProduto = _produtoRepo.ListProduto();
+            foreach (Produto p in _produtoRepo.ListProduto())
+            {
+                listProduto.Add(new SelectListItem
+                {
+                    Value = p.IdProduto.ToString(),
+                    Text = p.Descricao
+                });
+            }
 
             TempData["produtoItemPedido"] = Newtonsoft.Json.JsonConvert.SerializeObject(listProduto);
             TempData.Keep("produtoItemPedido");

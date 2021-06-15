@@ -1,22 +1,25 @@
-﻿@model Multicarbono.ViewModels.ItemPedidoViewModel
+﻿@model Multicarbono.ViewModels.CadastroPedidoViewModel
 
 
 @{ 
-    List<Multicarbono.Models.Produto.Produto> produtoItemPedido = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Multicarbono.Models.Produto.Produto>>(TempData["produtoItemPedido"].ToString());
+    List<SelectListItem> produtoItemPedido = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SelectListItem>>(TempData["produtoItemPedido"].ToString());
 
 }
 
-<hr />
-<h6 style="margin-left:10%">Inserir item</h6>
-<br />
-<br />
-<div class="row" style="margin-left:10%">
+
+@*<h6 style="margin-left:10%">Inserir item</h6>*@
+
+<div class="row">
     <div class="col-md-4">
-        <form asp-action="CadastroItemPedido">
+        <form asp-action="CadastroItemPedidoPedido" asp-controller="ItemPedido">
             @*<div class="form-group">
-                <label asp-for="ItemPedido.IdProduto" class="control-label"></label>
-                <select asp-for="ItemPedido.IdProduto" asp-itens="@produtoItemPedido.ToList()"  class="form-control" />
+                <label asp-for="ItemPedido.IdPedido" class="control-label"></label>
+                <input asp-for="ItemPedido.IdPedido" class="form-control" value="@Model.Pedido.IdPedido" readonly="readonly" />
             </div>*@
+            <div class="form-group">
+                <label asp-for="ItemPedido.IdProduto" class="control-label"></label>
+                <select asp-for="ItemPedido.IdProduto" asp-items="@produtoItemPedido" class="form-control"></select>
+            </div>
             <div class="form-group">
                 <label asp-for="ItemPedido.CFOP" class="control-label"></label>
                 <input asp-for="ItemPedido.CFOP" class="form-control" />
@@ -26,7 +29,7 @@
                 <input asp-for="ItemPedido.QTDE" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-info" />
+                <input type="submit" value="Salvar Pedido" class="btn btn-info"/>
             </div>
         </form>
     </div>

@@ -45,6 +45,16 @@ namespace Multicarbono.Controllers
             return RedirectToAction("Index", new { idPedido = itemPedido.IdPedido });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CadastroItemPedidoPedido(ItemPedido itemPedido)
+        {
+            decimal valProduto = _produtoRepo.ProdutoById(itemPedido.IdProduto).VrUnitario;
+            _itemPedidoRepo.IncludeItemPedido(itemPedido, valProduto);
+            return RedirectToAction("CadastroPedido", "Pedido", new { idPedido = itemPedido.IdPedido });
+        }
+
+
         public ActionResult Edit(int idItemPedido)
         {
             var model = _itemPedidoRepo.ItemPedidoById(idItemPedido);
