@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.Pedido;
 using Multicarbono.Models.Produto;
+using Multicarbono.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +35,19 @@ namespace Multicarbono.Controllers
         {
             ViewData["idPedido"] = idPedido;
 
-            return PartialView("~/Views/Pedido/_cadastroItemPedidoPartial.cshtml");
+            ItemPedidoViewModel vmItemPedido = new ItemPedidoViewModel();
+
+            vmItemPedido.Produto = new List<SelectListItem>();
+            foreach (Produto p in _produtoRepo.ListProduto())
+            {
+                vmItemPedido.Produto.Add(new SelectListItem
+                {
+                    Value = p.IdProduto.ToString(),
+                    Text = p.Descricao
+                });
+            }
+
+            return PartialView("~/Views/Pedido/_cadastroItemPedidoPartial.cshtml", vmItemPedido);
         }
 
         [HttpPost]

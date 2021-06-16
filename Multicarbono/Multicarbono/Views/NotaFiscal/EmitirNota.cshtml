@@ -1,11 +1,9 @@
 ﻿@model Multicarbono.Models.NotaFiscal.NotaFiscal
 @Html.Partial("_Menu")
 
+<h6 style="margin-left:2%">Emissão de Nota Fiscal</h6>
 
-@Html.Partial("/Views/NotaFiscal/_cadastroItemNotaPartial.cshtml", Model)
-
-
-<br /><br />
+<br />
 
 <form asp-action="CadastroNotaFiscal" style="margin-left:2%">
     <div class="form-row" asp-action="PedidoByFiltro">
@@ -53,6 +51,7 @@
             <label asp-for="ValorNota" class="control-label"></label>
             <input asp-for="ValorNota" class="form-control" />
         </div>
+        @Html.Partial("/Views/NotaFiscal/_cadastroItemNotaPartial.cshtml", Model)
         <div class="form-group">
             <div>
                 <br />
@@ -61,3 +60,4 @@
         </div>
     </div>
 </form>
+
