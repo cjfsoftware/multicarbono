@@ -17,6 +17,8 @@ namespace Multicarbono.Configuration
 
         public string Encrypt(string clearText)
         {
+            if (clearText == null) clearText = "";
+
             string securityKey = this.configuration.GetValue<String>("EncriptKey");
 
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);

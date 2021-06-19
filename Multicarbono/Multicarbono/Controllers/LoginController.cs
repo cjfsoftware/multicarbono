@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Exceptions;
 using Multicarbono.Models.Login;
 using Multicarbono.Models.Usuario;
 using System;
@@ -100,17 +101,24 @@ namespace Multicarbono.Controllers
         public ActionResult DoLogin(LoginViewModel loginModel)
         {
             string login = _login.ValidarLogin(loginModel.User, loginModel.Password);
-            Usuario usuario = _usuarioRepository.UsuarioByLogin(loginModel.User);
-
-            if (login == "OK")
+            try
             {
-                HttpContext.Session.SetString("user_id", usuario.IdUsuario.ToString());
-                HttpContext.Session.SetString("access_grant_type", usuario.NivelAcesso.ToString());
+                Usuario usuario = _usuarioRepository.UsuarioByLogin(loginModel.User);
 
-                return View("Base");
+                if (login == "OK")
+                {
+                    HttpContext.Session.SetString("user_id", usuario.IdUsuario.ToString());
+                    HttpContext.Session.SetString("access_grant_type", usuario.NivelAcesso.ToString());
+
+                    return View("Base");
+                }
+                else
+                    return PartialView("ModalLoginError");
             }
-            else
+            catch (ResourceNotFoundException)
+            {
                 return PartialView("ModalLoginError");
+            }
         }
     }
 }
