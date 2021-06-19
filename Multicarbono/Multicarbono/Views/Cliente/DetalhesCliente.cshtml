@@ -1,4 +1,4 @@
-﻿@model Multicarbono.Models.Cliente.Cliente
+﻿@model Multicarbono.ViewModels.DetalhesClienteViewModel
 
 @Html.Partial("_Menu")
 
@@ -8,68 +8,127 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdCliente)
+                @Html.DisplayNameFor(model => model.Cliente.IdCliente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CNPJ)
+                @Html.DisplayNameFor(model => model.Cliente.CNPJ)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RazaoSocial)
+                @Html.DisplayNameFor(model => model.Cliente.RazaoSocial)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomeFantasia)
+                @Html.DisplayNameFor(model => model.Cliente.NomeFantasia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IE)
+                @Html.DisplayNameFor(model => model.Cliente.IE)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DtCadastro)
+                @Html.DisplayNameFor(model => model.Cliente.DtCadastro)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Saldo)
+                @Html.DisplayNameFor(model => model.Cliente.Saldo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Situacao)
+                @Html.DisplayNameFor(model => model.Cliente.Situacao)
             </th>
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model)*@
-        @*{*@
         <tr>
             <td>
-                @Html.DisplayFor(model => model.IdCliente)
+                @Html.DisplayFor(model => model.Cliente.IdCliente)
             </td>
             <td>
-                @Html.DisplayFor(model => model.CNPJ)
+                @Html.DisplayFor(model => model.Cliente.CNPJ)
             </td>
             <td>
-                @Html.DisplayFor(model => model.RazaoSocial)
+                @Html.DisplayFor(model => model.Cliente.RazaoSocial)
             </td>
             <td>
-                @Html.DisplayFor(model => model.NomeFantasia)
+                @Html.DisplayFor(model => model.Cliente.NomeFantasia)
             </td>
             <td>
-                @Html.DisplayFor(model => model.IE)
+                @Html.DisplayFor(model => model.Cliente.IE)
             </td>
             <td>
-                @Html.DisplayFor(model => model.DtCadastro)
+                @Html.DisplayFor(model => model.Cliente.DtCadastro)
             </td>
             <td>
-                @Html.DisplayFor(model => model.Saldo)
+                @Html.DisplayFor(model => model.Cliente.Saldo)
             </td>
             <td>
-                @Html.DisplayFor(model => model.Situacao)
+                @Html.DisplayFor(model => model.Cliente.Situacao)
             </td>
             <td>
-                <a asp-action="CadastroEndereco" asp-controller="EnderecoCliente" asp-route-idCliente="@Model.IdCliente">Inserir Endereco</a>
-                <a asp-action="CadastroTelefone" asp-controller="Telefone" asp-route-idCliente="@Model.IdCliente">Inserir Telefone</a>
+                <a asp-action="CadastroEndereco" asp-controller="EnderecoCliente" asp-route-idCliente="@Model.Cliente.IdCliente">Inserir Endereco</a>
+                <a asp-action="CadastroTelefone" asp-controller="Telefone" asp-route-idCliente="@Model.Cliente.IdCliente">Inserir Telefone</a>
             </td>
         </tr>
         @*}*@
     </tbody>
 </table>
 
-@Html.Partial("/Views/Telefone/_telefonePartial.cshtml")
+<br />
+<h6 style="margin-left:2%">Telefones</h6>
 
-@Html.Partial("/Views/EnderecoCliente/_enderecoPartial.cshtml")
+<table class="table table-striped table-hover" style="margin-left:1%; margin-right:1%" width="45%">
+    <thead>
+        <tr>
+            <th>
+                Contato
+            </th>
+            <th>
+                Número de Telefone
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Telefones)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumTelefone)
+            </td>
+        </tr>
+         }
+    </tbody>
+</table>
+
+    <br />
+    <h6 style="margin-left:2%">Endereços</h6>
+
+
+<table class="table table-striped table-hover" style="margin-left:1%; margin-right:1%" width="45%">
+    <thead>
+        <tr>
+            <th>
+                Endereco
+            </th>
+            <th>
+                CEP
+            </th>
+            <th>
+                TipoEndereco
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Enderecos)
+        {
+        <tr>
+            <td>
+                @item.Endereco
+            </td>
+            <td>
+                @item.CEP
+            </td>
+            <td>
+                @item.TipoEndereco
+            </td>
+        </tr>
+        }
+    </tbody>
+ </table>

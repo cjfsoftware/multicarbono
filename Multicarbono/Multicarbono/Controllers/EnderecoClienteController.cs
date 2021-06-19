@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Multicarbono.Models.Cliente;
 using Multicarbono.Models.EnderecoCliente;
 using Multicarbono.Models.Telefone;
+using Multicarbono.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,12 @@ namespace Multicarbono.Controllers
     public class EnderecoClienteController : Controller
     {
         private EnderecoClienteRepository _enderecoClienteRepo;
+        private Models.Cliente.ClienteRepository _clienteRepo;
 
-        public EnderecoClienteController(EnderecoClienteRepository enderecoClienteRepo)
+        public EnderecoClienteController(EnderecoClienteRepository enderecoClienteRepo, ClienteRepository clienteRepository)
         {
             _enderecoClienteRepo = enderecoClienteRepo;
+            _clienteRepo = clienteRepository;
         }
 
 
@@ -25,17 +29,23 @@ namespace Multicarbono.Controllers
             return PartialView("Index", model);
         }
 
-        public ActionResult CadastroEndereco()
+        public ActionResult CadastroEndereco(int idCliente, CadastroEnderecoViewModel viewModel)
         {
-            return PartialView("CadastroEndereco");
+
+            viewModel.Cliente = _clienteRepo.ClienteById(idCliente);
+
+            return PartialView("CadastroEndereco", viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastroEndereco(int idEnderecoCliente, EnderecoCliente enderecoCliente)
+        public ActionResult CadastroEndereco(CadastroEnderecoViewModel viewModel)
         {
-            _enderecoClienteRepo.IncludeEndereco(enderecoCliente);
-            return RedirectToAction("Index");
+
+            viewModel.Endereco.IdCliente = viewModel.Cliente.IdCliente;
+
+            _enderecoClienteRepo.IncludeEndereco(viewModel.Endereco);
+            return RedirectToAction("Details", "Cliente", new { idCliente = viewModel.Cliente.IdCliente });
         }
 
 

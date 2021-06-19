@@ -55,34 +55,30 @@ namespace Multicarbono.Models.Usuario
         public void UpdateUsuario(Usuario usuario)
         {
             var encryptedPassword = _security.Encrypt(usuario.Senha);
+            
+            _dbConnection.Open();
 
-            using (_dbConnection)
-            {
-                _dbConnection.Open();
-
-                var command = new MySqlCommand("UPDATE USUARIO SET NOME = @NOME, DT_NASCIMENTO = @DT_NASCIMENTO, CARGO = @CARGO, ENDERECO = @ENDERECO, LOGIN = @LOGIN, " +
-                "EMAIL = @EMAIL, STATUS = @STATUS, DT_CRIACAO = @DT_CRIACAO, NIVEL_ACESSO = @NIVEL_ACESSO, SENHA = @SENHA WHERE ID_USUARIO = @ID_USUARIO");
+            var command = new MySqlCommand("UPDATE USUARIO SET NOME = @NOME, DT_NASCIMENTO = @DT_NASCIMENTO, CARGO = @CARGO, ENDERECO = @ENDERECO, LOGIN = @LOGIN, " +
+            "EMAIL = @EMAIL, STATUS = @STATUS, NIVEL_ACESSO = @NIVEL_ACESSO, SENHA = @SENHA WHERE ID_USUARIO = @ID_USUARIO");
 
 
-                command.CommandType = CommandType.Text;
-                command.Connection = _dbConnection;
+            command.CommandType = CommandType.Text;
+            command.Connection = _dbConnection;
 
-                command.Parameters.Add("NOME", DbType.String).Value = usuario.Nome;
-                command.Parameters.Add("DT_NASCIMENTO", DbType.DateTime).Value = usuario.DtNascimento;
-                command.Parameters.Add("CARGO", DbType.String).Value = usuario.Cargo;
-                command.Parameters.Add("ENDERECO", DbType.String).Value = usuario.Endereco;
-                command.Parameters.Add("LOGIN", DbType.String).Value = usuario.Login;
-                command.Parameters.Add("EMAIL", DbType.String).Value = usuario.Email;
-                command.Parameters.Add("STATUS", DbType.Boolean).Value = usuario.Ativo;
-                command.Parameters.Add("DT_CRIACAO", DbType.DateTime).Value = usuario.DtCriacao;
-                command.Parameters.Add("NIVEL_ACESSO", DbType.String).Value = usuario.NivelAcesso;
-                command.Parameters.Add("SENHA", DbType.String).Value = encryptedPassword;
-                command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = usuario.IdUsuario;
+            command.Parameters.Add("NOME", DbType.String).Value = usuario.Nome;
+            command.Parameters.Add("DT_NASCIMENTO", DbType.DateTime).Value = usuario.DtNascimento;
+            command.Parameters.Add("CARGO", DbType.String).Value = usuario.Cargo;
+            command.Parameters.Add("ENDERECO", DbType.String).Value = usuario.Endereco;
+            command.Parameters.Add("LOGIN", DbType.String).Value = usuario.Login;
+            command.Parameters.Add("EMAIL", DbType.String).Value = usuario.Email;
+            command.Parameters.Add("STATUS", DbType.Boolean).Value = usuario.Ativo;
+            command.Parameters.Add("NIVEL_ACESSO", DbType.String).Value = usuario.NivelAcesso;
+            command.Parameters.Add("SENHA", DbType.String).Value = encryptedPassword;
+            command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = usuario.IdUsuario;
 
-                int result = command.ExecuteNonQuery();
+            int result = command.ExecuteNonQuery();
 
-                _dbConnection.Close();
-            }
+            _dbConnection.Close();
         }
 
         public void DeleteUsuario(int idUsuario)

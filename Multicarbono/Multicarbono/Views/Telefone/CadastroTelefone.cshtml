@@ -1,4 +1,4 @@
-﻿@model Multicarbono.Models.Telefone.Telefone
+﻿@model Multicarbono.ViewModels.CadastroTelefoneViewModel
 
 @Html.Partial("_Menu")
 
@@ -8,16 +8,17 @@
     <div class="col-md-4">
         <form asp-action="CadastroTelefone">
             <div class="form-group">
-                <label asp-for="IdCliente" class="control-label"></label>
-                <input asp-for="IdCliente" class="form-control" />
+                <label class="control-label">Cliente</label>
+                <input asp-for="Cliente.RazaoSocial" class="form-control" readonly/>
+                <input asp-for="Cliente.IdCliente" class="form-control" readonly hidden/>
             </div>
             <div class="form-group">
-                <label asp-for="NumTelefone" class="control-label"></label>
-                <input asp-for="NumTelefone" class="form-control" />
+                <label asp-for="Telefone.NumTelefone" class="control-label"></label>
+                <input asp-for="Telefone.NumTelefone" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Contato" class="control-label"></label>
-                <input asp-for="Contato" class="form-control" />
+                <label asp-for="Telefone.Contato" class="control-label"></label>
+                <input asp-for="Telefone.Contato" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar telefone" class="btn btn-info" />

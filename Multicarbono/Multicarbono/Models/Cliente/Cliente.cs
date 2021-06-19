@@ -13,7 +13,7 @@ namespace Multicarbono.Models.Cliente
         public string CNPJ { get; set; }
 
         [Display(Name = "Data de Cadastro")]
-        public DateTime DtCadastro { get; set; }
+        public DateTime DtCadastro { get; set; } = DateTime.Now;
 
         [Display(Name = "Razão Social")]
         public string RazaoSocial { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Multicarbono.Models.Telefone;
+using Multicarbono.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace Multicarbono.Controllers
     public class TelefoneController : Controller
     {
         private TelefoneRepository _telefoneRepo;
+        private Models.Cliente.ClienteRepository _clienteRepo;
 
-        public TelefoneController(TelefoneRepository telefoneRepo)
+        public TelefoneController(TelefoneRepository telefoneRepo, Models.Cliente.ClienteRepository clienteRepo)
         {
             _telefoneRepo = telefoneRepo;
+            _clienteRepo = clienteRepo;
         }
 
 
@@ -24,17 +27,22 @@ namespace Multicarbono.Controllers
             return PartialView("Index", model);
         }
 
-        public ActionResult CadastroTelefone()
+        public ActionResult CadastroTelefone(int idCliente, CadastroTelefoneViewModel viewModel)
         {
-            return PartialView();
+            viewModel.Cliente = _clienteRepo.ClienteById(idCliente);
+
+            return PartialView(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CadastroTelefone(int idTelefone, Telefone telefone)
+        public ActionResult CadastroTelefone(CadastroTelefoneViewModel viewModel)
         {
-            _telefoneRepo.IncludeTelefone(telefone);
-            return RedirectToAction("Index");
+
+            viewModel.Telefone.IdCliente = viewModel.Cliente.IdCliente;
+
+            _telefoneRepo.IncludeTelefone(viewModel.Telefone);
+            return RedirectToAction("Details", "Cliente", new { idCliente = viewModel.Cliente.IdCliente });
         }
 
 
@@ -49,11 +57,11 @@ namespace Multicarbono.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int idTelefone, Telefone telefone)
+        public ActionResult Edit(int idTelefone, CadastroTelefoneViewModel telefone)
         {
             try
             {
-                _telefoneRepo.UpdateTelefone(telefone);
+                _telefoneRepo.UpdateTelefone(telefone.Telefone);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -73,7 +81,7 @@ namespace Multicarbono.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int idTelefone, Telefone telefone)
+        public ActionResult Delete(int idTelefone, CadastroTelefoneViewModel telefone)
         {
             try
             {

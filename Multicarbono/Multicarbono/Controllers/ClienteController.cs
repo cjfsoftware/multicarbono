@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Multicarbono.Models.Cliente;
 using Multicarbono.Models.EnderecoCliente;
 using Multicarbono.Models.Telefone;
+using Multicarbono.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Multicarbono.Controllers
 {
@@ -33,20 +30,22 @@ namespace Multicarbono.Controllers
         }
 
         // GET: ClienteController/Details/5
-        public ActionResult Details(int idCliente)
+        public ActionResult Details(int idCliente, DetalhesClienteViewModel viewModel)
         {
-            TempData["Telefone"] = Newtonsoft.Json.JsonConvert.SerializeObject(_telefoneRepo.TelefoneByCliente(idCliente));
-            TempData.Keep("ItemPedido");
-            TempData["Endereco"] = Newtonsoft.Json.JsonConvert.SerializeObject(_enderecoRepo.EnderecoByCliente(idCliente));
-            TempData.Keep("Endereco");
-            var model = _clienteRepo.ClienteById(idCliente);
-            return View("DetalhesCliente", model);
+            viewModel.Cliente = _clienteRepo.ClienteById(idCliente);
+            viewModel.Telefones = _telefoneRepo.TelefoneByCliente(idCliente);
+            viewModel.Enderecos = _enderecoRepo.EnderecoByCliente(idCliente);
+
+            return View("DetalhesCliente", viewModel);
         }
 
         // GET: ClienteController/Create
-        public ActionResult CadastroCliente()
+        public ActionResult CadastroCliente(Cliente cliente, string dif = "")
         {
-            return PartialView();
+
+            cliente.DtCadastro = DateTime.Now;
+
+            return PartialView(cliente);
         }
 
         // POST: ClienteController/Create

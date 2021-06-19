@@ -38,8 +38,7 @@
                 <input asp-for="Ativo" class="form-control"/>
             </div>
             <div class="form-group">
-                <label asp-for="DtCriacao" class="control-label"></label>
-                <input asp-for="DtCriacao" class="form-control" />
+                <input asp-for="DtCriacao" class="form-control" value="@Model.DtCriacao" hidden/>
             </div>
             <div class="form-group">
                 <label asp-for="NivelAcesso" class="control-label"></label>

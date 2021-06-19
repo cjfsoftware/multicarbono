@@ -33,17 +33,20 @@ namespace Multicarbono.Controllers
         }
 
         // GET: UsuarioController/Create
-        public ActionResult CadastroUsuario()
+        public ActionResult CadastroUsuario(Usuario usuario, string diff = "")
         {
-            //return PartialView("CadastroUsuario");
-            //var model = _usuarioRepo.ListUsuario();
-            return PartialView();
+
+            usuario.DtCriacao = DateTime.Now;
+
+            return PartialView(usuario);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CadastroUsuario(Usuario usuario)
         {
+
+            usuario.DtCriacao = DateTime.Now;
             _usuarioRepo.IncludeUsuario(usuario);
             return RedirectToAction("Index");
         }
