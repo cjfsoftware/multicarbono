@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Multicarbono.Models.ItemNota;
 using Multicarbono.Models.ItemPedido;
 using Multicarbono.Models.NotaFiscal;
 using Multicarbono.Models.Pedido;
+using Multicarbono.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,15 +40,30 @@ namespace Multicarbono.Controllers
         {
             var pedido = _pedidoRepo.PedidoById(idPedido);
 
-            List<ItemPedido> itensPedido = new List<ItemPedido>();
+            List<ItemPedido> itensPedido = new List<ItemPedido>(_itemPedidoRepo.ItemPedidoByPedido(idPedido));
 
-            TempData["Pedido"] = Newtonsoft.Json.JsonConvert.SerializeObject(GetItensPedidoNF(idPedido));
-            TempData["idPedido"] = idPedido;
-            TempData.Keep("Pedido");
-            TempData.Keep("idPedido");
+            NotaViewModel vmNota = new NotaViewModel();
 
-            TempData["ItensNota"] = Newtonsoft.Json.JsonConvert.SerializeObject(_itemNotaRepo.ItemNotaByPedido(idPedido));
-            TempData.Keep("ItensNota");
+            vmNota.ItemNota = new List<ItemNota>();
+            foreach (ItemPedido ip in itensPedido)
+            {
+                vmNota.ItemNota.Add(new ItemNota
+                {
+                    IdItemPedido = ip.IdItemPedido,
+                    QtdePedido = ip.QTDE,
+                    CodProduto = ip.CodProduto,
+                    SubtotalItemNota = ip.SubtotalItemPedido
+                });
+            }
+
+
+            ////TempData["Pedido"] = Newtonsoft.Json.JsonConvert.SerializeObject(GetItensPedidoNF(idPedido));
+            //TempData["idPedido"] = idPedido;
+            //TempData.Keep("Pedido");
+            //TempData.Keep("idPedido");
+
+            ////TempData["ItensNota"] = Newtonsoft.Json.JsonConvert.SerializeObject(_itemNotaRepo.ItemNotaByPedido(idPedido));
+            //TempData.Keep("ItensNota");
 
             if (pedido.NFEmitida == true)
             {
@@ -55,7 +72,7 @@ namespace Multicarbono.Controllers
             }
             else
             
-                return PartialView("EmitirNota");
+                return PartialView("EmitirNota", vmNota);
         }
 
         [HttpPost]

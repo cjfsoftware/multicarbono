@@ -1,4 +1,4 @@
-﻿@model Multicarbono.Models.NotaFiscal.NotaFiscal
+﻿@model Multicarbono.ViewModels.NotaViewModel
 @Html.Partial("_Menu")
 
 <h6 style="margin-left:2%">Emissão de Nota Fiscal</h6>
@@ -8,50 +8,50 @@
 <form asp-action="CadastroNotaFiscal" style="margin-left:2%">
     <div class="form-row" asp-action="PedidoByFiltro">
         <div class="form-group col-md-4">
-            <label asp-for="IdPedido" class="control-label"></label>
-            <input asp-for="IdPedido" class="form-control" readonly="readonly" />
+            <label asp-for="NotaFiscal.IdPedido" class="control-label"></label>
+            <input asp-for="NotaFiscal.IdPedido" class="form-control" readonly="readonly" />
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="NumNF" class="control-label"></label>
-            <input asp-for="NumNF" class="form-control" />
+            <label asp-for="NotaFiscal.NumNF" class="control-label"></label>
+            <input asp-for="NotaFiscal.NumNF" class="form-control" />
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="Chave" class="control-label"></label>
-            <input asp-for="Chave" class="form-control" />
+            <label asp-for="NotaFiscal.Chave" class="control-label"></label>
+            <input asp-for="NotaFiscal.Chave" class="form-control" />
         </div>
     </div>
     <div class="form-row" asp-action="PedidoByFiltro">
         <div class="form-group col-md-4">
-            <label asp-for="NaturezaOper" class="control-label"></label>
-            <input asp-for="NaturezaOper" class="form-control" />
+            <label asp-for="NotaFiscal.NaturezaOper" class="control-label"></label>
+            <input asp-for="NotaFiscal.NaturezaOper" class="form-control" />
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="DtEmissao" class="control-label"></label>
-            <input asp-for="DtEmissao" class="form-control" value="@DateTime.Now" />
+            <label asp-for="NotaFiscal.DtEmissao" class="control-label"></label>
+            <input asp-for="NotaFiscal.DtEmissao" class="form-control" value="@DateTime.Now" />
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="DtSaida" class="control-label"></label>
-            <input asp-for="DtSaida" class="form-control" value="@DateTime.Now" />
+            <label asp-for="NotaFiscal.DtSaida" class="control-label"></label>
+            <input asp-for="NotaFiscal.DtSaida" class="form-control" value="@DateTime.Now" />
         </div>
     </div>
     <div class="form-row" asp-action="PedidoByFiltro">
         <div class="form-group col-md-3">
-            <label asp-for="VrFrete" class="control-label"></label>
-            <input asp-for="VrFrete" class="form-control" />
+            <label asp-for="NotaFiscal.VrFrete" class="control-label"></label>
+            <input asp-for="NotaFiscal.VrFrete" class="form-control" />
         </div>
         <div class="form-group col-md-3">
-            <label asp-for="QtdeEmbalagens" class="control-label"></label>
-            <input asp-for="QtdeEmbalagens" class="form-control" />
+            <label asp-for="NotaFiscal.QtdeEmbalagens" class="control-label"></label>
+            <input asp-for="NotaFiscal.QtdeEmbalagens" class="form-control" />
         </div>
         <div class="form-group col-md-3">
-            <label asp-for="CNPJEmitente" class="control-label"></label>
-            <input asp-for="CNPJEmitente" class="form-control" />
+            <label asp-for="NotaFiscal.CNPJEmitente" class="control-label"></label>
+            <input asp-for="NotaFiscal.CNPJEmitente" class="form-control" />
         </div>
         <div class="form-group col-md-3">
-            <label asp-for="ValorNota" class="control-label"></label>
-            <input asp-for="ValorNota" class="form-control" />
+            <label asp-for="NotaFiscal.ValorNota" class="control-label"></label>
+            <input asp-for="NotaFiscal.ValorNota" class="form-control" />
         </div>
-        @Html.Partial("/Views/NotaFiscal/_cadastroItemNotaPartial.cshtml", Model)
+        @Html.Partial("/Views/NotaFiscal/_cadastroItemNotaPartial.cshtml", Model.ItemNota)
         <div class="form-group">
             <div>
                 <br />

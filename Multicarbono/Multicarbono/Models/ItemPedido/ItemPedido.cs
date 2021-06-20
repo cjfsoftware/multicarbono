@@ -15,6 +15,8 @@ namespace Multicarbono.Models.ItemPedido
         [Display(Name = "Produto")]
         public int IdProduto { get; set; }
 
+        public int CodProduto { get; set; }
+
         public int CFOP { get; set; }
 
         [Display(Name = "Quantidade")]
