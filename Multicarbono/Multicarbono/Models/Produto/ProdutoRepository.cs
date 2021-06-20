@@ -61,50 +61,48 @@ namespace Multicarbono.Models.Produto
 
         public Produto ProdutoById(int idProduto)
         {
-            using (_dbConnection)
+            
+            _dbConnection.Open();
+
+            var cmd = new MySqlCommand("SELECT * FROM PRODUTO WHERE ID_PRODUTO = @ID_PRODUTO");
+
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = _dbConnection;
+
+            cmd.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = idProduto;
+
+            int result = cmd.ExecuteNonQuery();
+
+            MySqlDataReader dr;
+            Produto produtoById = new Produto();
+
+            dr = cmd.ExecuteReader();
+
+
+            if (dr.HasRows)
             {
-                _dbConnection.Open();
-
-                var cmd = new MySqlCommand("SELECT * FROM PRODUTO WHERE ID_PRODUTO = @ID_PRODUTO");
-
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = _dbConnection;
-
-                cmd.Parameters.Add("ID_PRODUTO", DbType.Int32).Value = idProduto;
-
-                int result = cmd.ExecuteNonQuery();
-
-                MySqlDataReader dr;
-                Produto produtoById = new Produto();
-
-                dr = cmd.ExecuteReader();
-
-
-                if (dr.HasRows)
+                while (dr.Read())
                 {
-                    while (dr.Read())
-                    {
-                        Produto produto = new Produto();
+                    Produto produto = new Produto();
 
-                        produto.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
-                        produto.CodProduto = Convert.ToInt32(dr["COD_PRODUTO"]);
-                        produto.Descricao = Convert.ToString(dr["DESCRICAO"]);
-                        produto.Ativo = Convert.ToBoolean(dr["ATIVO"]);
-                        produto.NCM_SH = Convert.ToInt32(dr["NCM_SH"]);
-                        produto.CST = Convert.ToInt32(dr["CST"]);
-                        produto.Unidade = (Enum.TipoUnidadeProduto)System.Enum.Parse(typeof(Enum.TipoUnidadeProduto), Convert.ToString(dr["UNIDADE"]), true);
-                        produto.VrUnitario = Convert.ToDecimal(dr["VR_UNITARIO"]);
-                        produto.Ali_ICMS = Convert.ToDecimal(dr["ALI_ICMS"]);
-                        produto.Ali_IPI = Convert.ToDecimal(dr["ALI_IPI"]);
+                    produto.IdProduto = Convert.ToInt32(dr["ID_PRODUTO"]);
+                    produto.CodProduto = Convert.ToInt32(dr["COD_PRODUTO"]);
+                    produto.Descricao = Convert.ToString(dr["DESCRICAO"]);
+                    produto.Ativo = Convert.ToBoolean(dr["ATIVO"]);
+                    produto.NCM_SH = Convert.ToInt32(dr["NCM_SH"]);
+                    produto.CST = Convert.ToInt32(dr["CST"]);
+                    produto.Unidade = (Enum.TipoUnidadeProduto)System.Enum.Parse(typeof(Enum.TipoUnidadeProduto), Convert.ToString(dr["UNIDADE"]), true);
+                    produto.VrUnitario = Convert.ToDecimal(dr["VR_UNITARIO"]);
+                    produto.Ali_ICMS = Convert.ToDecimal(dr["ALI_ICMS"]);
+                    produto.Ali_IPI = Convert.ToDecimal(dr["ALI_IPI"]);
                         
-                        produtoById = produto;
-                    }
+                    produtoById = produto;
                 }
-
-                _dbConnection.Close();
-
-                return produtoById;
             }
+
+            _dbConnection.Close();
+
+            return produtoById;
         }
 
 

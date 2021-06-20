@@ -18,7 +18,7 @@ namespace Multicarbono.Models.ItemPedido
         public int CFOP { get; set; }
 
         [Display(Name = "Quantidade")]
-        public decimal QTDE { get; set; }
+        public int QTDE { get; set; }
 
         [Display(Name = "Subtotal do Item")]
         public decimal SubtotalItemPedido { get; set; }

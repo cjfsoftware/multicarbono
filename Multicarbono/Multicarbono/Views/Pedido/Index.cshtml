@@ -73,9 +73,6 @@
                 Valor do Pedido
             </th>
             <th>
-                Valor à Pagar
-            </th>
-            <th>
                 Transportador
             </th>
         </tr>
@@ -109,13 +106,9 @@
                 @Html.DisplayFor(modelItem => item.Pedido.ValorPedido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pedido.ValorPagar)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Transportador.RazaoSocial)
             </td>
             <td>
-                <a asp-controller="Pedido" asp-action="ValorPagar" asp-route-idPedido="@item.Pedido.IdPedido" asp-route-idCliente="@item.Pedido.IdCliente" asp-route-valorPedido="@item.Pedido.ValorPedido">Checkout</a>
                 <a asp-controller="NotaFiscal" asp-action="CadastroNotaFiscal" asp-route-idPedido="@item.Pedido.IdPedido">Emitir NF</a>
                 <a asp-action="Details" asp-route-idPedido="@item.Pedido.IdPedido">Detalhes</a>
                 <a asp-action="Edit" asp-route-idPedido="@item.Pedido.IdPedido">Alterar</a>
@@ -129,5 +122,4 @@
 
 <p>
     <a asp-action="CadastroPedido" class="btn btn-info" style="margin-left:2%">Criar pedido</a>
-    <a asp-action="RelatorioPedido" class="btn btn-info" style="margin-left:2%">Gerar relatório</a>
 </p>

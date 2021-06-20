@@ -39,12 +39,10 @@
                 <select asp-for="Pedido.IdTransport" asp-items="@Model.Transportadores" class="form-control"></select>
             </div>
             <br />
-            <h6>Item do Pedido</h6>
-            @Html.Partial("/Views/Pedido/_cadastroItemPedidoPartialPedido.cshtml", Model)
-            <br />
-            @*<div class="form-group">
+            
+            <div class="form-group">
             <input type="submit" value="Criar pedido" class="btn btn-info" action="CadastroPedido">
-        </div>*@
+        </div>
         </form>
     </div>
 </div>

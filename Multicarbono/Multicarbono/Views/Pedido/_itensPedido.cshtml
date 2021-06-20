@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Multicarbono.Models.ItemPedido.ItemPedido>
+﻿@model Multicarbono.ViewModels.ItensPedidoViewModel
 
 @Html.Partial("_Menu")
 
@@ -8,44 +8,56 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdProduto)
+                Descrição do Produto
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CFOP)
+                Código do Produto
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QTDE)
+                CFOP
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SubtotalItemPedido)
+                Preço Unitário
+            </th>
+            <th>
+                Quantidade
+            </th>
+            <th>
+                Subtotal do item
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.itens)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdProduto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CFOP)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QTDE)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SubtotalItemPedido)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-idItemPedido="@item.IdItemPedido">Alterar</a>
-                    <a asp-action="Delete" asp-route-idItemPedido="@item.IdItemPedido">Excluir</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.produto.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.produto.CodProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item.CFOP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.produto.VrUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item.QTDE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item.SubtotalItemPedido)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-idItemPedido="@item.item.IdItemPedido">Alterar</a>
+                <a asp-action="Delete" asp-route-idItemPedido="@item.item.IdItemPedido">Excluir</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
 
 <p>
-    <a asp-controller="ItemPedido" asp-action="CadastroItemPedido" asp-route-idPedido="@TempData["idPedido"]" id="btn_add_item" class="btn btn-info" style="margin-left:2%">Adicionar item ao pedido</a>
+    <a asp-controller="ItemPedido" asp-action="CadastroItemPedido" asp-route-idPedido="@Model.pedidoId" id="btn_add_item" class="btn btn-info" style="margin-left:2%">Adicionar item ao pedido</a>
 </p>

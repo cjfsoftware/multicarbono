@@ -342,33 +342,31 @@ namespace Multicarbono.Models.Pedido
 
         public void IncludePedido(Pedido pedido)
         {
-            using (_dbConnection)
-            {
-                _dbConnection.Open();
+            _dbConnection.Open();
 
-                var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, ID_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE, ID_TRANSPORT, VALOR_PEDIDO, VALOR_PAGAR) VALUES" +
-                "(@ID_PEDIDO, @NUM_PEDIDO, @ID_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE, @ID_TRANSPORT, 0, 0)");
+            var command = new MySqlCommand("INSERT INTO PEDIDO (ID_PEDIDO, NUM_PEDIDO, ID_CLIENTE, ID_USUARIO, DT_EMISSAO, DT_CARREGA, OBS, TIPO_FRETE, ID_TRANSPORT, VALOR_PEDIDO, VALOR_PAGAR) VALUES" +
+            "(@ID_PEDIDO, @NUM_PEDIDO, @ID_CLIENTE, @ID_USUARIO, @DT_EMISSAO, @DT_CARREGA, @OBS, @TIPO_FRETE, @ID_TRANSPORT, 0, 0)");
 
 
-                command.CommandType = CommandType.Text;
-                command.Connection = _dbConnection;
+            command.CommandType = CommandType.Text;
+            command.Connection = _dbConnection;
 
-                command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = pedido.IdPedido;
-                command.Parameters.Add("NUM_PEDIDO", DbType.Int32).Value = pedido.NumPedido;
-                command.Parameters.Add("ID_CLIENTE", DbType.String).Value = pedido.IdCliente;
-                command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = pedido.IdUsuario;
-                command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = pedido.DtEmissao;
-                command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;
-                command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
-                command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
-                command.Parameters.Add("ID_TRANSPORT", DbType.Int32).Value = pedido.IdTransport;
-                command.Parameters.Add("NF_EMITIDA", DbType.String).Value = 'N';
+            command.Parameters.Add("ID_PEDIDO", DbType.Int32).Value = pedido.IdPedido;
+            command.Parameters.Add("NUM_PEDIDO", DbType.Int32).Value = pedido.NumPedido;
+            command.Parameters.Add("ID_CLIENTE", DbType.String).Value = pedido.IdCliente;
+            command.Parameters.Add("ID_USUARIO", DbType.Int32).Value = pedido.IdUsuario;
+            command.Parameters.Add("DT_EMISSAO", DbType.DateTime).Value = pedido.DtEmissao;
+            command.Parameters.Add("DT_CARREGA", DbType.DateTime).Value = pedido.DtCarregamento;
+            command.Parameters.Add("OBS", DbType.String).Value = pedido.Obs;
+            command.Parameters.Add("TIPO_FRETE", DbType.String).Value = pedido.TipoFrete;
+            command.Parameters.Add("ID_TRANSPORT", DbType.Int32).Value = pedido.IdTransport;
+            command.Parameters.Add("NF_EMITIDA", DbType.String).Value = 'N';
 
 
-                int result = command.ExecuteNonQuery();
+            int result = command.ExecuteNonQuery();
 
-                _dbConnection.Close();
-            }
+            _dbConnection.Close();
+            
         }
 
         public void DeletePedido(int idPedido)

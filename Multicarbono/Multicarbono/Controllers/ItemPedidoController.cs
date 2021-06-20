@@ -26,14 +26,27 @@ namespace Multicarbono.Controllers
 
         public ActionResult Index(int idPedido)
         {
-            var model = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
-            TempData["idPedido"] = idPedido;
-            return PartialView("~/Views/Pedido/_itensPedido.cshtml", model);
+            var pedidos = _itemPedidoRepo.ItemPedidoByPedido(idPedido);
+
+            var viewModel = new ItensPedidoViewModel();
+
+            viewModel.itens = new List<ItensPedidoItemViewModel>();
+            viewModel.pedidoId = idPedido;
+
+            pedidos.ForEach(p =>
+            {
+                viewModel.itens.Add(new ItensPedidoItemViewModel
+                {
+                    item = p,
+                    produto = _produtoRepo.ProdutoById(p.IdProduto)
+                });
+            });
+
+            return PartialView("~/Views/Pedido/_itensPedido.cshtml", viewModel);
         }
 
         public ActionResult CadastroItemPedido(int idPedido)
         {
-            ViewData["idPedido"] = idPedido;
 
             ItemPedidoViewModel vmItemPedido = new ItemPedidoViewModel();
 
@@ -47,6 +60,10 @@ namespace Multicarbono.Controllers
                 });
             }
 
+            vmItemPedido.ItemPedido = new ItemPedido();
+
+            vmItemPedido.ItemPedido.IdPedido = idPedido;
+
             return PartialView("~/Views/Pedido/_cadastroItemPedidoPartial.cshtml", vmItemPedido);
         }
 
@@ -56,6 +73,7 @@ namespace Multicarbono.Controllers
         {
             decimal valProduto = _produtoRepo.ProdutoById(itemPedido.IdProduto).VrUnitario;
             _itemPedidoRepo.IncludeItemPedido(itemPedido, valProduto);
+
             return RedirectToAction("Index", new { idPedido = itemPedido.IdPedido });
         }
 
