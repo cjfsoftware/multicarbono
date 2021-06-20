@@ -11,15 +11,6 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(itemNota => itemNota.IdItemNF)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(itemNota => itemNota.IdNF)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(itemNota => itemNota.IdItemPedido)
-                </th>
-                <th>
                     @Html.DisplayNameFor(itemNota => itemNota.CodProduto)
                 </th>
                 <th>
@@ -59,9 +50,6 @@
                     </td>
                     <td>
                         <input asp-for="SubtotalItemNota" class="form-control" value="@item.value.SubtotalItemPedido" />
-                    </td>
-                    <td>
-                        <input type="submit" value="Gravar peso" class="btn btn-info" style="margin-left:2%" onsubmit="readonly:readonly" />
                     </td>
                 </form>
             </tr>

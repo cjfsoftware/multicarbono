@@ -32,7 +32,7 @@ namespace Multicarbono.Models.NotaFiscal
         [Display(Name = "Valor do Frete")]
         public decimal VrFrete { get; set; }
 
-        [Display(Name = "ID")]
+        [Display(Name = "Quantidade de Embalagens")]
         public int QtdeEmbalagens { get; set; }
 
         [Display(Name = "CNPJ do Emitente")]

@@ -204,8 +204,8 @@ namespace Multicarbono.Models.NotaFiscal
                 _dbConnection.Open();
 
                 var command = new MySqlCommand("INSERT INTO NOTA_FISCAL (ID_PEDIDO, NUM_NF, CHAVE, NATUREZA_OPER, DT_EMISSAO, DT_SAIDA, VR_FRETE, QTDE_EMBALAGENS, CNPJ_EMITENTE, VALOR_NOTA) VALUES" +
-                "(@ID_PEDIDO, @NUM_NF, @CHAVE, @NATUREZA_OPER, @DT_EMISSAO, @DT_SAIDA, @VR_FRETE, @QTDE_EMBALAGENS, @CNPJ_EMITENTE, (SELECT VALOR_PAGAR FROM PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO);" +
-                "UPDATE PEDIDO SET NF_EMITIDA = 'Y' WHERE ID_PEDIDO = @ID_PEDIDO; COMMIT");
+                "(@ID_PEDIDO, @NUM_NF, @CHAVE, @NATUREZA_OPER, @DT_EMISSAO, @DT_SAIDA, @VR_FRETE, @QTDE_EMBALAGENS, @CNPJ_EMITENTE, (SELECT VALOR_PAGAR FROM PEDIDO WHERE ID_PEDIDO = @ID_PEDIDO)); " +
+                "UPDATE PEDIDO SET NF_EMITIDA = TRUE WHERE ID_PEDIDO = @ID_PEDIDO;");
 
 
                 command.CommandType = CommandType.Text;
@@ -247,6 +247,28 @@ namespace Multicarbono.Models.NotaFiscal
 
                 _dbConnection.Close();
             }
+        }
+
+        public int GetNextNumNota()
+        {
+            MySqlDataReader dr1;
+
+
+            _dbConnection.Open();
+
+            var command = new MySqlCommand("SELECT MAX(NUM_NF) + 1 AS NEXT_NUM_NF FROM NOTA_FISCAL");
+            command.CommandType = CommandType.Text;
+            command.Connection = _dbConnection;
+
+            dr1 = command.ExecuteReader();
+            dr1.Read();
+
+            var nextNumNF = Convert.ToInt32(dr1["NEXT_NUM_NF"] is DBNull ? 1 : dr1["NEXT_NUM_NF"]);
+
+            _dbConnection.Close();
+
+
+            return nextNumNF;
         }
     }
 }
